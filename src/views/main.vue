@@ -1,19 +1,11 @@
 <template>
-  <div>
+  <div class="main">
     <Carousel></Carousel>
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane :label="menu.label" :name="menu.name" v-for="menu in menus" :key="menu.name"></el-tab-pane>
     </el-tabs>
     <router-view />
   </div>
-  <!-- <el-container>
-    <el-header>
-      <Carousel></Carousel>
-    </el-header>
-    <el-main>
-      <router-view />
-    </el-main>
-  </el-container>-->
 </template>
 
 <script lang="ts">
@@ -54,4 +46,7 @@ export default class Main extends Vue {
 </script>
 
 <style>
+.main {
+  margin-top: 10px;
+}
 </style>
