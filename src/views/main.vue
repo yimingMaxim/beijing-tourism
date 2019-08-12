@@ -9,8 +9,8 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import Carousel from "./main/carousel.vue";
+import { Component, Prop, Vue } from 'vue-property-decorator';
+import Carousel from './main/carousel.vue';
 
 @Component({
   components: {
@@ -18,27 +18,26 @@ import Carousel from "./main/carousel.vue";
   }
 })
 export default class Main extends Vue {
-  private activeName = "group";
+  private activeName = 'group';
   private menus = [
     {
-      label: "Group tours",
-      name: "group"
+      label: 'Group tours',
+      name: 'group'
     },
     {
-      label: "Private tours",
-      name: "private"
+      label: 'Private tours',
+      name: 'private'
     },
     {
-      label: "Chauffeur service",
-      name: "chauffeur"
+      label: 'Chauffeur service',
+      name: 'chauffeur'
     },
     {
-      label: "Beijing Night Show",
-      name: "nightShow"
+      label: 'Beijing Night Show',
+      name: 'nightShow'
     }
   ];
   private handleClick(tab: any) {
-    debugger;
     const path = tab.name;
     this.$router.push(path);
   }

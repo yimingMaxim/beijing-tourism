@@ -3,8 +3,6 @@ import Home from './home.vue';
 const mainRouter = [
   {
     path: '',
-    name: 'group',
-    component: Home,
     redirect: 'group'
   },
   {

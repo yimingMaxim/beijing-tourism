@@ -1,9 +1,26 @@
-<template></template>
+<template>
+  <el-row>
+    <el-col :md="8" :sm="12" :xs="24">
+      <spot-card></spot-card>
+    </el-col>
+    <el-col :md="8" :sm="12" :xs="24">
+      <spot-card></spot-card>
+    </el-col>
+    <el-col :md="8" :sm="12" :xs="24">
+      <spot-card></spot-card>
+    </el-col>
+  </el-row>
+</template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue } from 'vue-property-decorator';
+import SpotCard from '@/components/spotCard.vue';
 
-@Component
+@Component({
+  components: {
+    SpotCard
+  }
+})
 export default class Home extends Vue {
   @Prop() private msg!: string;
 }
@@ -11,18 +28,9 @@ export default class Home extends Vue {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+.el-col {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
 }
 </style>

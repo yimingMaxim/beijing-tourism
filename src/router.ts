@@ -8,18 +8,13 @@ import mainRouter from './views/main/main.router';
 Vue.use(Router);
 
 export default new Router({
-  mode: 'history',
-  base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
-      name: 'main',
-      component: Main,
+      path: '',
       redirect: '/main'
     },
     {
       path: '/main',
-      name: 'main',
       component: Main,
       children: mainRouter
     },

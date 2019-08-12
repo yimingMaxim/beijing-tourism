@@ -3,9 +3,9 @@ import App from './App.vue';
 import router from './router';
 
 // 引入移动端ui
-import MuseUI from 'muse-ui';
-import 'muse-ui/dist/muse-ui.css';
-Vue.use(MuseUI);
+// import MuseUI from 'muse-ui';
+// import 'muse-ui/dist/muse-ui.css';
+// Vue.use(MuseUI);
 
 // 引入pc端ui
 import ElementUI from 'element-ui';
