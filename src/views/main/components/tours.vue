@@ -13,17 +13,15 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-import SpotCard from '@/components/spotCard.vue';
+import { Component, Prop, Vue } from "vue-property-decorator";
+import SpotCard from "@/components/spotCard.vue";
 
 @Component({
   components: {
     SpotCard
   }
 })
-export default class Home extends Vue {
-  @Prop() private msg!: string;
-}
+export default class Tours extends Vue {}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
