@@ -1,6 +1,6 @@
 <template>
   <el-card :body-style="{ padding: '0' }">
-    <img src="@/assets/dsn.png" class="image" />
+    <img src="@/assets/dsn.png" class="image img-responsive" />
     <div style="padding: 14px;">
       <p class="card-body-title">北京-上海迪士尼乐园 4天自由行</p>
       <p class="card-body-desc">迪士尼无限次一票全含🔥五星皇庭国际含早+烟火秀+快速通行证+景区机场酒店接</p>
