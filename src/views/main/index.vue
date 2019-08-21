@@ -4,10 +4,11 @@
     <el-container class="main-body">
       <el-main>
         <el-tabs v-model="activeName" @tab-click="handleClick">
-          <el-tab-pane :label="menu.label" :name="menu.name" v-for="menu in menus" :key="menu.name"></el-tab-pane>
+          <el-tab-pane :label="tab.label" :name="tab.name" v-for="tab in tabs" :key="tab.name"></el-tab-pane>
         </el-tabs>
-        <Tours :title="'Group tours'" :id="'group'"></Tours>
-        <Tours :title="'Private tours'" :id="'private'"></Tours>
+        <Tours :title="'Group tours'" id="group"></Tours>
+        <Tours :title="'Private tours'" id="private"></Tours>
+        <chauffeur-service :title="'Chauffeur service'" id="chauffeur"></chauffeur-service>
       </el-main>
       <el-aside class="visible-lg-block" width="25%">
         <el-card class="box-card">
@@ -26,17 +27,19 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import Carousel from './components/carousel.vue';
-import Tours from './components/tours.vue';
+import Tours from './tours/tours.vue';
+import ChauffeurService from './chauffeurService/chauffeurService.vue';
 
 @Component({
   components: {
     Carousel,
-    Tours
+    Tours,
+    ChauffeurService
   }
 })
 export default class Main extends Vue {
-  private activeName = 'group';
-  private menus = [
+  private activeName = '#group';
+  private tabs = [
     {
       label: 'Group tours',
       name: '#group'
@@ -47,7 +50,7 @@ export default class Main extends Vue {
     },
     {
       label: 'Chauffeur service',
-      name: 'chauffeur'
+      name: '#chauffeur'
     },
     {
       label: 'Beijing Night Show',
@@ -57,7 +60,7 @@ export default class Main extends Vue {
 
   /**
    * @private handleClick
-   * @param {menu} tab - 菜单对象
+   * @param {tab} tab - 菜单对象
    * @description 锚点跳转
    */
   private handleClick(tab: any) {
@@ -68,6 +71,10 @@ export default class Main extends Vue {
 </script>
 
 <style>
+#main-root {
+  margin-top: 15px;
+}
+
 .main-body {
   margin-top: 10px;
 }

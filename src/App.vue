@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <el-container class="main-container">
-      <el-header>
+      <el-header id="main-header">
         <Header></Header>
       </el-header>
       <router-view />
@@ -10,8 +10,8 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import Header from "./views/header.vue";
+import { Component, Prop, Vue } from 'vue-property-decorator';
+import Header from './views/header.vue';
 
 @Component({
   components: {
@@ -23,14 +23,19 @@ export default class App extends Vue {}
 
 <style>
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
 }
+
 .main-container {
-  padding-left: 15%;
-  padding-right: 15%;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+#main-header {
+  padding: 0;
 }
 </style>
