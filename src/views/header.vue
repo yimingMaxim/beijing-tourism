@@ -4,15 +4,21 @@
       <img src="@/assets/logo.png" style="height: 100%;" />
     </el-col>
     <el-col class="header-login" :sm="12" :xs="12">
-      <u>login</u>
+      <login-form></login-form>
     </el-col>
   </el-row>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue } from "vue-property-decorator";
 
-@Component
+import LoginForm from "./login/index.vue";
+
+@Component({
+  components: {
+    LoginForm
+  }
+})
 export default class Header extends Vue {}
 </script>
 
