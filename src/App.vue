@@ -6,16 +6,21 @@
       </el-header>
       <router-view />
     </el-container>
+    <el-footer style="height: 100%;">
+      <Footer></Footer>
+    </el-footer>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import Header from './views/header.vue';
+import Footer from './views/footer.vue';
 
 @Component({
   components: {
-    Header
+    Header,
+    Footer
   }
 })
 export default class App extends Vue {}
