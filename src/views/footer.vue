@@ -46,7 +46,7 @@ export default class Footer extends Vue {}
   clear: both;
   margin: 0 auto;
   padding: 15px 0 25px;
-  width: 979px;
+  /* width: 979px; */
   line-height: 1.231;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 13px;
