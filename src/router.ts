@@ -4,6 +4,7 @@ import Cookies from 'js-cookie';
 import { Message } from 'element-ui';
 
 import Main from './views/main/index.vue';
+import List from './views/list/index.vue';
 // import Detail from './views/detail.vue';
 
 // import mainRouter from './views/main/main.router';
@@ -19,6 +20,12 @@ const baseRouter = new Router({
     {
       path: '/main',
       component: Main
+      // children: mainRouter
+    },
+    {
+      path: '/list',
+      name: 'list',
+      component: List
       // children: mainRouter
     }
     // {

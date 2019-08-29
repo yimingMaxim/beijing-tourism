@@ -1,6 +1,6 @@
 <template>
   <div>
-    <card-list-title :title="title" url></card-list-title>
+    <card-list-title :title="title" :path="'list'"></card-list-title>
     <el-row class="card-list-row">
       <el-col :md="8" :sm="12" :xs="24">
         <tour-card></tour-card>
@@ -28,6 +28,7 @@ import cardListTitle from '@/components/cardListTitle.vue';
 })
 export default class Tours extends Vue {
   @Prop() title!: string;
+  private path: string = '/list';
 }
 </script>
 

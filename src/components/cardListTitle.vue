@@ -1,7 +1,7 @@
 <template>
   <div class="card-list-title">
     <div class="piao-head-more">
-      <u class="piao-head-more-link">more&nbsp;&gt;</u>
+      <u class="piao-head-more-link" @click="toList()">more&nbsp;&gt;</u>
     </div>
     <h4>{{title}}</h4>
   </div>
@@ -13,7 +13,11 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 @Component({})
 export default class CardListTitle extends Vue {
   @Prop() title!: string;
-  @Prop() url!: string;
+  @Prop() path!: string;
+
+  private toList() {
+    this.$router.push(this.path);
+  }
 }
 </script>
 

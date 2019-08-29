@@ -11,17 +11,7 @@
         <chauffeur-service :title="'Chauffeur service'" id="chauffeur"></chauffeur-service>
       </el-main>
       <el-aside class="visible-lg-block" width="25%">
-        <el-card class="box-card">
-          <div slot="header" class="clearfix">
-            <strong>About Us</strong>
-          </div>
-          <div class="card-content">
-            <span>BeijingLocalTour.com is a service to help with tour service and hotel reservation in Beijing & specially catered for your travel needs in Beijing. Whether you are the business traveler or just a backpacker, we have every tour package and accommodation that suits your needs. To sweeten your stay, all the prices are discounted. So, enjoy your stay in Beijing!</span>
-          </div>
-        </el-card>
-        <p class="weather-widget">
-          <weather-widget></weather-widget>
-        </p>
+        <about-us></about-us>
       </el-aside>
     </el-container>
   </div>
@@ -30,14 +20,14 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import Carousel from './components/carousel.vue';
-import WeatherWidget from '@/components/weatherWidget.vue';
+import AboutUs from '@/components/aboutAs.vue';
 import Tours from './tours/tours.vue';
 import ChauffeurService from './chauffeurService/chauffeurService.vue';
 
 @Component({
   components: {
     Carousel,
-    WeatherWidget,
+    AboutUs,
     Tours,
     ChauffeurService
   }
@@ -75,35 +65,4 @@ export default class Main extends Vue {
 }
 </script>
 
-<style>
-#main-root {
-  margin-top: 15px;
-}
-
-.main-body {
-  margin-top: 10px;
-}
-
-.card-content {
-  text-align: left;
-  font-size: 16px;
-}
-
-.clearfix:before,
-.clearfix:after {
-  display: table;
-  content: '';
-}
-.clearfix:after {
-  clear: both;
-}
-
-.clearfix strong {
-  font-size: 16px;
-}
-
-.weather-widget {
-  text-align: center;
-  margin-top: 20px;
-}
-</style>
+<style scoped src="../../views/main/main.css">
