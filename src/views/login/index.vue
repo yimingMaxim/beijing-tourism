@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="login-item">
     <u @click="onLoginOpen()">login</u>
     <el-dialog title="Login" :visible.sync="dialogDisplay" style="text-align: left;">
       <el-form ref="login_form" :model="loginData" :rules="validate">
@@ -19,32 +19,32 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component
 export default class LoginForm extends Vue {
   private dialogDisplay: boolean = false;
 
   private loginData = {
-    userName: "",
-    password: ""
+    userName: '',
+    password: ''
   };
 
   private validate = {
     userName: [
       {
         required: true,
-        message: "please enter your user name",
-        trigger: "blur"
+        message: 'please enter your user name',
+        trigger: 'blur'
       }
     ],
     password: [
       {
         required: true,
-        message: "please enter your user password",
-        trigger: "blur"
+        message: 'please enter your user password',
+        trigger: 'blur'
       },
-      { min: 6, max: 18, message: "length 6 to 18", trigger: "blur" }
+      { min: 6, max: 18, message: 'length 6 to 18', trigger: 'blur' }
     ]
   };
 
@@ -55,7 +55,7 @@ export default class LoginForm extends Vue {
   private onLogin(formName: string) {
     (this.$refs.login_form as any).validate((valid: boolean) => {
       if (valid) {
-        alert("submit!");
+        alert('submit!');
       } else {
         return false;
       }
@@ -63,3 +63,13 @@ export default class LoginForm extends Vue {
   }
 }
 </script>
+
+<style scoped>
+.login-item {
+  padding-right: 15px;
+}
+
+.login-item u {
+  cursor: pointer;
+}
+</style>
