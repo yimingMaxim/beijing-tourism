@@ -5,9 +5,10 @@ import { Message } from 'element-ui';
 
 import Main from './views/main/index.vue';
 import List from './views/list/index.vue';
+import Admin from './views/admin/index.vue';
 // import Detail from './views/detail.vue';
 
-// import mainRouter from './views/main/main.router';
+import adminRouter from './views/admin/admin-router';
 
 Vue.use(Router);
 
@@ -27,13 +28,13 @@ const baseRouter = new Router({
       name: 'list',
       component: List
       // children: mainRouter
+    },
+    {
+      path: '/admin',
+      // meta: { requireAuth: true },
+      component: Admin,
+      children: adminRouter
     }
-    // {
-    //   path: '/admin',
-    //   name: 'admin',
-    //   meta: { requireAuth: true },
-    //   component: Detail
-    // }
     // {
     //   path: '/detail',
     //   name: 'detail',

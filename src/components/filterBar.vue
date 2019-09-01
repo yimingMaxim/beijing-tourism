@@ -8,7 +8,7 @@
       </el-col>
     </el-row>
     <el-row>
-      <el-col :md="6" :sm="8" :xs="24">
+      <el-col :md="5" :sm="8" :xs="24">
         <el-form-item class="no-margin" label="budget">
           <el-select v-model="searchKey.budget">
             <el-option label="Any Budget" value></el-option>
@@ -19,7 +19,7 @@
           </el-select>
         </el-form-item>
       </el-col>
-      <el-col :md="6" :sm="8" :xs="24">
+      <el-col :md="5" :sm="8" :xs="24">
         <el-form-item label="length">
           <el-select v-model="searchKey.length">
             <el-option label="Any Length" value></el-option>
@@ -35,15 +35,15 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component({})
 export default class FilterBar extends Vue {
   private searchKey: any = {
-    category: '',
-    budget: '',
-    length: '',
-    keywords: ''
+    category: "",
+    budget: "",
+    length: "",
+    keywords: ""
   };
 }
 </script>

@@ -42,8 +42,7 @@ export default class CardListTitle extends Vue {
 }
 
 .piao-head-more-link {
-  color: #666;
-  font-family: 'SimSun';
+  color: #409eff;
   cursor: pointer;
 }
 </style>
