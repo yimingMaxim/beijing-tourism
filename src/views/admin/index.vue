@@ -5,10 +5,10 @@
         :default-active="activeIndex"
         class="el-menu-demo"
         mode="horizontal"
-        @select="handleSelect"
         background-color="#545c64"
         text-color="#fff"
         active-text-color="#ffd04b"
+        :router="true"
       >
         <el-submenu index="1">
           <template slot="title">后台管理</template>
@@ -27,14 +27,14 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue } from 'vue-property-decorator';
 
 @Component
 export default class Admin extends Vue {
-  private activeIndex: string = "group";
+  private activeIndex!: string;
 
-  private handleSelect(key: string) {
-    this.$router.push(key);
+  private created(): any {
+    this.activeIndex = this.$router.currentRoute.name as string;
   }
 }
 </script>

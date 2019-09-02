@@ -1,5 +1,5 @@
 import GroupTour from './tour/groupTour.vue';
-import PrivateTour from './tour/privateTour.vue';
+// import PrivateTour from './tour/privateTour.vue';
 import Bus from './tour/bus.vue';
 import NightShow from './tour/nightShow.vue';
 import Order from './order/order.vue';
@@ -17,7 +17,7 @@ const adminRouter = [
   {
     path: 'private',
     name: 'private',
-    component: PrivateTour
+    component: GroupTour
   },
   {
     path: 'bus',

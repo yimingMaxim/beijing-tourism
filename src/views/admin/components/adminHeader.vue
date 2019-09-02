@@ -1,7 +1,7 @@
 <template>
   <el-row class="admin-header">
     <el-col :span="12" class="admin-header-left">
-      <h4>Group Tour</h4>
+      <h4>{{title}}</h4>
     </el-col>
     <el-col :span="12" class="admin-header-right">
       <el-button type="primary" @click="handleAdd">
@@ -13,14 +13,14 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator";
+import { Component, Vue, Prop } from 'vue-property-decorator';
 
 @Component
 export default class AdminHeader extends Vue {
   @Prop() title!: string;
 
   private handleAdd() {
-    this.$emit("onAdd");
+    this.$emit('onAdd');
   }
 }
 </script>

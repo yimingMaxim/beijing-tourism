@@ -21,13 +21,11 @@ const baseRouter = new Router({
     {
       path: '/main',
       component: Main
-      // children: mainRouter
     },
     {
       path: '/list',
       name: 'list',
       component: List
-      // children: mainRouter
     },
     {
       path: '/admin',
@@ -35,11 +33,6 @@ const baseRouter = new Router({
       component: Admin,
       children: adminRouter
     }
-    // {
-    //   path: '/detail',
-    //   name: 'detail',
-    //   component: Detail
-    // }
   ]
 });
 
