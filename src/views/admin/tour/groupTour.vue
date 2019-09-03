@@ -28,6 +28,9 @@
             <el-option v-for="day in days" :key="day" :label="day" :value="day"></el-option>
           </el-select>
         </el-form-item>
+        <el-form-item label="图片" prop="imgUrl">
+          <file-upload></file-upload>
+        </el-form-item>
       </el-form>
     </template>
   </admin-templete>
@@ -37,11 +40,13 @@
 import { Component, Vue } from "vue-property-decorator";
 import AdminTemplete from "./components/adminTemplete.vue";
 import UiTable from "@/components/table.vue";
+import FileUpload from "@/components/fileUpload.vue";
 
 @Component({
   components: {
     AdminTemplete,
-    UiTable
+    UiTable,
+    FileUpload
   }
 })
 export default class GroupTour extends Vue {

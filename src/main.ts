@@ -13,6 +13,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
 
 import 'bootstrap/dist/css/bootstrap.css';
+import './index.css';
 
 Vue.config.productionTip = false;
 
