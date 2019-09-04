@@ -1,12 +1,5 @@
 <template>
-  <admin-templete
-    ref="adminTemplete"
-    :title="title"
-    :dialog-title="dialogTitle"
-    :dialog-display="dialogDisplay"
-    @onSave="handleSave"
-    @on-open="handleOpen"
-  >
+  <admin-templete ref="adminTemplete" :title="title" @onSave="handleSave" @on-open="handleOpen">
     <template v-slot:dialogTable>
       <ui-table
         :columns="columns"
@@ -21,7 +14,8 @@
           <el-input v-model="dialogData.title"></el-input>
         </el-form-item>
         <el-form-item label="内容" prop="content">
-          <el-input v-model="dialogData.content"></el-input>
+          <tiny-mce v-model="dialogData.content"></tiny-mce>
+          {{dialogData.content}}
         </el-form-item>
         <el-form-item label="几日游" prop="day">
           <el-select v-model="dialogData.day">
@@ -37,46 +31,46 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import AdminTemplete from "./components/adminTemplete.vue";
-import UiTable from "@/components/table.vue";
-import FileUpload from "@/components/fileUpload.vue";
+import { Component, Vue } from 'vue-property-decorator';
+import AdminTemplete from './components/adminTemplete.vue';
+import UiTable from '@/components/table.vue';
+import FileUpload from '@/components/fileUpload.vue';
+import TinyMce from '@/components/tinymce.vue';
 
 @Component({
   components: {
     AdminTemplete,
     UiTable,
-    FileUpload
+    FileUpload,
+    TinyMce
   }
 })
 export default class GroupTour extends Vue {
-  private title: string = "Group Tour";
-  private dialogTitle: string = "新增";
-  private dialogDisplay: boolean = false;
+  private title: string = 'Group Tour';
   private days: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   private dialogData: any = {
-    title: "",
-    content: "",
-    day: "",
+    title: '',
+    content: '',
+    day: '',
     isShow: true,
-    city: "beijing",
-    tourType: "group",
+    city: 'beijing',
+    tourType: 'group',
     imgUrl: []
   };
 
   private tableData = [
     {
-      uuid: "0001",
-      tourNo: "T000001",
-      title: "标题1",
+      uuid: '0001',
+      tourNo: 'T000001',
+      title: '标题1',
       day: 2,
       isShow: true
     },
     {
-      uuid: "0002",
-      tourNo: "T000002",
-      title: "标题2",
+      uuid: '0002',
+      tourNo: 'T000002',
+      title: '标题2',
       day: 4,
       isShow: false
     }
@@ -84,12 +78,12 @@ export default class GroupTour extends Vue {
 
   private columns: any = [
     {
-      label: "编号",
-      value: "tourNo"
+      label: '编号',
+      value: 'tourNo'
     },
     {
-      label: "标题",
-      value: "title"
+      label: '标题',
+      value: 'title'
     }
   ];
 
@@ -101,11 +95,11 @@ export default class GroupTour extends Vue {
 
   private handleEdit(row: any) {
     this.dialogData = row;
-    (this.$refs.adminTemplete as any).setTitle("编辑");
+    (this.$refs.adminTemplete as any).setTitle('编辑');
     (this.$refs.adminTemplete as any).showDialog();
   }
   private handleDelete(row: any) {
-    alert("删除");
+    alert('删除');
   }
 }
 </script>

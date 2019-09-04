@@ -1,3 +1,6 @@
 input[type='file'] {
   display: none;
 }
+.tox-notifications-container {
+  display: none;
+}

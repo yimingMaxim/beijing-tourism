@@ -6,6 +6,7 @@
       :show-file-list="false"
       :before-upload="validate"
       :on-remove="handleRemove"
+      :auto-upload="false"
     >
       <i class="el-icon-plus"></i>
     </el-upload>

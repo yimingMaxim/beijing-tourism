@@ -12,8 +12,7 @@
       >
         <el-submenu index="1">
           <template slot="title">后台管理</template>
-          <el-menu-item index="group">group</el-menu-item>
-          <el-menu-item index="private">private</el-menu-item>
+          <el-menu-item index="tour">旅游</el-menu-item>
           <el-menu-item index="bus">chauffeur service</el-menu-item>
           <el-menu-item index="nightShow">night show</el-menu-item>
         </el-submenu>
