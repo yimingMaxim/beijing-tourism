@@ -1,25 +1,33 @@
 <template>
   <div class="tinymce">
     <!-- 富文本编辑组件 -->
-    <tinymce-editor toolbar="false" :init="init"></tinymce-editor>
+    <tinymce-editor
+      toolbar="false"
+      v-model="tinymceHtml"
+      :init="init"
+      @onKeyUp="change"
+      @onChange="change"
+    ></tinymce-editor>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Model, Vue } from 'vue-property-decorator';
-import Editor from '@tinymce/tinymce-vue';
+import { Component, Model, Vue } from "vue-property-decorator";
+import Editor from "@tinymce/tinymce-vue";
 
 @Component({
-  components: { 'tinymce-editor': Editor }
+  components: { "tinymce-editor": Editor }
 })
 export default class TinyMce extends Vue {
-  @Model('change') text!: string;
-  private tinymceHtml: string = '';
+  @Model("change") text!: string;
+
+  private tinymceHtml: string = this.text;
+
   private change() {
-    this.$emit('change', this.text);
+    this.$emit("change", this.tinymceHtml);
   }
   private init: any = {
-    plugins: 'wordcount',
+    plugins: "wordcount",
     menubar: false,
     statusbar: false
     // language_url: '/assets/tinymce/langs/zh_CN.js',

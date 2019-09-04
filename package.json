@@ -56,5 +56,8 @@
   "browserslist": [
     "> 1%",
     "last 2 versions"
-  ]
+  ],
+  "resolutions": {
+    "@vue/cli-service/portfinder": "1.0.21"
+  }
 }

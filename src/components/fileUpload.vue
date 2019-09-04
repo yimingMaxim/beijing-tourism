@@ -5,10 +5,11 @@
       list-type="picture-card"
       :show-file-list="false"
       :before-upload="validate"
+      :on-success="handleSuccess"
       :on-remove="handleRemove"
-      :auto-upload="false"
     >
-      <i class="el-icon-plus"></i>
+      <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+      <i v-else class="el-icon-plus"></i>
     </el-upload>
   </div>
 </template>
@@ -18,7 +19,25 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component({})
 export default class extends Vue {
-  private handleRemove(file: any) {}
+  private imageUrl: string = "";
+
+  /**
+   * @private handleSuccess
+   * @param {} res -
+   * @param {File} file - 照片文件对象
+   * @description 上传成功 - callback
+   */
+  private handleSuccess(res: any, file: any) {
+    this.imageUrl = URL.createObjectURL(file.raw);
+  }
+
+  /**
+   * @private handleRemove
+   * @description 删除照片 - callback
+   */
+  private handleRemove(file: any) {
+    this.imageUrl = "";
+  }
 
   /**
    * @private validate
