@@ -20,6 +20,8 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import Cookies from 'js-cookie';
+import AuthApi from '@/api/auth';
 
 @Component
 export default class LoginForm extends Vue {
@@ -55,7 +57,12 @@ export default class LoginForm extends Vue {
   private onLogin(formName: string) {
     (this.$refs.login_form as any).validate((valid: boolean) => {
       if (valid) {
-        alert('submit!');
+        const param = this.loginData;
+        AuthApi.login(param).then((res: any) => {
+          const { auth, authToken } = res.obj.authToken;
+          Cookies.set('auth', auth);
+          Cookies.set('authToken', authToken);
+        });
       } else {
         return false;
       }

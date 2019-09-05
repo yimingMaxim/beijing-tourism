@@ -6,7 +6,7 @@
         <filter-bar></filter-bar>
         <list-item></list-item>
       </el-main>
-      <el-aside class="visible-lg-block" width="25%">
+      <el-aside class="hidden-sm-and-down" width="25%">
         <about-us></about-us>
       </el-aside>
     </el-container>

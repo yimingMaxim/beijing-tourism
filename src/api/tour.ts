@@ -1,4 +1,3 @@
-import Cookies from 'js-cookie';
 import request from '@/utils/request';
 
 const QUERY_URL = '';
@@ -6,7 +5,7 @@ const ADD_URL = '';
 const UPDATE_URL = '';
 const DELETE_URL = '';
 
-export default class Tour {
+export default class TourApi {
   /**
    * @public queryTour
    * @description 查询旅游线路

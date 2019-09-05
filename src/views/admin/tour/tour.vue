@@ -32,6 +32,40 @@
           <el-form-item label="图片" prop="imgUrl">
             <file-upload></file-upload>
           </el-form-item>
+          <el-form-item v-for="(price, index) in dialogData.prices" label="价格" :key="index">
+            <el-row>
+              <el-col :span="3">
+                <el-select v-model="price.people">
+                  <el-option
+                    v-for="(person, index) in people"
+                    :key="index"
+                    :label="person"
+                    :value="person"
+                  ></el-option>
+                </el-select>
+              </el-col>
+              <el-col :span="1">人</el-col>
+              <el-col :span="3">
+                <el-input v-model="price.value"></el-input>
+              </el-col>
+              <el-col :span="1">$</el-col>
+              <el-col :span="10" :push="1">
+                <el-row>
+                  <el-button
+                    type="danger"
+                    icon="el-icon-delete"
+                    @click.prevent="removeDomain(domain)"
+                  ></el-button>
+                  <el-button
+                    v-if="index === 0"
+                    type="primary"
+                    icon="el-icon-plus"
+                    @click.prevent="addRow()"
+                  ></el-button>
+                </el-row>
+              </el-col>
+            </el-row>
+          </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="dialogDisplay = false">取消</el-button>
@@ -43,11 +77,12 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import AdminTemplete from "./components/adminTemplete.vue";
-import UiTable from "@/components/table.vue";
-import FileUpload from "@/components/fileUpload.vue";
-import TinyMce from "@/components/tinymce.vue";
+import { Component, Vue } from 'vue-property-decorator';
+import AdminTemplete from './components/adminTemplete.vue';
+import UiTable from '@/components/table.vue';
+import FileUpload from '@/components/fileUpload.vue';
+import TinyMce from '@/components/tinymce.vue';
+import TourApi from '@/api/tour';
 
 @Component({
   components: {
@@ -58,34 +93,45 @@ import TinyMce from "@/components/tinymce.vue";
   }
 })
 export default class GroupTour extends Vue {
-  private title: string = "旅游";
-  private dialogTitle: string = "新增";
+  private title: string = '旅游';
+  private dialogTitle: string = '新增';
   private dialogDisplay: boolean = false;
 
   private days: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  private people: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   private dialogData: any = {
-    title: "",
-    content: "",
-    day: "",
+    title: '',
+    content: '',
+    day: '',
     isShow: true,
-    city: "beijing",
-    tourType: "group",
-    imgUrl: []
+    city: 'beijing',
+    tourType: 'group',
+    imgUrl: [],
+    prices: [
+      {
+        people: 1,
+        value: 40
+      },
+      {
+        people: 2,
+        value: 75
+      }
+    ]
   };
 
   private tableData = [
     {
-      uuid: "0001",
-      tourNo: "T000001",
-      title: "标题1",
+      uuid: '0001',
+      tourNo: 'T000001',
+      title: '标题1',
       day: 2,
       isShow: true
     },
     {
-      uuid: "0002",
-      tourNo: "T000002",
-      title: "标题2",
+      uuid: '0002',
+      tourNo: 'T000002',
+      title: '标题2',
       day: 4,
       isShow: false
     }
@@ -93,22 +139,47 @@ export default class GroupTour extends Vue {
 
   private columns: any = [
     {
-      label: "编号",
-      value: "tourNo"
+      label: '编号',
+      value: 'tourNo'
     },
     {
-      label: "标题",
-      value: "title"
+      label: '标题',
+      value: 'title'
     }
   ];
+
+  /**
+   * @private created
+   * @description 立即实行函数 - click
+   */
+  private created() {
+    // this.getTbData();
+  }
+
+  /**
+   * @private getTbData
+   * @description 查询表格数据
+   */
+  private getTbData() {
+    TourApi.queryTour().then((res: any) => {
+      this.tableData = res.obj;
+    });
+  }
 
   /**
    * @private handleAddBtn
    * @description 新增按钮 - click
    */
   private handleAddBtn() {
-    this.dialogTitle = "新增";
+    this.dialogTitle = '新增';
     this.showDialog();
+  }
+
+  private addRow() {
+    this.dialogData.prices.push({
+      people: 2,
+      value: 60
+    });
   }
 
   /**
@@ -116,7 +187,10 @@ export default class GroupTour extends Vue {
    * @description 弹窗确认按钮 - click
    */
   private handleFormSave() {
-    this.hideDialog();
+    const param = this.dialogData;
+    TourApi.addTour(param).then(res => {
+      this.hideDialog();
+    });
   }
 
   /**
@@ -126,11 +200,11 @@ export default class GroupTour extends Vue {
    */
   private handleEdit(row: any) {
     this.dialogData = row;
-    this.dialogTitle = "编辑";
+    this.dialogTitle = '编辑';
     this.showDialog();
   }
   private handleDelete(row: any) {
-    alert("删除");
+    alert('删除');
   }
 
   /**

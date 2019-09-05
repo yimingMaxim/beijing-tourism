@@ -4,3 +4,15 @@ input[type='file'] {
 .tox-notifications-container {
   display: none;
 }
+.row-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.price {
+  color: crimson;
+  font-weight: bolder;
+  font-size: 18px;
+}

@@ -12,28 +12,28 @@
 </template>
 
 <script lang="ts">
-import { Component, Model, Vue } from "vue-property-decorator";
-import Editor from "@tinymce/tinymce-vue";
+import { Component, Model, Vue } from 'vue-property-decorator';
+import Editor from '@tinymce/tinymce-vue';
 
 @Component({
-  components: { "tinymce-editor": Editor }
+  components: { 'tinymce-editor': Editor }
 })
 export default class TinyMce extends Vue {
-  @Model("change") text!: string;
+  @Model('change') text!: string;
 
   private tinymceHtml: string = this.text;
 
   private change() {
-    this.$emit("change", this.tinymceHtml);
+    this.$emit('change', this.tinymceHtml);
   }
   private init: any = {
-    plugins: "wordcount",
+    plugins: 'wordcount',
     menubar: false,
-    statusbar: false
+    statusbar: false,
     // language_url: '/assets/tinymce/langs/zh_CN.js',
     // language: 'zh_CN'
     // skin_url: '/assets/tinymce/skins/lightgray'
-    // height: 300
+    height: 150
   };
 }
 </script>

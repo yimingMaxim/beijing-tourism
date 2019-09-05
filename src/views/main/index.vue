@@ -10,7 +10,7 @@
         <Tours :title="'Private tours'" id="private"></Tours>
         <chauffeur-service :title="'Chauffeur service'" id="chauffeur"></chauffeur-service>
       </el-main>
-      <el-aside class="visible-lg-block" width="25%">
+      <el-aside class="hidden-sm-and-down" width="25%">
         <about-us></about-us>
       </el-aside>
     </el-container>
