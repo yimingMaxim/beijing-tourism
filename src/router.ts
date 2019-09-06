@@ -8,6 +8,7 @@ import List from './views/list/index.vue';
 import Admin from './views/admin/index.vue';
 // import Detail from './views/detail.vue';
 
+import listRouter from './views/list/list-router';
 import adminRouter from './views/admin/admin-router';
 
 Vue.use(Router);
@@ -24,8 +25,8 @@ const baseRouter = new Router({
     },
     {
       path: '/list',
-      name: 'list',
-      component: List
+      component: List,
+      children: listRouter
     },
     {
       path: '/admin',

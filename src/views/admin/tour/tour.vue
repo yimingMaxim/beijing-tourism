@@ -9,7 +9,7 @@
       ></ui-table>
     </template>
     <template v-slot:dialog>
-      <el-dialog :title="dialogTitle" :visible.sync="dialogDisplay" style="text-align: left;">
+      <el-dialog :title="dialogTitle" :visible="dialogDisplay" style="text-align: left;">
         <el-form ref="login_form" :model="dialogData" label-width="80px">
           <el-form-item label="类型" prop="title">
             <el-radio-group v-model="dialogData.tourType">

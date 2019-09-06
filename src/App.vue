@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <el-container class="main-container">
+      <el-aside class="hidden-sm-and-down" width="25%"></el-aside>
       <el-header id="main-header" style="height: 100%;">
         <Header></Header>
       </el-header>

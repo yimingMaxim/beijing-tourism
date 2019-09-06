@@ -2,9 +2,8 @@
   <div id="main-root">
     <el-container class="main-body list-body">
       <el-main>
-        <Breadcrumb :current="'private tour'"></Breadcrumb>
-        <filter-bar></filter-bar>
-        <list-item></list-item>
+        <Breadcrumb :current="title"></Breadcrumb>
+        <router-view />
       </el-main>
       <el-aside class="hidden-sm-and-down" width="25%">
         <about-us></about-us>
@@ -17,18 +16,19 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import AboutUs from '@/components/aboutAs.vue';
 import Breadcrumb from '@/components/breadcrumb.vue';
-import FilterBar from '@/components/filterBar.vue';
-import ListItem from '@/components/listItem.vue';
 
 @Component({
   components: {
     AboutUs,
-    Breadcrumb,
-    FilterBar,
-    ListItem
+    Breadcrumb
   }
 })
-export default class List extends Vue {}
+export default class List extends Vue {
+  private title!: string;
+  private created() {
+    this.title = this.$route.meta.title;
+  }
+}
 </script>
 
-<style scoped src="../../views/main/main.css">
+<style src="../../views/main/main.css">

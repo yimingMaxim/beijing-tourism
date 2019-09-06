@@ -2,6 +2,7 @@
   <div id="main-root">
     <Carousel></Carousel>
     <el-container class="main-body">
+      <el-aside class="hidden-sm-and-down" width="15%"></el-aside>
       <el-main>
         <el-tabs v-model="activeName" @tab-click="handleClick">
           <el-tab-pane :label="tab.label" :name="tab.name" v-for="tab in tabs" :key="tab.name"></el-tab-pane>

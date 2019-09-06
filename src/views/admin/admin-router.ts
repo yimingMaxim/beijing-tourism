@@ -10,17 +10,17 @@ const adminRouter = [
   },
   {
     path: 'tour',
-    name: 'tour',
+    name: 'tourAdmin',
     component: Tour
   },
   {
     path: 'bus',
-    name: 'bus',
+    name: 'busAdmin',
     component: Bus
   },
   {
     path: 'nightShow',
-    name: 'nightShow',
+    name: 'nightShowAdmin',
     component: NightShow
   },
   {

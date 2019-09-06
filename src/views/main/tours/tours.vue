@@ -1,6 +1,6 @@
 <template>
   <div>
-    <card-list-title :title="title" :path="'list'"></card-list-title>
+    <card-list-title :title="title" :path="'private_tour'"></card-list-title>
     <el-row class="card-list-row">
       <el-col :md="8" :sm="12" :xs="24">
         <tour-card></tour-card>

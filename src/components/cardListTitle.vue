@@ -16,7 +16,7 @@ export default class CardListTitle extends Vue {
   @Prop() path!: string;
 
   private toList() {
-    this.$router.push(this.path);
+    this.$router.push(`list/${this.path}`);
   }
 }
 </script>
