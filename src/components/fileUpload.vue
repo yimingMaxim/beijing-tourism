@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-upload
-      action="https://jsonplaceholder.typicode.com/posts/"
+      action="/business/uploadImg"
       list-type="picture-card"
       :show-file-list="false"
       :before-upload="validate"
@@ -15,11 +15,14 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component({})
 export default class extends Vue {
-  private imageUrl: string = "";
+  private header: any = {
+    'Content-type': 'application/json'
+  };
+  private imageUrl: string = '';
 
   /**
    * @private handleSuccess
@@ -36,7 +39,7 @@ export default class extends Vue {
    * @description 删除照片 - callback
    */
   private handleRemove(file: any) {
-    this.imageUrl = "";
+    this.imageUrl = '';
   }
 
   /**
@@ -44,14 +47,14 @@ export default class extends Vue {
    * @description 校验图片格式、大小
    */
   private validate(file: any) {
-    const isJPG = file.type === "image/jpeg";
-    const isPNG = file.type === "image/png";
+    const isJPG = file.type === 'image/jpeg';
+    const isPNG = file.type === 'image/png';
     const isLt2M = file.size / 1024 / 1024 < 2;
     if (!isJPG && !isPNG) {
-      this.$message.error("图片只能是 JPG/PNG 格式!");
+      this.$message.error('图片只能是 JPG/PNG 格式!');
       return false;
     } else if (!isLt2M) {
-      this.$message.error("图片大小不能超过 2MB!");
+      this.$message.error('图片大小不能超过 2MB!');
       return false;
     } else {
       return true;

@@ -6,9 +6,10 @@
 
 export default class Wang {
   /**
-   * @function merge 深度合并
+   * @public merge
    * @param a 被合并对象
    * @param b 合并对象
+   * @description 深度合并
    */
   public static merge(a: any, b: any) {
     if (a === undefined || b === undefined) {
@@ -20,6 +21,22 @@ export default class Wang {
       }
       return a;
     }
+  }
+
+  /**
+   * @public randomString
+   * @param {number} len - 字符串长度
+   * @description 生成随机字符串
+   */
+  public static randomString(len: number) {
+    len = len || 32;
+    const $chars = 'abcdefghijklmnopqrstuvwxyz1234567890';
+    const maxPos = $chars.length;
+    let pwd = '';
+    for (let i = 0; i < len; i++) {
+      pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
+    }
+    return pwd;
   }
 
   /**

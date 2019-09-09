@@ -1,7 +1,7 @@
 import request from '@/utils/request';
 
-const QUERY_URL = '';
-const ADD_URL = '';
+const QUERY_URL = '/tour/api/tourList';
+const ADD_URL = '/tour/api/addtour';
 const UPDATE_URL = '';
 const DELETE_URL = '';
 
@@ -11,11 +11,7 @@ export default class TourApi {
    * @description 查询旅游线路
    */
   public static queryTour() {
-    return request.get(QUERY_URL, {
-      transformResponse: res => {
-        return {};
-      }
-    });
+    return request.get(QUERY_URL);
   }
 
   /**

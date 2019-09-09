@@ -9,7 +9,7 @@
       ></ui-table>
     </template>
     <template v-slot:dialog>
-      <el-dialog :title="dialogTitle" :visible="dialogDisplay" style="text-align: left;">
+      <el-dialog :title="dialogTitle" :visible.sync="dialogDisplay" style="text-align: left;">
         <el-form ref="login_form" :model="dialogData" label-width="80px">
           <el-form-item label="类型" prop="title">
             <el-radio-group v-model="dialogData.tourType">
@@ -35,7 +35,7 @@
           <el-form-item v-for="(price, index) in dialogData.prices" label="价格" :key="index">
             <el-row>
               <el-col :span="3">
-                <el-select v-model="price.people">
+                <el-select v-model="price.person">
                   <el-option
                     v-for="(person, index) in people"
                     :key="index"
@@ -84,6 +84,8 @@ import FileUpload from '@/components/fileUpload.vue';
 import TinyMce from '@/components/tinymce.vue';
 import TourApi from '@/api/tour';
 
+import Tour from '@/model/tour.model';
+
 @Component({
   components: {
     AdminTemplete,
@@ -96,47 +98,8 @@ export default class GroupTour extends Vue {
   private title: string = '旅游';
   private dialogTitle: string = '新增';
   private dialogDisplay: boolean = false;
-
   private days: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   private people: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
-  private dialogData: any = {
-    title: '',
-    content: '',
-    day: '',
-    isShow: true,
-    city: 'beijing',
-    tourType: 'group',
-    imgUrl: [],
-    prices: [
-      {
-        people: 1,
-        value: 40
-      },
-      {
-        people: 2,
-        value: 75
-      }
-    ]
-  };
-
-  private tableData = [
-    {
-      uuid: '0001',
-      tourNo: 'T000001',
-      title: '标题1',
-      day: 2,
-      isShow: true
-    },
-    {
-      uuid: '0002',
-      tourNo: 'T000002',
-      title: '标题2',
-      day: 4,
-      isShow: false
-    }
-  ];
-
   private columns: any = [
     {
       label: '编号',
@@ -148,12 +111,15 @@ export default class GroupTour extends Vue {
     }
   ];
 
+  private dialogData: Tour = new Tour(); // 弹窗表单
+  private tableData: Array<Tour> = []; // table列表数据
+
   /**
    * @private created
    * @description 立即实行函数 - click
    */
   private created() {
-    // this.getTbData();
+    this.getTbData();
   }
 
   /**
@@ -162,7 +128,10 @@ export default class GroupTour extends Vue {
    */
   private getTbData() {
     TourApi.queryTour().then((res: any) => {
-      this.tableData = res.obj;
+      const list: Array<any> = res.data.object;
+      this.tableData = list.map((item: any) => {
+        return new Tour(item);
+      });
     });
   }
 
@@ -176,10 +145,7 @@ export default class GroupTour extends Vue {
   }
 
   private addRow() {
-    this.dialogData.prices.push({
-      people: 2,
-      value: 60
-    });
+    this.dialogData.addPrice();
   }
 
   /**

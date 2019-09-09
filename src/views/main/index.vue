@@ -1,6 +1,6 @@
 <template>
   <div id="main-root">
-    <Carousel></Carousel>
+    <Carousel class="hidden-sm-and-down"></Carousel>
     <el-container class="main-body">
       <el-aside class="hidden-sm-and-down" width="15%"></el-aside>
       <el-main>
@@ -51,6 +51,10 @@ export default class Main extends Vue {
     {
       label: 'Beijing Night Show',
       name: 'nightShow'
+    },
+    {
+      label: 'Hotel Booking',
+      name: 'hotel'
     }
   ];
 

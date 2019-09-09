@@ -1,24 +1,28 @@
-const BASE_PATH = 'http://192.168.55.7';
-// const BASE_PATH = 'http://192.168.13.176';
+const BASE_PATH = 'http://192.168.54.12:7891';
+// const BASE_PATH = '192.168.202.198:7891';
 
 module.exports = {
   publicPath: './',
   devServer: {
-    port: 8088,
+    port: 7891,
     proxy: {
       '/auth': {
+        target: BASE_PATH,
+        changeOrigin: true
+      },
+      '/tour': {
         target: BASE_PATH
       },
-      '/message': {
+      '/business': {
         target: BASE_PATH
       },
-      '/statistic': {
+      '/image': {
         target: BASE_PATH
       },
-      '/product': {
+      '/price': {
         target: BASE_PATH
       },
-      '/search': {
+      '/downloadImg': {
         target: BASE_PATH
       }
     }
