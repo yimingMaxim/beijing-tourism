@@ -7,8 +7,7 @@ module.exports = {
     port: 7891,
     proxy: {
       '/auth': {
-        target: BASE_PATH,
-        changeOrigin: true
+        target: BASE_PATH
       },
       '/tour': {
         target: BASE_PATH

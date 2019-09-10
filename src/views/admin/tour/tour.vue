@@ -30,7 +30,7 @@
             </el-select>
           </el-form-item>
           <el-form-item label="图片" prop="imgUrl">
-            <file-upload></file-upload>
+            <file-upload @change="onImgChange"></file-upload>
           </el-form-item>
           <el-form-item v-for="(price, index) in dialogData.prices" label="价格" :key="index">
             <el-row>
@@ -46,7 +46,7 @@
               </el-col>
               <el-col :span="1">人</el-col>
               <el-col :span="3">
-                <el-input v-model="price.value"></el-input>
+                <el-input v-model="price.price"></el-input>
               </el-col>
               <el-col :span="1">$</el-col>
               <el-col :span="10" :push="1">
@@ -54,13 +54,13 @@
                   <el-button
                     type="danger"
                     icon="el-icon-delete"
-                    @click.prevent="removeDomain(domain)"
+                    @click.prevent="removePrice(price.uuid)"
                   ></el-button>
                   <el-button
                     v-if="index === 0"
                     type="primary"
                     icon="el-icon-plus"
-                    @click.prevent="addRow()"
+                    @click.prevent="addPrice()"
                   ></el-button>
                 </el-row>
               </el-col>
@@ -136,27 +136,73 @@ export default class GroupTour extends Vue {
   }
 
   /**
+   * @private addTour
+   * @param {object} param - 表单结构体
+   * @description 新增一条旅游数据
+   */
+  private addTour(param: any) {
+    TourApi.addTour(param).then(res => {
+      this.hideDialog();
+      this.getTbData();
+    });
+  }
+
+  /**
+   * @private updateTour
+   * @param {object} param - 表单结构体
+   * @description 修改一条旅游数据
+   */
+  private updateTour(param: any) {
+    TourApi.updateTour(param).then(res => {
+      this.hideDialog();
+      this.getTbData();
+    });
+  }
+
+  /**
+   * @private deleteTour
+   * @param {string} uuid - 删除行uuid
+   * @description 删除一条旅游数据
+   */
+  private deleteTour(uuid: string) {
+    TourApi.deleteTour(uuid).then(res => {
+      this.getTbData();
+    });
+  }
+
+  /**
+   * @private onImgChange
+   * @param {string} url - 图片url
+   * @description 上传图片成功后回调
+   */
+  private onImgChange(url: string) {
+    this.dialogData.images[0].url = url;
+  }
+
+  /**
+   * @private addPrice
+   * @description 增加一条价格
+   */
+  private addPrice() {
+    this.dialogData.addPrice();
+  }
+
+  /**
+   * @private removePrice
+   * @param {string} uuid - 价格uuid
+   * @description 删除一条价格
+   */
+  private removePrice(uuid: string) {
+    this.dialogData.removePrice(uuid);
+  }
+
+  /**
    * @private handleAddBtn
    * @description 新增按钮 - click
    */
   private handleAddBtn() {
     this.dialogTitle = '新增';
     this.showDialog();
-  }
-
-  private addRow() {
-    this.dialogData.addPrice();
-  }
-
-  /**
-   * @private handleFormSave
-   * @description 弹窗确认按钮 - click
-   */
-  private handleFormSave() {
-    const param = this.dialogData;
-    TourApi.addTour(param).then(res => {
-      this.hideDialog();
-    });
   }
 
   /**
@@ -169,8 +215,23 @@ export default class GroupTour extends Vue {
     this.dialogTitle = '编辑';
     this.showDialog();
   }
+
+  /**
+   * @private handleFormSave
+   * @description 弹窗保存按钮 - click
+   */
+  private handleFormSave() {
+    const param = this.dialogData.getSubmit();
+    const title = this.dialogTitle;
+    if (title === '新增') {
+      this.addTour(param);
+    } else {
+      this.updateTour(param);
+    }
+  }
+
   private handleDelete(row: any) {
-    alert('删除');
+    this.deleteTour(row.uuid);
   }
 
   /**

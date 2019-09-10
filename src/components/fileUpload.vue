@@ -8,21 +8,18 @@
       :on-success="handleSuccess"
       :on-remove="handleRemove"
     >
-      <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+      <img v-if="previewUrl" :src="previewUrl" class="avatar" />
       <i v-else class="el-icon-plus"></i>
     </el-upload>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Model, Vue } from 'vue-property-decorator';
 
 @Component({})
 export default class extends Vue {
-  private header: any = {
-    'Content-type': 'application/json'
-  };
-  private imageUrl: string = '';
+  private previewUrl: string = '';
 
   /**
    * @private handleSuccess
@@ -31,7 +28,9 @@ export default class extends Vue {
    * @description 上传成功 - callback
    */
   private handleSuccess(res: any, file: any) {
-    this.imageUrl = URL.createObjectURL(file.raw);
+    this.previewUrl = URL.createObjectURL(file.raw);
+    const resultUrl = res.result.url;
+    this.$emit('change', resultUrl);
   }
 
   /**
@@ -39,7 +38,7 @@ export default class extends Vue {
    * @description 删除照片 - callback
    */
   private handleRemove(file: any) {
-    this.imageUrl = '';
+    this.previewUrl = '';
   }
 
   /**
@@ -64,27 +63,9 @@ export default class extends Vue {
 </script>
 
 <style>
-.avatar-uploader .el-upload {
-  border: 1px dashed #d9d9d9;
-  border-radius: 6px;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-}
-.avatar-uploader .el-upload:hover {
-  border-color: #409eff;
-}
-.avatar-uploader-icon {
-  font-size: 28px;
-  color: #8c939d;
-  width: 178px;
-  height: 178px;
-  line-height: 178px;
-  text-align: center;
-}
 .avatar {
-  width: 178px;
-  height: 178px;
+  width: 249px;
+  height: 147px;
   display: block;
 }
 </style>

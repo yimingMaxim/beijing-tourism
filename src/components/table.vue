@@ -9,7 +9,7 @@
     ></el-table-column>
     <el-table-column label="是否展示">
       <template slot-scope="scope">
-        <el-switch v-model="scope.row.isShow"></el-switch>
+        <el-switch v-model="scope.row.shows"></el-switch>
       </template>
     </el-table-column>
     <el-table-column label="操作">

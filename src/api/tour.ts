@@ -1,9 +1,11 @@
 import request from '@/utils/request';
+import ImageApi from './image';
+import PriceApi from './price';
 
 const QUERY_URL = '/tour/api/tourList';
 const ADD_URL = '/tour/api/addtour';
-const UPDATE_URL = '';
-const DELETE_URL = '';
+const UPDATE_URL = '/tour/api/updatetour';
+const DELETE_URL = '/tour/api/deletetour/';
 
 export default class TourApi {
   /**
@@ -34,7 +36,7 @@ export default class TourApi {
    * @public deleteTour
    * @description 删除旅游线路
    */
-  public static deleteTour(param: any) {
-    return request.post(DELETE_URL, param);
+  public static deleteTour(uuid: string) {
+    return request.delete(`${DELETE_URL}${uuid}`);
   }
 }
