@@ -9,8 +9,6 @@ export default class AuthApi {
   public static login(param: any) {
     const psw = Md5.init(param.password);
     param.password = psw;
-    console.log(param);
     return request.post('/auth/api/v2/menu/role', param);
   }
-
 }

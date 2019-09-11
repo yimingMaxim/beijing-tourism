@@ -6,7 +6,7 @@ const listRouter = [
     redirect: 'tour'
   },
   {
-    path: 'private_tour',
+    path: 'private',
     name: 'tourList',
     meta: {
       type: 'private',
@@ -15,7 +15,7 @@ const listRouter = [
     component: Tour
   },
   {
-    path: 'group_tour',
+    path: 'group',
     name: 'tourList',
     meta: {
       type: 'group',

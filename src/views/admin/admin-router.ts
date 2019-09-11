@@ -1,5 +1,5 @@
 import Tour from './tour/tour.vue';
-import Bus from './tour/bus.vue';
+import Chauffeur from './tour/chauffeur.vue';
 import NightShow from './tour/nightShow.vue';
 import Order from './order/order.vue';
 
@@ -14,14 +14,9 @@ const adminRouter = [
     component: Tour
   },
   {
-    path: 'bus',
+    path: 'chauffeur',
     name: 'busAdmin',
-    component: Bus
-  },
-  {
-    path: 'nightShow',
-    name: 'nightShowAdmin',
-    component: NightShow
+    component: Chauffeur
   },
   {
     path: 'order',

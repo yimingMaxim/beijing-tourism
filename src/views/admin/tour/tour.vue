@@ -15,6 +15,7 @@
             <el-radio-group v-model="dialogData.tourType">
               <el-radio-button label="group">Group Tour</el-radio-button>
               <el-radio-button label="private">Private Tour</el-radio-button>
+              <el-radio-button label="chauffeur">Chauffeur Service</el-radio-button>
             </el-radio-group>
           </el-form-item>
           <el-form-item label="标题" prop="title">
@@ -77,14 +78,14 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import AdminTemplete from './components/adminTemplete.vue';
-import UiTable from '@/components/table.vue';
-import FileUpload from '@/components/fileUpload.vue';
-import TinyMce from '@/components/tinymce.vue';
-import TourApi from '@/api/tour';
+import { Component, Vue } from "vue-property-decorator";
+import AdminTemplete from "./components/adminTemplete.vue";
+import UiTable from "@/components/table.vue";
+import FileUpload from "@/components/fileUpload.vue";
+import TinyMce from "@/components/tinymce.vue";
+import TourApi from "@/api/tour";
 
-import Tour from '@/model/tour.model';
+import Tour from "@/model/tour.model";
 
 @Component({
   components: {
@@ -95,19 +96,19 @@ import Tour from '@/model/tour.model';
   }
 })
 export default class GroupTour extends Vue {
-  private title: string = '旅游';
-  private dialogTitle: string = '新增';
+  private title: string = "旅游";
+  private dialogTitle: string = "新增";
   private dialogDisplay: boolean = false;
   private days: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   private people: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   private columns: any = [
     {
-      label: '编号',
-      value: 'tourNo'
+      label: "编号",
+      value: "tourNo"
     },
     {
-      label: '标题',
-      value: 'title'
+      label: "标题",
+      value: "title"
     }
   ];
 
@@ -201,7 +202,8 @@ export default class GroupTour extends Vue {
    * @description 新增按钮 - click
    */
   private handleAddBtn() {
-    this.dialogTitle = '新增';
+    this.dialogTitle = "新增";
+    this.dialogData = new Tour();
     this.showDialog();
   }
 
@@ -212,7 +214,7 @@ export default class GroupTour extends Vue {
    */
   private handleEdit(row: any) {
     this.dialogData = row;
-    this.dialogTitle = '编辑';
+    this.dialogTitle = "编辑";
     this.showDialog();
   }
 
@@ -223,7 +225,7 @@ export default class GroupTour extends Vue {
   private handleFormSave() {
     const param = this.dialogData.getSubmit();
     const title = this.dialogTitle;
-    if (title === '新增') {
+    if (title === "新增") {
       this.addTour(param);
     } else {
       this.updateTour(param);

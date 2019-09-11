@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator';
+import { Component, Vue, Prop } from "vue-property-decorator";
 
 @Component({
   components: {}
@@ -32,11 +32,11 @@ export default class UiTable extends Vue {
   @Prop() tableData!: Array<any>;
 
   private handleEdit(row: any) {
-    this.$emit('onEdit', row);
+    this.$emit("onEdit", row);
   }
 
   private handleDelete(row: any) {
-    this.$emit('onDelete', row);
+    this.$emit("onDelete", row);
   }
 }
 
@@ -46,6 +46,3 @@ interface column {
   width?: number;
 }
 </script>
-
-<style scoped>
-</style>

@@ -13,8 +13,7 @@
         <el-submenu index="1">
           <template slot="title">后台管理</template>
           <el-menu-item index="tour">旅游</el-menu-item>
-          <el-menu-item index="bus">chauffeur service</el-menu-item>
-          <el-menu-item index="nightShow">night show</el-menu-item>
+          <el-menu-item index="chauffeur">用车</el-menu-item>
         </el-submenu>
         <el-menu-item index="order">订单管理</el-menu-item>
       </el-menu>
@@ -26,7 +25,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class Admin extends Vue {
