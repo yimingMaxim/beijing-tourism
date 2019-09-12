@@ -1,20 +1,22 @@
 <template>
-  <el-card :body-style="{ padding: '0' }">
-    <img src="@/assets/lunbo.png" class="image img-responsive" />
+  <el-card :body-style="{ padding: '0' }" class="card-hover">
+    <img :src="'/downloadImg/' + tourObj.images[0].uuid" class="image img-responsive" />
+    <!-- <img src="@/assets/lunbo.png" class="image img-responsive" /> -->
     <div style="padding: 14px;">
-      <p class="card-body-title">北京-上海迪士尼乐园 4天自由行</p>
-      <p class="card-body-desc">迪士尼无限次一票全含🔥五星皇庭国际含早+烟火秀+快速通行证+景区机场酒店接</p>
-      <p>2783起</p>
+      <p class="card-body-title">{{ tourObj.title }}</p>
+      <p class="card-body-desc" v-html="tourObj.content"></p>
+      <p class="price">${{tourObj.minPrice}}</p>
     </div>
   </el-card>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue } from 'vue-property-decorator';
+import Tour from '@/model/tour.model';
 
 @Component
 export default class SpotCard extends Vue {
-  @Prop() private msg!: string;
+  @Prop() private tourObj!: Tour;
 }
 </script>
 
@@ -36,18 +38,13 @@ p {
   overflow: hidden;
 }
 
-.card-body-desc {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  height: 14px;
-  line-height: 14px;
-  color: #999;
-  font-size: 12px;
-}
-
 .image {
   width: 100%;
   display: block;
+}
+
+.card-hover:hover {
+  background-color: #f6fcff;
+  cursor: pointer;
 }
 </style>

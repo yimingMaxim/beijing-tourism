@@ -63,7 +63,7 @@ export default class Tour implements TourImpl {
       uuid: Wang.randomString(32),
       tourId: this.uuid,
       person: null,
-      price: null
+      price: 0
     });
   }
 
@@ -71,6 +71,10 @@ export default class Tour implements TourImpl {
     this.prices = this.prices.filter((price: PriceImpl) => {
       return price.uuid !== uuid;
     })
+  }
+
+  get minPrice() {
+    return Math.min.apply(Math, this.prices.map(price => {return (price.price as number)}));
   }
 }
 

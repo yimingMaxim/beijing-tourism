@@ -26,10 +26,11 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   (response: any) => {
     // 错误处理
-    switch (response.status) {
+    debugger;
+    switch (response.data.code) {
       case 400:
         Message({
-          message: response.data.msg,
+          message: response.data.message,
           type: 'error'
         });
         return Promise.reject(response);
@@ -37,31 +38,31 @@ service.interceptors.response.use(
         return Promise.reject(response);
       case 401:
         Message({
-          message: response.data.msg,
+          message: response.data.message,
           type: 'error'
         });
         break;
       case 403:
         Message({
-          message: response.data.msg,
+          message: response.data.message,
           type: 'warning'
         });
         break;
       case 404:
         Message({
-          message: response.data.msg,
+          message: response.data.message,
           type: 'error'
         });
         break;
       case 405:
         Message({
-          message: response.data.msg,
+          message: response.data.message,
           type: 'error'
         });
         break;
       case 500:
         Message({
-          message: response.data.msg,
+          message: response.data.message,
           type: 'error'
         });
         break;

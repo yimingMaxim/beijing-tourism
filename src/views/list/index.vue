@@ -25,6 +25,8 @@ import Breadcrumb from '@/components/breadcrumb.vue';
 })
 export default class List extends Vue {
   private title!: string;
+  private tourType!: string;
+
   private created() {
     this.title = this.$route.meta.title;
   }

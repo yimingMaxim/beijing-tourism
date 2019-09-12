@@ -1,4 +1,5 @@
 import Tour from './tour/index.vue';
+import Detail from './detail/detail.vue';
 
 const listRouter = [
   {
@@ -22,6 +23,11 @@ const listRouter = [
       title: 'group tour'
     },
     component: Tour
+  },
+  {
+    path: 'detail',
+    name: 'detail',
+    component: Detail
   }
 ];
 

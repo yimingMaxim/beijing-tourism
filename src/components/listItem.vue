@@ -2,16 +2,13 @@
   <el-row class="list-item-body" @click.native="toDetail()">
     <el-col :md="6" :sm="6" :xs="24">
       <div class="list-item-img">
-        <img src="@/assets/dsn.png" />
+        <img :src="'/downloadImg/' + tourObj.images[0].uuid" />
       </div>
     </el-col>
     <el-col :md="12" :sm="12" :xs="24" class="list-item-content">
-      <h4>北京-上海迪士尼乐园 4天自由行</h4>
-      <p
-        class="row-2"
-        title="迪士尼无限次一票全含🔥五星皇庭国际含早+烟火秀+快速通行证+景区机场酒店接"
-      >迪士尼无限次一票全含🔥五星皇庭国际含早+烟火秀+快速通行证+景区机场酒店接迪士尼无限次一票全含🔥五星皇庭国际含早+烟火秀+快速通行证+景区机场酒店接迪士尼无限次一票全含🔥五星皇庭国际含早+烟火秀+快速通行证+景区机场酒店接迪士尼无限次一票全含🔥五星皇庭国际含早+烟火秀+快速通行证+景区机场酒店接迪士尼无限次一票全含🔥五星皇庭国际含早+烟火秀+快速通行证+景区机场酒店接迪士尼无限次一票全含🔥五星皇庭国际含早+烟火秀+快速通行证+景区机场酒店接迪士尼无限次一票全含🔥五星皇庭国际含早+烟火秀+快速通行证+景区机场酒店接迪士尼无限次一票全含🔥五星皇庭国际含早+烟火秀+快速通行证+景区机场酒店接迪士尼无限次一票全含🔥五星皇庭国际含早+烟火秀+快速通行证+景区机场酒店接迪士尼无限次一票全含🔥五星皇庭国际含早+烟火秀+快速通行证+景区机场酒店接迪士尼无限次一票全含🔥五星皇庭国际含早+烟火秀+快速通行证+景区机场酒店接迪士尼无限次一票全含🔥五星皇庭国际含早+烟火秀+快速通行证+景区机场酒店接迪士尼无限次一票全含🔥五星皇庭国际含早+烟火秀+快速通行证+景区机场酒店接</p>
-      <p class="price">US$30 (RMB204)</p>
+      <h4 v-text="tourObj.title"></h4>
+      <p class="card-body-desc" :title="tourObj.content" v-html="tourObj.content"></p>
+      <p class="price">${{tourObj.minPrice}}</p>
     </el-col>
     <el-col :md="6" :sm="6" :xs="24" class="list-item-price">
       <el-button type="danger" @click="handleBook">Book Now</el-button>
@@ -22,8 +19,12 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
+import Tour from '@/model/tour.model';
+
 @Component({})
 export default class ListItem extends Vue {
+  @Prop() tourObj!: Tour;
+
   private toDetail() {}
   private handleBook() {}
 }
