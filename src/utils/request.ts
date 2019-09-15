@@ -26,7 +26,6 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   (response: any) => {
     // 错误处理
-    debugger;
     switch (response.data.code) {
       case 400:
         Message({

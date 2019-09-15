@@ -1,6 +1,6 @@
 <template>
   <div>
-    <card-list-title :title="title" :path="tourType"></card-list-title>
+    <card-list-title :title="title" :path="tourType" :more="more"></card-list-title>
     <el-row class="card-list-row">
       <el-col v-for="tourObj in tourList" :key="tourObj.uuid" :md="8" :sm="12" :xs="24">
         <tour-card :tour-obj="tourObj"></tour-card>
@@ -10,13 +10,13 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-import tourCard from './components/tourCard.vue';
-import cardListTitle from '@/components/cardListTitle.vue';
+import { Component, Prop, Vue } from "vue-property-decorator";
+import tourCard from "./components/tourCard.vue";
+import cardListTitle from "@/components/cardListTitle.vue";
 
-import TourApi from '@/api/tour';
+import TourApi from "@/api/tour";
 
-import Tour from '@/model/tour.model';
+import Tour from "@/model/tour.model";
 
 @Component({
   components: {
@@ -27,7 +27,8 @@ import Tour from '@/model/tour.model';
 export default class Tours extends Vue {
   @Prop() title!: string;
   @Prop() tourType!: string;
-  private path: string = '/list';
+  @Prop() more!: boolean;
+  private path: string = "/list";
 
   private tourList: Array<Tour> = []; // 旅游列表数据
 
