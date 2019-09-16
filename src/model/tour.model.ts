@@ -63,7 +63,7 @@ export default class Tour implements TourImpl {
       uuid: Wang.randomString(32),
       tourId: this.uuid,
       person: null,
-      price: 0
+      price: null
     });
   }
 

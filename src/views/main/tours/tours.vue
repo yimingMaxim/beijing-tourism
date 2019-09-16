@@ -10,13 +10,13 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import tourCard from "./components/tourCard.vue";
-import cardListTitle from "@/components/cardListTitle.vue";
+import { Component, Prop, Vue } from 'vue-property-decorator';
+import tourCard from './components/tourCard.vue';
+import cardListTitle from '@/components/cardListTitle.vue';
 
-import TourApi from "@/api/tour";
+import TourApi from '@/api/tour';
 
-import Tour from "@/model/tour.model";
+import Tour from '@/model/tour.model';
 
 @Component({
   components: {
@@ -28,7 +28,7 @@ export default class Tours extends Vue {
   @Prop() title!: string;
   @Prop() tourType!: string;
   @Prop() more!: boolean;
-  private path: string = "/list";
+  private path: string = '/list';
 
   private tourList: Array<Tour> = []; // 旅游列表数据
 
@@ -42,7 +42,8 @@ export default class Tours extends Vue {
    */
   private getTours() {
     TourApi.queryTour({
-      tourType: this.tourType
+      tourType: this.tourType,
+      isShow: true
     }).then((res: any) => {
       const list: Array<any> = res.data.object;
       this.tourList = list

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <filter-bar></filter-bar>
+    <filter-bar ref="filter" @change="getTours"></filter-bar>
     <list-item v-for="tourObj in tourList" :key="tourObj.uuid" :tour-obj="tourObj"></list-item>
   </div>
 </template>
@@ -26,7 +26,7 @@ export default class TourList extends Vue {
 
   private tourList: Array<Tour> = []; // 旅游列表数据
 
-  private created() {
+  private mounted() {
     this.tourType = this.$route.meta.type;
     this.getTours();
   }
@@ -36,13 +36,15 @@ export default class TourList extends Vue {
    * @description 查询表格数据
    */
   private getTours() {
-    TourApi.queryTour({
-      tourType: this.tourType
-    }).then((res: any) => {
+    const param = (this.$refs.filter as any).getSearchParam();
+    param.tourType = this.tourType;
+    TourApi.queryTour(param).then((res: any) => {
       const list: Array<any> = res.data.object;
-      this.tourList = list.map((item: any) => {
-        return new Tour(item);
-      });
+      this.tourList = list
+        ? list.map((item: any) => {
+            return new Tour(item);
+          })
+        : [];
     });
   }
 }

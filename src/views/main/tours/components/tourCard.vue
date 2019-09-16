@@ -1,7 +1,6 @@
 <template>
-  <el-card :body-style="{ padding: '0' }" class="card-hover">
+  <el-card :body-style="{ padding: '0' }" class="card-hover" @click.native="toDetail()">
     <img :src="'/downloadImg/' + tourObj.images[0].uuid" class="image img-responsive" />
-    <!-- <img src="@/assets/lunbo.png" class="image img-responsive" /> -->
     <div style="padding: 14px;">
       <p class="card-body-title">{{ tourObj.title }}</p>
       <p class="card-body-desc" v-html="tourObj.content"></p>
@@ -17,6 +16,15 @@ import Tour from '@/model/tour.model';
 @Component
 export default class SpotCard extends Vue {
   @Prop() private tourObj!: Tour;
+
+  private toDetail() {
+    this.$router.push({
+      name: 'tourDetail',
+      params: {
+        tourId: this.tourObj.uuid
+      }
+    });
+  }
 }
 </script>
 

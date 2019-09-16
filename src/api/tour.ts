@@ -12,11 +12,9 @@ export default class TourApi {
    * @public queryTour
    * @description 查询旅游线路
    */
-  public static queryTour(param: any = {}) {
+  public static queryTour(params: any = {}) {
     return request.get(QUERY_URL, {
-      params: {
-        param
-      }
+      params
     });
   }
 

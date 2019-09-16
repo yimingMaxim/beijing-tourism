@@ -9,7 +9,12 @@
       ></ui-table>
     </template>
     <template v-slot:dialog>
-      <el-dialog :title="dialogTitle" :visible.sync="dialogDisplay" style="text-align: left;">
+      <el-dialog
+        :title="dialogTitle"
+        :visible.sync="dialogDisplay"
+        style="text-align: left;"
+        @close="onDialogClose"
+      >
         <el-form ref="login_form" :model="dialogData" label-width="80px">
           <el-form-item label="类型" prop="title">
             <el-radio-group v-model="dialogData.tourType">
@@ -31,11 +36,11 @@
             </el-select>
           </el-form-item>
           <el-form-item label="图片" prop="imgUrl">
-            <file-upload @change="onImgChange"></file-upload>
+            <file-upload ref="upload" @change="onImgChange"></file-upload>
           </el-form-item>
           <el-form-item v-for="(price, index) in dialogData.prices" label="价格" :key="index">
             <el-row>
-              <el-col :span="3">
+              <el-col :span="4">
                 <el-select v-model="price.person">
                   <el-option
                     v-for="(person, index) in people"
@@ -50,9 +55,10 @@
                 <el-input v-model="price.price"></el-input>
               </el-col>
               <el-col :span="1">$</el-col>
-              <el-col :span="10" :push="1">
+              <el-col :span="9" :push="1">
                 <el-row>
                   <el-button
+                    v-if="index !== 0"
                     type="danger"
                     icon="el-icon-delete"
                     @click.prevent="removePrice(price.uuid)"
@@ -78,14 +84,14 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import AdminTemplete from "./components/adminTemplete.vue";
-import UiTable from "@/components/table.vue";
-import FileUpload from "@/components/fileUpload.vue";
-import TinyMce from "@/components/tinymce.vue";
-import TourApi from "@/api/tour";
+import { Component, Vue } from 'vue-property-decorator';
+import AdminTemplete from './components/adminTemplete.vue';
+import UiTable from '@/components/table.vue';
+import FileUpload from '@/components/fileUpload.vue';
+import TinyMce from '@/components/tinymce.vue';
+import TourApi from '@/api/tour';
 
-import Tour from "@/model/tour.model";
+import Tour from '@/model/tour.model';
 
 @Component({
   components: {
@@ -96,19 +102,23 @@ import Tour from "@/model/tour.model";
   }
 })
 export default class GroupTour extends Vue {
-  private title: string = "旅游";
-  private dialogTitle: string = "新增";
+  private title: string = '旅游';
+  private dialogTitle: string = '新增';
   private dialogDisplay: boolean = false;
   private days: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   private people: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   private columns: any = [
     {
-      label: "编号",
-      value: "tourNo"
+      label: '编号',
+      value: 'tourNo'
     },
     {
-      label: "标题",
-      value: "title"
+      label: '标题',
+      value: 'title'
+    },
+    {
+      label: '类型',
+      value: 'tourType'
     }
   ];
 
@@ -202,9 +212,13 @@ export default class GroupTour extends Vue {
    * @description 新增按钮 - click
    */
   private handleAddBtn() {
-    this.dialogTitle = "新增";
+    this.dialogTitle = '新增';
     this.dialogData = new Tour();
     this.showDialog();
+  }
+
+  private onDialogClose() {
+    (this.$refs.upload as any).previewUrl = '';
   }
 
   /**
@@ -214,7 +228,7 @@ export default class GroupTour extends Vue {
    */
   private handleEdit(row: any) {
     this.dialogData = row;
-    this.dialogTitle = "编辑";
+    this.dialogTitle = '编辑';
     this.showDialog();
   }
 
@@ -225,7 +239,7 @@ export default class GroupTour extends Vue {
   private handleFormSave() {
     const param = this.dialogData.getSubmit();
     const title = this.dialogTitle;
-    if (title === "新增") {
+    if (title === '新增') {
       this.addTour(param);
     } else {
       this.updateTour(param);

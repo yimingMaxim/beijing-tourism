@@ -26,8 +26,8 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import Breadcrumb from "@/components/breadcrumb.vue";
+import { Component, Vue } from 'vue-property-decorator';
+import Breadcrumb from '@/components/breadcrumb.vue';
 
 @Component({
   components: {
@@ -41,9 +41,15 @@ export default class Detail extends Vue {}
 .detail-body {
   text-align: left;
 }
+.detail-img {
+  padding: 10px;
+}
 .detail-img img {
   max-width: 100%;
   max-height: 100%;
+}
+.detail-content {
+  padding-left: 10px;
 }
 .detail-content h4 {
   font-weight: bolder;
