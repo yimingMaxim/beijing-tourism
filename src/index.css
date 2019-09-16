@@ -26,3 +26,7 @@ input[type='file'] {
   height: 100%;
   padding: 10px;
 }
+
+.min-width .el-input {
+  width: 20%;
+}

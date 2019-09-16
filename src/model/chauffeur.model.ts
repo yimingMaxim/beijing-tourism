@@ -1,14 +1,10 @@
 import Wang from '@/utils/wang';
 
-export default class Tour implements TourImpl {
+export default class Chauffeur implements ChauffeurImpl {
   public uuid: string = Wang.randomString(32);
-  public tourNo: string = '';
-  public title: string = '';
-  public content: string = '';
-  public day: number = 1;
+  public carNo: string = '';
+  public carName: string = '';
   public shows: boolean = true;
-  public tourType: string = 'group';
-  public city: string = 'beijing';
   public images: Array<ImageImpl> = [
     {
       uuid: Wang.randomString(32),
@@ -25,27 +21,12 @@ export default class Tour implements TourImpl {
   }
 
   public getSubmit() {
-    const {
-      uuid,
-      tourNo,
-      title,
-      content,
-      day,
-      shows,
-      tourType,
-      city,
-      images,
-      prices
-    } = this;
+    const { uuid, carNo, carName, shows, images, prices } = this;
     return {
       uuid,
-      tourNo,
-      title,
-      content,
-      day,
+      carNo,
+      carName,
       shows,
-      tourType,
-      city,
       images,
       prices
     };
@@ -54,8 +35,8 @@ export default class Tour implements TourImpl {
   public addPrice() {
     this.prices.push({
       uuid: Wang.randomString(32),
-      tourId: this.uuid,
-      person: null,
+      chauffeurId: this.uuid,
+      route: '',
       price: null
     });
   }
@@ -76,15 +57,11 @@ export default class Tour implements TourImpl {
   }
 }
 
-interface TourImpl {
+interface ChauffeurImpl {
   uuid: string;
-  tourNo: string;
-  title: string;
-  content: string;
-  day: number;
+  carNo: string;
+  carName: string;
   shows: boolean;
-  tourType: string;
-  city: string;
   images: Array<ImageImpl>;
   prices: Array<PriceImpl>;
 }
@@ -97,7 +74,7 @@ interface ImageImpl {
 
 interface PriceImpl {
   uuid?: string;
-  person: number | null;
+  chauffeurId?: string;
+  route: string;
   price: number | null;
-  tourId?: string;
 }

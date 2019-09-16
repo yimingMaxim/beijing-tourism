@@ -14,9 +14,9 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-import Header from './views/header.vue';
-import Footer from './views/footer.vue';
+import { Component, Prop, Vue } from "vue-property-decorator";
+import Header from "./views/header.vue";
+import Footer from "./views/footer.vue";
 
 @Component({
   components: {
@@ -29,12 +29,12 @@ export default class App extends Vue {}
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background: #f9f9f9;
+  background: #f2f3f5;
 }
 
 /* .main-container {

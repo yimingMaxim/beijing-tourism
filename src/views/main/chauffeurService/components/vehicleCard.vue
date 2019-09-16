@@ -12,12 +12,12 @@
         </p>
       </el-col>
     </el-row>
-    <img src="@/assets/car.png" class="image img-responsive" />
+    <img src="@/assets/car/nisang.jpg" class="image img-responsive" />
   </el-card>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component
 export default class VehicleCard extends Vue {

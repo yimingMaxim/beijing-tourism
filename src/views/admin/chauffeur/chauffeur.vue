@@ -15,25 +15,9 @@
         style="text-align: left;"
         @close="onDialogClose"
       >
-        <el-form ref="dialog_form" :model="dialogData" label-width="80px">
-          <el-form-item label="类型" prop="title">
-            <el-radio-group v-model="dialogData.tourType">
-              <el-radio-button label="group">Group Tour</el-radio-button>
-              <el-radio-button label="private">Private Tour</el-radio-button>
-              <el-radio-button label="chauffeur">Chauffeur Service</el-radio-button>
-            </el-radio-group>
-          </el-form-item>
-          <el-form-item label="标题" prop="title">
-            <el-input v-model="dialogData.title"></el-input>
-          </el-form-item>
-          <el-form-item label="内容" prop="content">
-            <tiny-mce v-if="dialogDisplay" v-model="dialogData.content"></tiny-mce>
-            <!-- <el-input v-model="dialogData.content"></el-input> -->
-          </el-form-item>
-          <el-form-item label="几日游" prop="day">
-            <el-select v-model="dialogData.day">
-              <el-option v-for="day in days" :key="day" :label="day" :value="day"></el-option>
-            </el-select>
+        <el-form ref="dialog_form" :model="dialogData" :rules="validate" label-width="80px">
+          <el-form-item label="车名" prop="title" class="min-width">
+            <el-input v-model="dialogData.title" :clearable="true"></el-input>
           </el-form-item>
           <el-form-item label="图片" prop="imgUrl">
             <file-upload ref="upload" @change="onImgChange"></file-upload>
@@ -41,24 +25,17 @@
           <el-form-item v-if="dialogData.prices.length === 0" label="价格">
             <el-button type="primary" icon="el-icon-plus" @click.prevent="addPrice()"></el-button>
           </el-form-item>
-          <el-form-item v-else v-for="(price, index) in dialogData.prices" label="人数" :key="index">
+          <el-form-item v-else v-for="(price, index) in dialogData.prices" label="路线" :key="index">
             <el-row>
-              <el-col :span="3">
-                <el-select v-model="price.person">
-                  <el-option
-                    v-for="(person, index) in people"
-                    :key="index"
-                    :label="person"
-                    :value="person"
-                  ></el-option>
-                </el-select>
+              <el-col :span="6">
+                <el-input placeholder="请输入路线/目的地" v-model="price.route"></el-input>
               </el-col>
               <el-col :span="4">
-                <el-input placeholder="价格/人" v-model="price.price">
+                <el-input placeholder="价格" v-model="price.price">
                   <template slot="prepend">$</template>
                 </el-input>
               </el-col>
-              <el-col :span="9" :push="1">
+              <el-col :span="8" :push="1">
                 <el-row>
                   <el-button
                     v-if="index !== 0"
@@ -91,42 +68,51 @@ import { Component, Vue } from "vue-property-decorator";
 import AdminTemplete from "../components/adminTemplete.vue";
 import UiTable from "@/components/table.vue";
 import FileUpload from "@/components/fileUpload.vue";
-import TinyMce from "@/components/tinymce.vue";
 import TourApi from "@/api/tour";
 
-import Tour from "@/model/tour.model";
+import Chauffeur from "@/model/chauffeur.model";
 
 @Component({
   components: {
     AdminTemplete,
     UiTable,
-    FileUpload,
-    TinyMce
+    FileUpload
   }
 })
-export default class TourAdmin extends Vue {
-  private title: string = "旅游";
+export default class ChauffeurAdmin extends Vue {
+  private title: string = "用车";
   private dialogTitle: string = "新增";
   private dialogDisplay: boolean = false;
-  private days: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  private people: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   private columns: any = [
     {
       label: "编号",
-      value: "tourNo"
+      value: "carNo"
     },
     {
-      label: "标题",
-      value: "title"
-    },
-    {
-      label: "类型",
-      value: "tourType"
+      label: "车名",
+      value: "name"
     }
   ];
 
-  private dialogData: Tour = new Tour(); // 弹窗表单
-  private tableData: Array<Tour> = []; // table列表数据
+  private dialogData: Chauffeur = new Chauffeur(); // 弹窗表单
+  private tableData: Array<Chauffeur> = []; // table列表数据
+
+  private validate = {
+    title: [
+      {
+        required: true,
+        message: "车名不能为空!",
+        trigger: "blur"
+      }
+    ],
+    imgUrl: [
+      {
+        required: true,
+        message: "必须上传图片!",
+        trigger: "blur"
+      }
+    ]
+  };
 
   /**
    * @private created
@@ -144,7 +130,7 @@ export default class TourAdmin extends Vue {
     TourApi.queryTour().then((res: any) => {
       const list: Array<any> = res.data.object;
       this.tableData = list.map((item: any) => {
-        return new Tour(item);
+        return new Chauffeur(item);
       });
     });
   }
@@ -216,7 +202,7 @@ export default class TourAdmin extends Vue {
    */
   private handleAddBtn() {
     this.dialogTitle = "新增";
-    this.dialogData = new Tour();
+    this.dialogData = new Chauffeur();
     this.showDialog();
   }
 
@@ -278,4 +264,7 @@ export default class TourAdmin extends Vue {
 </script>
 
 <style scoped>
+.el-input {
+  height: 30%;
+}
 </style>
