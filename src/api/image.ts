@@ -12,6 +12,6 @@ export default class ImageApi {
    * @description 删除图片
    */
   public static deleteImage(uuid: string) {
-    return request.post(`${DELETE_URL}${uuid}`);
+    return request.delete(`${DELETE_URL}${uuid}`);
   }
 }

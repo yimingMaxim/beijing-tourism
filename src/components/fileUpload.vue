@@ -9,16 +9,18 @@
       :on-remove="handleRemove"
     >
       <img v-if="previewUrl" :src="previewUrl" class="avatar" />
+      <img v-else-if="imageId" :src="'/downloadImg/' + imageId" class="avatar" />
       <i v-else class="el-icon-plus"></i>
     </el-upload>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Model, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component({})
 export default class extends Vue {
+  @Prop() imageId!: string;
   private previewUrl: string = '';
 
   /**

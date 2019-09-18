@@ -31,14 +31,28 @@ export default class TourApi {
    * @description 修改旅游线路
    */
   public static updateTour(param: any) {
-    return request.post(UPDATE_URL, param);
+    return request.put(UPDATE_URL, param);
   }
 
   /**
    * @public deleteTour
-   * @description 删除旅游线路
+   * @description 删除图片及价格
    */
   public static deleteTour(uuid: string) {
     return request.delete(`${DELETE_URL}${uuid}`);
+  }
+
+  public static deletePriceAndImg(tourId: string) {
+    const imagePromise = new Promise(resolve => {
+      ImageApi.deleteImage(tourId).then(res => {
+        resolve();
+      })
+    });
+    const pricePromise = new Promise(resolve => {
+      PriceApi.deletePrice(tourId).then(res => {
+        resolve();
+      })
+    });
+    return Promise.all([imagePromise, pricePromise]);
   }
 }

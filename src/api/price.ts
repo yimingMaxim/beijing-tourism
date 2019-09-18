@@ -9,6 +9,6 @@ export default class PriceApi {
    * @description 删除价格
    */
   public static deletePrice(uuid: string) {
-    return request.post(`${DELETE_URL}${uuid}`);
+    return request.delete(`${DELETE_URL}${uuid}`);
   }
 }
