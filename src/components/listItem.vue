@@ -2,7 +2,7 @@
   <el-row class="list-item-body" @click.native="toDetail()">
     <el-col :md="6" :sm="6" :xs="24">
       <div class="list-item-img">
-        <img :src="'/downloadImg/' + tourObj.images[0].uuid" />
+        <img class="tour-image" :src="'/downloadImg/' + tourObj.images[0].uuid" />
       </div>
     </el-col>
     <el-col :md="12" :sm="12" :xs="24" class="list-item-content">
@@ -25,7 +25,14 @@ import Tour from '@/model/tour.model';
 export default class ListItem extends Vue {
   @Prop() tourObj!: Tour;
 
-  private toDetail() {}
+  private toDetail() {
+    this.$router.push({
+      name: 'tourDetail',
+      params: {
+        data: JSON.stringify(this.tourObj)
+      }
+    });
+  }
   private handleBook() {}
 }
 </script>
@@ -48,13 +55,8 @@ export default class ListItem extends Vue {
   margin-right: 20px;
 }
 
-.list-item-img img {
-  width: 100%;
-  max-width: 320px;
-  max-height: 140px;
-}
-
 .list-item-content {
+  padding-left: 10px;
   margin-top: 5px;
 }
 

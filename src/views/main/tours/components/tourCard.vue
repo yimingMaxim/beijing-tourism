@@ -1,9 +1,9 @@
 <template>
   <el-card :body-style="{ padding: '0' }" class="card-hover" @click.native="toDetail()">
-    <img :src="'/downloadImg/' + tourObj.images[0].uuid" class="image img-responsive" />
+    <img :src="'/downloadImg/' + tourObj.images[0].uuid" class="tour-image" />
     <div style="padding: 14px;">
       <p class="card-body-title">{{ tourObj.title }}</p>
-      <div class="card-body-desc" v-html="tourObj.content"></div>
+      <!-- <div class="card-body-desc" v-html="tourObj.content"></div> -->
       <p class="price">${{tourObj.minPrice}}</p>
     </div>
   </el-card>
@@ -12,6 +12,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import Tour from '@/model/tour.model';
+const E = require('wangeditor');
 
 @Component
 export default class SpotCard extends Vue {
@@ -21,7 +22,7 @@ export default class SpotCard extends Vue {
     this.$router.push({
       name: 'tourDetail',
       params: {
-        tourId: this.tourObj.uuid
+        data: JSON.stringify(this.tourObj)
       }
     });
   }
@@ -44,11 +45,6 @@ p {
   white-space: nowrap;
   width: 100%;
   overflow: hidden;
-}
-
-.image {
-  width: 100%;
-  display: block;
 }
 
 .card-hover:hover {

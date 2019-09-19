@@ -27,8 +27,8 @@
             <el-input v-model="dialogData.title"></el-input>
           </el-form-item>
           <el-form-item label="内容" prop="content">
-            <tiny-mce v-if="dialogDisplay" v-model="dialogData.content"></tiny-mce>
-            <!-- <el-input v-model="dialogData.content"></el-input> -->
+            <!-- <tiny-mce v-if="dialogDisplay" v-model="dialogData.content"></tiny-mce> -->
+            <wang-editor v-if="dialogDisplay" v-model="dialogData.content"></wang-editor>
           </el-form-item>
           <el-form-item label="几日游" prop="day">
             <el-select v-model="dialogData.day">
@@ -36,14 +36,19 @@
             </el-select>
           </el-form-item>
           <el-form-item label="图片" prop="imgUrl">
-            <file-upload ref="upload" :image-id="dialogData.images[0].uuid" @change="onImgChange"></file-upload>
+            <file-upload
+              ref="upload"
+              :image-id="dialogData.images[0].uuid"
+              :image-url="dialogData.images[0].url"
+              @change="onImgChange"
+            ></file-upload>
           </el-form-item>
           <el-form-item v-if="dialogData.prices.length === 0" label="价格">
             <el-button type="primary" icon="el-icon-plus" @click.prevent="addPrice()"></el-button>
           </el-form-item>
           <el-form-item v-else v-for="(price, index) in dialogData.prices" label="人数" :key="index">
             <el-row>
-              <el-col :span="3">
+              <el-col :span="4">
                 <el-select v-model="price.person">
                   <el-option
                     v-for="(person, index) in people"
@@ -53,12 +58,12 @@
                   ></el-option>
                 </el-select>
               </el-col>
-              <el-col :span="4">
+              <el-col :span="6">
                 <el-input placeholder="价格/人" v-model="price.price">
                   <template slot="prepend">$</template>
                 </el-input>
               </el-col>
-              <el-col :span="9" :push="1">
+              <el-col :span="10" :push="1">
                 <el-row>
                   <el-button
                     v-if="index !== 0"
@@ -91,8 +96,10 @@ import { Component, Vue } from 'vue-property-decorator';
 import AdminTemplete from '../components/adminTemplete.vue';
 import UiTable from '@/components/table.vue';
 import FileUpload from '@/components/fileUpload.vue';
-import TinyMce from '@/components/tinymce.vue';
+// import TinyMce from '@/components/tinymce.vue';
 import TourApi from '@/api/tour';
+
+import WangEditor from '@/components/wangEditor.vue';
 
 import Tour from '@/model/tour.model';
 
@@ -101,7 +108,8 @@ import Tour from '@/model/tour.model';
     AdminTemplete,
     UiTable,
     FileUpload,
-    TinyMce
+    // TinyMce,
+    WangEditor
   }
 })
 export default class TourAdmin extends Vue {

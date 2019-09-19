@@ -25,7 +25,8 @@ const listRouter = [
     component: Tour
   },
   {
-    path: 'tour_detail/:tourId',
+    path: 'tour_detail/:data',
+    // path: 'tour_detail/:tourId',
     name: 'tourDetail',
     component: TourDetail
   }
