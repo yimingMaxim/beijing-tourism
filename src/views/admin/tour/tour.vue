@@ -26,6 +26,9 @@
           <el-form-item label="标题" prop="title">
             <el-input v-model="dialogData.title"></el-input>
           </el-form-item>
+          <el-form-item label="副标题" prop="title">
+            <el-input v-model="dialogData.subTitle"></el-input>
+          </el-form-item>
           <el-form-item label="内容" prop="content">
             <!-- <tiny-mce v-if="dialogDisplay" v-model="dialogData.content"></tiny-mce> -->
             <wang-editor v-if="dialogDisplay" v-model="dialogData.content"></wang-editor>

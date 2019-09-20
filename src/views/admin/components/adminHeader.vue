@@ -26,6 +26,9 @@ export default class AdminHeader extends Vue {
 </script>
 
 <style scoped>
+.admin-header {
+  margin-bottom: 10px;
+}
 .admin-header-left {
   text-align: left;
 }

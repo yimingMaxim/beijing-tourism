@@ -3,8 +3,8 @@
     <u @click="onLoginOpen()">login</u>
     <el-dialog title="Login" :visible.sync="dialogDisplay" style="text-align: left;">
       <el-form ref="login_form" :model="loginData" :rules="validate">
-        <el-form-item label="userName" prop="userName">
-          <el-input v-model="loginData.userName" auto-complete="off"></el-input>
+        <el-form-item label="userName" prop="name">
+          <el-input v-model="loginData.name" auto-complete="off"></el-input>
         </el-form-item>
         <el-form-item label="password" prop="password">
           <el-input type="password" v-model="loginData.password" auto-complete="off"></el-input>
@@ -28,12 +28,12 @@ export default class LoginForm extends Vue {
   private dialogDisplay: boolean = false;
 
   private loginData = {
-    userName: '',
+    name: '',
     password: ''
   };
 
   private validate = {
-    userName: [
+    name: [
       {
         required: true,
         message: 'please enter your user name',

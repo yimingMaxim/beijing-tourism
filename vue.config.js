@@ -6,7 +6,7 @@ module.exports = {
   devServer: {
     port: 7891,
     proxy: {
-      '/auth': {
+      '/user': {
         target: BASE_PATH
       },
       '/tour': {

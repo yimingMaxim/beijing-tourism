@@ -4,6 +4,7 @@ export default class Tour implements TourImpl {
   public uuid: string = Wang.randomString(32);
   public tourNo: string = '';
   public title: string = '';
+  public subTitle: string = '';
   public content: string = '';
   public day: number = 1;
   public shows: boolean = true;
@@ -29,6 +30,7 @@ export default class Tour implements TourImpl {
       uuid,
       tourNo,
       title,
+      subTitle,
       content,
       day,
       shows,
@@ -41,6 +43,7 @@ export default class Tour implements TourImpl {
       uuid,
       tourNo,
       title,
+      subTitle,
       content,
       day,
       shows,
@@ -80,6 +83,7 @@ interface TourImpl {
   uuid: string;
   tourNo: string;
   title: string;
+  subTitle: string;
   content: string;
   day: number;
   shows: boolean;

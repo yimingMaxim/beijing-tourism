@@ -8,9 +8,16 @@
 import { Component, Model, Watch, Vue } from 'vue-property-decorator';
 const E = require('wangeditor');
 
+/**
+ * @component WangEditor
+ * @description ts富文本编辑器
+ * @author ymwang
+ */
 @Component
 export default class WangEditor extends Vue {
   @Model('change') text!: string;
+
+  private editor!: any;
 
   private mounted() {
     this.editor = new E(this.$refs.editor);

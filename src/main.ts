@@ -18,6 +18,8 @@ import './index.css';
 
 Vue.config.productionTip = false;
 
+const isPhone = /Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent);
+
 new Vue({
   router,
   render: h => h(App)
