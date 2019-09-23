@@ -7,7 +7,7 @@
     </el-col>
     <el-col :md="12" :sm="12" :xs="24" class="list-item-content">
       <h4 v-text="tourObj.title"></h4>
-      <div class="card-body-desc" :title="tourObj.content" v-html="tourObj.content"></div>
+      <p class="card-body-desc" :title="tourObj.subTitle" v-html="tourObj.subTitle"></p>
       <p class="price">${{tourObj.minPrice}}</p>
     </el-col>
     <el-col :md="6" :sm="6" :xs="24" class="list-item-price">

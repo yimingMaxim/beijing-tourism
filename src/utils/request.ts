@@ -73,37 +73,37 @@ service.interceptors.response.use(
     switch (error.response.status) {
       case 400:
         Message({
-          message: res.msg,
+          message: res.message,
           type: 'error'
         });
         break;
       case 401:
         Message({
-          message: res.msg,
+          message: res.message,
           type: 'error'
         });
         break;
       case 403:
         Message({
-          message: res.msg,
+          message: res.message,
           type: 'warning'
         });
         break;
       case 404:
         Message({
-          message: res.msg || error.response.status,
+          message: res.message || error.response.status,
           type: 'error'
         });
         break;
       case 405:
         Message({
-          message: res.msg,
+          message: res.message,
           type: 'error'
         });
         break;
       case 500:
         Message({
-          message: res.msg || error.response.status,
+          message: res.message || error.response.status,
           type: 'error'
         });
         break;

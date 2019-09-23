@@ -13,15 +13,16 @@ const E = require('wangeditor');
  * @description ts富文本编辑器
  * @author ymwang
  */
+
 @Component
-export default class WangEditor extends Vue {
+export default class extends Vue {
   @Model('change') text!: string;
 
-  private editor!: any;
+  private wangEditor!: any;
 
   private mounted() {
-    this.editor = new E(this.$refs.editor);
-    this.editor.customConfig.menus = [
+    this.wangEditor = new E(this.$refs.editor);
+    this.wangEditor.customConfig.menus = [
       'head', // 标题
       'bold', // 粗体
       'fontSize', // 字号
@@ -36,11 +37,11 @@ export default class WangEditor extends Vue {
       'undo', // 撤销
       'redo' // 重复
     ];
-    this.editor.customConfig.onchange = (html: string) => {
+    this.wangEditor.customConfig.onchange = (html: string) => {
       this.$emit('change', html);
     };
-    this.editor.create();
-    this.editor.txt.html(this.text);
+    this.wangEditor.create();
+    this.wangEditor.txt.html(this.text);
   }
 }
 </script>

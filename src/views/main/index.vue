@@ -8,9 +8,9 @@
           <el-tab-pane :label="tab.label" :name="tab.name" v-for="tab in tabs" :key="tab.name"></el-tab-pane>
         </el-tabs>
         <Tours title="Group tours" id="group" :tour-type="'group'" :more="true"></Tours>
-        <Tours title="Private tours" id="private" :tour-type="'private'" :more="true"></Tours>
-        <Tours title="Night show" id="nightShow" :tour-type="'nightShow'"></Tours>
-        <chauffeur-service :title="'Chauffeur service'" id="chauffeur"></chauffeur-service>
+        <Tours title="Private tours" id="private" tour-type="private" :more="true"></Tours>
+        <Tours title="Night show" id="nightShow" tour-type="nightShow"></Tours>
+        <chauffeur-service title="Chauffeur service" id="chauffeur"></chauffeur-service>
       </el-main>
       <el-aside class="hidden-sm-and-down" width="25%">
         <about-us></about-us>

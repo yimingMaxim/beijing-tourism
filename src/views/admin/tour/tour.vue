@@ -1,12 +1,17 @@
 <template>
   <admin-templete ref="adminTemplete" :title="title" @addBtn="handleAddBtn">
     <template v-slot:dialogTable>
-      <ui-table
-        :columns="columns"
-        :table-data="tableData"
-        @onEdit="handleEdit"
-        @onDelete="handleDelete"
-      ></ui-table>
+      <el-tabs v-model="activeTab" type="border-card" @tab-click="getTbData()">
+        <el-tab-pane label="Private" name="private"></el-tab-pane>
+        <el-tab-pane label="Group" name="group"></el-tab-pane>
+        <el-tab-pane label="Night Show" name="nightShow"></el-tab-pane>
+        <ui-table
+          :columns="columns"
+          :table-data="tableData"
+          @onEdit="handleEdit"
+          @onDelete="handleDelete"
+        ></ui-table>
+      </el-tabs>
     </template>
     <template v-slot:dialog>
       <el-dialog
@@ -20,7 +25,7 @@
             <el-radio-group v-model="dialogData.tourType">
               <el-radio-button label="group">Group Tour</el-radio-button>
               <el-radio-button label="private">Private Tour</el-radio-button>
-              <el-radio-button label="chauffeur">Chauffeur Service</el-radio-button>
+              <el-radio-button label="nightShow">Night Show</el-radio-button>
             </el-radio-group>
           </el-form-item>
           <el-form-item label="标题" prop="title">
@@ -30,7 +35,6 @@
             <el-input v-model="dialogData.subTitle"></el-input>
           </el-form-item>
           <el-form-item label="内容" prop="content">
-            <!-- <tiny-mce v-if="dialogDisplay" v-model="dialogData.content"></tiny-mce> -->
             <wang-editor v-if="dialogDisplay" v-model="dialogData.content"></wang-editor>
           </el-form-item>
           <el-form-item label="几日游" prop="day">
@@ -99,7 +103,6 @@ import { Component, Vue } from 'vue-property-decorator';
 import AdminTemplete from '../components/adminTemplete.vue';
 import UiTable from '@/components/table.vue';
 import FileUpload from '@/components/fileUpload.vue';
-// import TinyMce from '@/components/tinymce.vue';
 import TourApi from '@/api/tour';
 
 import WangEditor from '@/components/wangEditor.vue';
@@ -111,7 +114,6 @@ import Tour from '@/model/tour.model';
     AdminTemplete,
     UiTable,
     FileUpload,
-    // TinyMce,
     WangEditor
   }
 })
@@ -121,6 +123,7 @@ export default class TourAdmin extends Vue {
   private dialogDisplay: boolean = false;
   private days: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   private people: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  private activeTab: string = 'private';
   private columns: any = [
     {
       label: '编号',
@@ -152,7 +155,9 @@ export default class TourAdmin extends Vue {
    * @description 查询表格数据
    */
   private getTbData() {
-    TourApi.queryTour().then((res: any) => {
+    TourApi.queryTour({
+      tourType: this.activeTab
+    }).then((res: any) => {
       const list: Array<any> = res.data.object;
       this.tableData = list.map((item: any) => {
         return new Tour(item);

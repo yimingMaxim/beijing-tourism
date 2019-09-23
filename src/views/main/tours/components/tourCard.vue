@@ -3,7 +3,7 @@
     <img :src="'/downloadImg/' + tourObj.images[0].uuid" class="tour-image" />
     <div style="padding: 14px;">
       <p class="card-body-title">{{ tourObj.title }}</p>
-      <!-- <div class="card-body-desc" v-html="tourObj.content"></div> -->
+      <p class="card-body-desc" v-html="tourObj.subTitle"></p>
       <p class="price">${{tourObj.minPrice}}</p>
     </div>
   </el-card>

@@ -30,7 +30,7 @@
               <el-col :span="6">
                 <el-input placeholder="请输入路线/目的地" v-model="price.route"></el-input>
               </el-col>
-              <el-col :span="4">
+              <el-col :span="5">
                 <el-input placeholder="价格" v-model="price.price">
                   <template slot="prepend">$</template>
                 </el-input>
@@ -64,13 +64,13 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import AdminTemplete from "../components/adminTemplete.vue";
-import UiTable from "@/components/table.vue";
-import FileUpload from "@/components/fileUpload.vue";
-import TourApi from "@/api/tour";
+import { Component, Vue } from 'vue-property-decorator';
+import AdminTemplete from '../components/adminTemplete.vue';
+import UiTable from '@/components/table.vue';
+import FileUpload from '@/components/fileUpload.vue';
+import TourApi from '@/api/tour';
 
-import Chauffeur from "@/model/chauffeur.model";
+import Chauffeur from '@/model/chauffeur.model';
 
 @Component({
   components: {
@@ -80,17 +80,17 @@ import Chauffeur from "@/model/chauffeur.model";
   }
 })
 export default class ChauffeurAdmin extends Vue {
-  private title: string = "用车";
-  private dialogTitle: string = "新增";
+  private title: string = '用车';
+  private dialogTitle: string = '新增';
   private dialogDisplay: boolean = false;
   private columns: any = [
     {
-      label: "编号",
-      value: "carNo"
+      label: '编号',
+      value: 'carNo'
     },
     {
-      label: "车名",
-      value: "name"
+      label: '车名',
+      value: 'name'
     }
   ];
 
@@ -101,15 +101,15 @@ export default class ChauffeurAdmin extends Vue {
     title: [
       {
         required: true,
-        message: "车名不能为空!",
-        trigger: "blur"
+        message: '车名不能为空!',
+        trigger: 'blur'
       }
     ],
     imgUrl: [
       {
         required: true,
-        message: "必须上传图片!",
-        trigger: "blur"
+        message: '必须上传图片!',
+        trigger: 'blur'
       }
     ]
   };
@@ -201,13 +201,13 @@ export default class ChauffeurAdmin extends Vue {
    * @description 新增按钮 - click
    */
   private handleAddBtn() {
-    this.dialogTitle = "新增";
+    this.dialogTitle = '新增';
     this.dialogData = new Chauffeur();
     this.showDialog();
   }
 
   private onDialogClose() {
-    (this.$refs.upload as any).previewUrl = "";
+    (this.$refs.upload as any).previewUrl = '';
   }
 
   /**
@@ -217,7 +217,7 @@ export default class ChauffeurAdmin extends Vue {
    */
   private handleEdit(row: any) {
     this.dialogData = row;
-    this.dialogTitle = "编辑";
+    this.dialogTitle = '编辑';
     this.showDialog();
   }
 
@@ -230,7 +230,7 @@ export default class ChauffeurAdmin extends Vue {
       if (valid) {
         const param = this.dialogData.getSubmit();
         const title = this.dialogTitle;
-        if (title === "新增") {
+        if (title === '新增') {
           this.addTour(param);
         } else {
           this.updateTour(param);
