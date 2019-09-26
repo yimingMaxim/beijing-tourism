@@ -1,5 +1,4 @@
 import Tour from './tour/index.vue';
-import TourDetail from './detail/detail.vue';
 
 const listRouter = [
   {
@@ -23,12 +22,6 @@ const listRouter = [
       title: 'group tour'
     },
     component: Tour
-  },
-  {
-    path: 'tour_detail/:data',
-    // path: 'tour_detail/:tourId',
-    name: 'tourDetail',
-    component: TourDetail
   }
 ];
 

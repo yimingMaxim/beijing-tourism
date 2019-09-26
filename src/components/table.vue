@@ -6,10 +6,24 @@
       :prop="column.value"
       :label="column.label"
       :width="column.width"
-    ></el-table-column>
+    >
+      <template slot-scope="scope">
+        <!-- if(超链接)) -->
+        <u
+          v-if="column.type === 'link'"
+          @click="toComment(scope.row)"
+          v-text="scope.row[column.value]"
+        ></u>
+        <!-- else if(富文本) -->
+        <span v-else-if="column.type === 'html'" v-html="scope.row[column.value]"></span>
+        <!-- else(文本) -->
+        <span v-else v-text="scope.row[column.value]"></span>
+        <!-- end if -->
+      </template>
+    </el-table-column>
     <el-table-column label="是否展示" v-if="showSwitch !== false">
       <template slot-scope="scope">
-        <el-switch v-model="scope.row.shows" @change="handleSwitch"></el-switch>
+        <el-switch v-model="scope.row.shows" @change="handleSwitch(scope.row)"></el-switch>
       </template>
     </el-table-column>
     <el-table-column label="操作">
@@ -33,7 +47,19 @@ export default class UiTable extends Vue {
   @Prop() showSwitch!: boolean;
   @Prop() showEdit!: boolean;
 
-  private handleSwitch(isShow: boolean) {}
+  private handleSwitch(row: any) {
+    this.$emit('onSwitch', row);
+  }
+
+  private toComment(row: any) {
+    const tourId = row.uuid;
+    this.$router.push({
+      name: 'commentAdmin',
+      params: {
+        tourId
+      }
+    });
+  }
 
   private handleEdit(row: any) {
     this.$emit('onEdit', row);
@@ -50,3 +76,10 @@ interface column {
   width?: number;
 }
 </script>
+
+<style scoped>
+u {
+  cursor: pointer;
+  color: #409eff;
+}
+</style>

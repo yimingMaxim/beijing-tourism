@@ -8,6 +8,7 @@
         <ui-table
           :columns="columns"
           :table-data="tableData"
+          @onSwitch="handleSwitch"
           @onEdit="handleEdit"
           @onDelete="handleDelete"
         ></ui-table>
@@ -18,10 +19,11 @@
         :title="dialogTitle"
         :visible.sync="dialogDisplay"
         style="text-align: left;"
+        :close-on-click-modal="false"
         @close="onDialogClose"
       >
-        <el-form ref="dialog_form" :model="dialogData" label-width="80px">
-          <el-form-item label="类型" prop="title">
+        <el-form ref="dialog_form" :model="dialogData" :rules="validate" label-width="80px">
+          <el-form-item label="类型">
             <el-radio-group v-model="dialogData.tourType">
               <el-radio-button label="group">Group Tour</el-radio-button>
               <el-radio-button label="private">Private Tour</el-radio-button>
@@ -31,7 +33,7 @@
           <el-form-item label="标题" prop="title">
             <el-input v-model="dialogData.title"></el-input>
           </el-form-item>
-          <el-form-item label="副标题" prop="title">
+          <el-form-item label="副标题" prop="subTitle">
             <el-input v-model="dialogData.subTitle"></el-input>
           </el-form-item>
           <el-form-item label="内容" prop="content">
@@ -42,7 +44,7 @@
               <el-option v-for="day in days" :key="day" :label="day" :value="day"></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="图片" prop="imgUrl">
+          <el-form-item label="图片" prop="images">
             <file-upload
               ref="upload"
               :image-id="dialogData.images[0].uuid"
@@ -50,10 +52,16 @@
               @change="onImgChange"
             ></file-upload>
           </el-form-item>
-          <el-form-item v-if="dialogData.prices.length === 0" label="价格">
+          <el-form-item v-if="dialogData.prices.length === 0" label="价格" prop="prices">
             <el-button type="primary" icon="el-icon-plus" @click.prevent="addPrice()"></el-button>
           </el-form-item>
-          <el-form-item v-else v-for="(price, index) in dialogData.prices" label="人数" :key="index">
+          <el-form-item
+            v-else
+            v-for="(price, index) in dialogData.prices"
+            label="人数"
+            :key="index"
+            prop="prices"
+          >
             <el-row>
               <el-col :span="4">
                 <el-select v-model="price.person">
@@ -100,6 +108,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { Message } from 'element-ui';
 import AdminTemplete from '../components/adminTemplete.vue';
 import UiTable from '@/components/table.vue';
 import FileUpload from '@/components/fileUpload.vue';
@@ -127,7 +136,8 @@ export default class TourAdmin extends Vue {
   private columns: any = [
     {
       label: '编号',
-      value: 'tourNo'
+      value: 'tourNo',
+      type: 'link'
     },
     {
       label: '标题',
@@ -138,6 +148,59 @@ export default class TourAdmin extends Vue {
       value: 'tourType'
     }
   ];
+
+  private validate = {
+    title: [
+      {
+        required: true,
+        message: '标题不能为空!',
+        trigger: 'blur'
+      }
+    ],
+    subTitle: [
+      {
+        required: true,
+        message: '副标题不能为空!',
+        trigger: 'blur'
+      }
+    ],
+    content: [
+      {
+        required: true,
+        message: '内容不能为空!',
+        trigger: 'blur'
+      }
+    ],
+    images: [
+      {
+        validator: (rule: any, value: any, callback: any) => {
+          const url = value[0].url;
+          if (!url) {
+            callback(new Error('必须上传图片'));
+          } else {
+            callback();
+          }
+        },
+        trigger: 'change'
+      }
+    ],
+    prices: [
+      {
+        validator: (rule: any, value: any, callback: any) => {
+          const noLength = !value.length;
+          const inputError = value.some((price: any) => {
+            return !price.person || !price.price;
+          });
+          if (noLength || inputError) {
+            callback(new Error('至少添加一条价格,且人数和价格不能为空！'));
+          } else {
+            callback();
+          }
+        },
+        trigger: 'change'
+      }
+    ]
+  };
 
   private dialogData: Tour = new Tour(); // 弹窗表单
   private tableData: Array<Tour> = []; // table列表数据
@@ -155,7 +218,7 @@ export default class TourAdmin extends Vue {
    * @description 查询表格数据
    */
   private getTbData() {
-    TourApi.queryTour({
+    TourApi.queryTourList({
       tourType: this.activeTab
     }).then((res: any) => {
       const list: Array<any> = res.data.object;
@@ -173,7 +236,7 @@ export default class TourAdmin extends Vue {
   private addTour(param: any) {
     TourApi.addTour(param).then(res => {
       this.hideDialog();
-      this.getTbData();
+      this.success();
     });
   }
 
@@ -187,8 +250,17 @@ export default class TourAdmin extends Vue {
     TourApi.deletePriceAndImg(tourId).then(() => {
       TourApi.updateTour(param).then(res => {
         this.hideDialog();
-        this.getTbData();
+        this.success();
       });
+    });
+  }
+
+  private handleSwitch(tour: Tour) {
+    const { uuid, shows } = tour;
+    TourApi.updateIsShow(uuid, {
+      shows
+    }).then(res => {
+      this.getTbData();
     });
   }
 
@@ -199,7 +271,7 @@ export default class TourAdmin extends Vue {
    */
   private deleteTour(uuid: string) {
     TourApi.deleteTour(uuid).then(res => {
-      this.getTbData();
+      this.success();
     });
   }
 
@@ -278,6 +350,14 @@ export default class TourAdmin extends Vue {
     this.deleteTour(row.uuid);
   }
 
+  private success() {
+    Message({
+      message: '操作成功！',
+      type: 'success'
+    });
+    this.getTbData();
+  }
+
   /**
    * @private showDialog
    * @description 打开弹窗
@@ -293,8 +373,11 @@ export default class TourAdmin extends Vue {
   private hideDialog() {
     this.dialogDisplay = false;
   }
+
+  private sort(prices: Array<any>) {
+    return prices.sort((a: any, b: any) => {
+      return a.person - b.person;
+    });
+  }
 }
 </script>
-
-<style scoped>
-</style>

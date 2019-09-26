@@ -29,11 +29,13 @@ export default class ListItem extends Vue {
     this.$router.push({
       name: 'tourDetail',
       params: {
-        data: JSON.stringify(this.tourObj)
+        tourId: this.tourObj.uuid
       }
     });
   }
-  private handleBook() {}
+  private handleBook(e: any) {
+    e.stopPropagation(); //非IE浏览器
+  }
 }
 </script>
 

@@ -6,6 +6,7 @@ import { Message } from 'element-ui';
 import Main from './views/main/index.vue';
 import List from './views/list/index.vue';
 import Admin from './views/admin/index.vue';
+import TourDetail from './views/detail/index.vue'
 
 import listRouter from './views/list/list-router';
 import adminRouter from './views/admin/admin-router';
@@ -26,6 +27,11 @@ const baseRouter = new Router({
       path: '/list',
       component: List,
       children: listRouter
+    },
+    {
+      path: '/tour_detail/:tourId',
+      name: 'tourDetail',
+      component: TourDetail
     },
     {
       path: '/admin',

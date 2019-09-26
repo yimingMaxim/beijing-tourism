@@ -22,7 +22,7 @@ export default class SpotCard extends Vue {
     this.$router.push({
       name: 'tourDetail',
       params: {
-        data: JSON.stringify(this.tourObj)
+        tourId: this.tourObj.uuid
       }
     });
   }

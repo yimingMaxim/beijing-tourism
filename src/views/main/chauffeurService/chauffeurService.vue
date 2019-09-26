@@ -1,7 +1,7 @@
 <template>
   <div>
     <card-list-title :title="title" url></card-list-title>
-    <el-collapse>
+    <!-- <el-collapse>
       <el-col class="car-collapse" :md="12" :xs="24">
         <el-collapse-item>
           <template slot="title">
@@ -46,14 +46,14 @@
           <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
         </el-collapse-item>
       </el-col>
-    </el-collapse>
+    </el-collapse>-->
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import vehicleCard from "./components/vehicleCard.vue";
-import cardListTitle from "@/components/cardListTitle.vue";
+import { Component, Prop, Vue } from 'vue-property-decorator';
+import vehicleCard from './components/vehicleCard.vue';
+import cardListTitle from '@/components/cardListTitle.vue';
 
 @Component({
   components: {

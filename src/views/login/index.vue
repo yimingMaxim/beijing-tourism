@@ -1,7 +1,14 @@
 <template>
   <div class="login-item">
-    <u @click="onLoginOpen()">login</u>
-    <el-dialog title="Login" :visible.sync="dialogDisplay" style="text-align: left;">
+    <!-- <u @click="onLoginOpen()">login</u> -->
+    <el-button size="small" type="primary" class="hidden-sm-and-down" @click="onLoginOpen()">登录</el-button>
+    <!-- <el-button size="small" type="success" class="hidden-sm-and-down" disabled>已登录</el-button> -->
+    <el-dialog
+      title="Login"
+      :visible.sync="dialogDisplay"
+      :close-on-click-modal="false"
+      style="text-align: left;"
+    >
       <el-form ref="login_form" :model="loginData" :rules="validate">
         <el-form-item label="userName" prop="name">
           <el-input v-model="loginData.name" auto-complete="off"></el-input>
@@ -54,14 +61,24 @@ export default class LoginForm extends Vue {
     this.dialogDisplay = true;
   }
 
+  private onLoginClose() {
+    this.dialogDisplay = false;
+  }
+
   private onLogin(formName: string) {
     (this.$refs.login_form as any).validate((valid: boolean) => {
       if (valid) {
         const param = this.loginData;
         AuthApi.login(param).then((res: any) => {
-          const { auth, authToken } = res.obj.authToken;
-          Cookies.set('auth', auth);
-          Cookies.set('authToken', authToken);
+          const { code, object } = res.data;
+          if (code === 200) {
+            const { auth, authToken } = object;
+            Cookies.set('auth', auth);
+            Cookies.set('authToken', authToken);
+            this.$router.push('/admin');
+          } else {
+            this.onLoginClose();
+          }
         });
       } else {
         return false;

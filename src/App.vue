@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <el-container class="main-container">
-      <el-aside class="hidden-sm-and-down" width="25%"></el-aside>
       <el-header id="main-header" style="height: 100%;">
         <Header></Header>
       </el-header>
@@ -14,9 +13,9 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import Header from "./views/header.vue";
-import Footer from "./views/footer.vue";
+import { Component, Prop, Vue } from 'vue-property-decorator';
+import Header from './views/header.vue';
+import Footer from './views/footer.vue';
 
 @Component({
   components: {
@@ -29,7 +28,7 @@ export default class App extends Vue {}
 
 <style>
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

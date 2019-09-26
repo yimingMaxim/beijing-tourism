@@ -13,6 +13,7 @@
         :title="dialogTitle"
         :visible.sync="dialogDisplay"
         style="text-align: left;"
+        :close-on-click-modal="false"
         @close="onDialogClose"
       >
         <el-form ref="dialog_form" :model="dialogData" :rules="validate" label-width="80px">
@@ -127,7 +128,7 @@ export default class ChauffeurAdmin extends Vue {
    * @description 查询表格数据
    */
   private getTbData() {
-    TourApi.queryTour().then((res: any) => {
+    TourApi.queryTourList().then((res: any) => {
       const list: Array<any> = res.data.object;
       this.tableData = list.map((item: any) => {
         return new Chauffeur(item);

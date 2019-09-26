@@ -41,7 +41,7 @@ export default class Tours extends Vue {
    * @description 查询表格数据
    */
   private getTours() {
-    TourApi.queryTour({
+    TourApi.queryTourList({
       tourType: this.tourType,
       isShow: true
     }).then((res: any) => {

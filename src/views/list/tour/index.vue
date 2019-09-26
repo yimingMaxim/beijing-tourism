@@ -38,7 +38,7 @@ export default class TourList extends Vue {
   private getTours() {
     const param = (this.$refs.filter as any).getSearchParam();
     param.tourType = this.tourType;
-    TourApi.queryTour(param).then((res: any) => {
+    TourApi.queryTourList(param).then((res: any) => {
       const list: Array<any> = res.data.object;
       this.tourList = list
         ? list.map((item: any) => {
