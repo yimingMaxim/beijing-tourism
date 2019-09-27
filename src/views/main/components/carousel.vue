@@ -2,8 +2,8 @@
   <div>
     <el-carousel :interval="5000" arrow="always">
       <el-carousel-item v-for="item in 4" :key="item">
-        <!-- <h3>{{ item }}</h3> -->
-        <img src="../../../assets/gugong.png" />
+        <h3>{{ item }}</h3>
+        <!-- <img src="../../../assets/gugong.png" /> -->
       </el-carousel-item>
     </el-carousel>
   </div>

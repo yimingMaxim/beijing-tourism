@@ -42,10 +42,10 @@ const baseRouter = new Router({
   ]
 });
 
-baseRouter.beforeEach((to, from, next) => {
+baseRouter.beforeEach((to: any, from: any, next: any) => {
   const auth = Cookies.get('auth');
-  const requireAuth = to.matched.some(res => res.meta.requireAuth);
-  if (requireAuth && !auth) {
+  const requireAuth = to.matched.some((res: any) => res.meta.requireAuth);
+  if (requireAuth && auth !== 'admin') {
     Message({
       message: '无访问权限',
       type: 'error'

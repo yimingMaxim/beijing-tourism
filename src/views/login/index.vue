@@ -1,8 +1,20 @@
 <template>
   <div class="login-item">
-    <!-- <u @click="onLoginOpen()">login</u> -->
-    <el-button size="small" type="primary" class="hidden-sm-and-down" @click="onLoginOpen()">登录</el-button>
-    <!-- <el-button size="small" type="success" class="hidden-sm-and-down" disabled>已登录</el-button> -->
+    <!-- <el-button size="small" type="success" class="hidden-sm-and-down" v-else disabled>已登录</el-button> -->
+    <el-button
+      size="small"
+      type="primary"
+      class="hidden-sm-and-down"
+      v-if="cookie.get('auth') === 'admin'"
+      @click="$router.push('/admin')"
+    >控制台</el-button>
+    <el-button
+      size="small"
+      type="primary"
+      class="hidden-sm-and-down"
+      v-else
+      @click="onLoginOpen()"
+    >登录</el-button>
     <el-dialog
       title="Login"
       :visible.sync="dialogDisplay"
@@ -28,11 +40,13 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import Cookies from 'js-cookie';
+import Wang from '@/utils/wang';
 import AuthApi from '@/api/auth';
 
 @Component
 export default class LoginForm extends Vue {
   private dialogDisplay: boolean = false;
+  private cookie: any = Cookies;
 
   private loginData = {
     name: '',
@@ -72,13 +86,14 @@ export default class LoginForm extends Vue {
         AuthApi.login(param).then((res: any) => {
           const { code, object } = res.data;
           if (code === 200) {
-            const { auth, authToken } = object;
-            Cookies.set('auth', auth);
-            Cookies.set('authToken', authToken);
+            // const { auth, authToken } = object;
+            // Cookies.set('auth', auth);
+            // Cookies.set('authToken', authToken);
+            Cookies.set('auth', 'admin');
+            Cookies.set('authToken', Wang.randomString(32));
             this.$router.push('/admin');
-          } else {
-            this.onLoginClose();
           }
+          this.onLoginClose();
         });
       } else {
         return false;
