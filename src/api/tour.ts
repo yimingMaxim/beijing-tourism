@@ -24,10 +24,7 @@ export default class TourApi {
       transformResponse: (res: any) => {
         const object = JSON.parse(res).object;
         object.forEach((tour: any) => {
-          const prices = tour.prices;
-          tour.prices = prices.sort((a: any, b: any) => {
-            return a.person - b.person;
-          });
+          sortPrice(tour);
         });
         return { object };
       }
@@ -39,7 +36,13 @@ export default class TourApi {
    * @description 根据ID查询一条旅游线路
    */
   public static queryTourById(tourId: string) {
-    return request.get(`${QUERY_ONE_URL}${tourId}`);
+    return request.get(`${QUERY_ONE_URL}${tourId}`, {
+      transformResponse: (res: any) => {
+        const object = JSON.parse(res).object;
+        sortPrice(object);
+        return { object };
+      }
+    });
   }
 
   /**
@@ -111,4 +114,11 @@ export default class TourApi {
     });
     return Promise.all([imagePromise, pricePromise]);
   }
+}
+
+const sortPrice = (tour: any) => {
+  const prices = tour.prices;
+  tour.prices = prices.sort((a: any, b: any) => {
+    return a.person - b.person;
+  });
 }

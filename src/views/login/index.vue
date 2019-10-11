@@ -2,36 +2,36 @@
   <div class="login-item">
     <!-- <el-button size="small" type="success" class="hidden-sm-and-down" v-else disabled>已登录</el-button> -->
     <el-button
+      @click="$router.push('/admin')"
+      class="hidden-sm-and-down"
       size="small"
       type="primary"
-      class="hidden-sm-and-down"
       v-if="cookie.get('auth') === 'admin'"
-      @click="$router.push('/admin')"
     >控制台</el-button>
     <el-button
+      @click="onLoginOpen()"
+      class="hidden-sm-and-down"
       size="small"
       type="primary"
-      class="hidden-sm-and-down"
       v-else
-      @click="onLoginOpen()"
     >登录</el-button>
     <el-dialog
-      title="Login"
-      :visible.sync="dialogDisplay"
       :close-on-click-modal="false"
+      :visible.sync="dialogDisplay"
       style="text-align: left;"
+      title="Login"
     >
-      <el-form ref="login_form" :model="loginData" :rules="validate">
+      <el-form :model="loginData" :rules="validate" ref="login_form">
         <el-form-item label="userName" prop="name">
-          <el-input v-model="loginData.name" auto-complete="off"></el-input>
+          <el-input auto-complete="off" v-model="loginData.name"></el-input>
         </el-form-item>
         <el-form-item label="password" prop="password">
-          <el-input type="password" v-model="loginData.password" auto-complete="off"></el-input>
+          <el-input auto-complete="off" type="password" v-model="loginData.password"></el-input>
         </el-form-item>
       </el-form>
-      <div slot="footer" class="dialog-footer">
+      <div class="dialog-footer" slot="footer">
         <el-button @click="dialogDisplay = false">cancel</el-button>
-        <el-button type="primary" @click="onLogin()">login</el-button>
+        <el-button @click="onLogin()" type="primary">login</el-button>
       </div>
     </el-dialog>
   </div>
@@ -39,6 +39,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Message } from 'element-ui';
 import Cookies from 'js-cookie';
 import Wang from '@/utils/wang';
 import AuthApi from '@/api/auth';
@@ -84,13 +85,10 @@ export default class LoginForm extends Vue {
       if (valid) {
         const param = this.loginData;
         AuthApi.login(param).then((res: any) => {
-          const { code, object } = res.data;
+          const { code, message, object } = res.data;
           if (code === 200) {
-            // const { auth, authToken } = object;
-            // Cookies.set('auth', auth);
-            // Cookies.set('authToken', authToken);
             Cookies.set('auth', 'admin');
-            Cookies.set('authToken', Wang.randomString(32));
+            Cookies.set('authToken', object.token);
             this.$router.push('/admin');
           }
           this.onLoginClose();

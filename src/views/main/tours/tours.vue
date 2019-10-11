@@ -43,7 +43,8 @@ export default class Tours extends Vue {
   private getTours() {
     TourApi.queryTourList({
       tourType: this.tourType,
-      isShow: true
+      shows: true,
+      priorityShow: 'true'
     }).then((res: any) => {
       const list: Array<any> = res.data.object;
       this.tourList = list

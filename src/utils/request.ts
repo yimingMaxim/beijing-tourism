@@ -11,7 +11,7 @@ const service = axios.create({
 // 配置所有request
 service.interceptors.request.use(
   config => {
-    config.headers.authToken = Cookies.get('authToken'); // 所有请求增加authToken
+    config.headers.token = Cookies.get('authToken'); // 所有请求增加authToken
     return config;
   },
   error => {

@@ -36,6 +36,9 @@
           <el-form-item label="副标题" prop="subTitle">
             <el-input v-model="dialogData.subTitle"></el-input>
           </el-form-item>
+          <el-form-item label="首页展示">
+            <el-switch v-model="dialogData.priorityShow"></el-switch>
+          </el-form-item>
           <el-form-item label="内容" prop="content">
             <wang-editor v-if="dialogDisplay" v-model="dialogData.content"></wang-editor>
           </el-form-item>
@@ -372,12 +375,6 @@ export default class TourAdmin extends Vue {
    */
   private hideDialog() {
     this.dialogDisplay = false;
-  }
-
-  private sort(prices: Array<any>) {
-    return prices.sort((a: any, b: any) => {
-      return a.person - b.person;
-    });
   }
 }
 </script>

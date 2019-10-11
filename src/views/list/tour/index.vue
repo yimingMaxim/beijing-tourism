@@ -9,7 +9,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 // import Breadcrumb from '@/components/breadcrumb.vue';
 import FilterBar from '@/components/filterBar.vue';
-import ListItem from '@/components/listItem.vue';
+import ListItem from '../components/listItem.vue';
 
 import TourApi from '@/api/tour';
 

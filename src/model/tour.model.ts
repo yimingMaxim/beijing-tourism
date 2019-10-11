@@ -8,6 +8,7 @@ export default class Tour implements TourImpl {
   public content: string = '';
   public day: number = 1;
   public shows: boolean = true;
+  public priorityShow: boolean = false;
   public tourType: string = 'group';
   public city: string = 'beijing';
   public images: Array<ImageImpl> = [
@@ -34,6 +35,7 @@ export default class Tour implements TourImpl {
       content,
       day,
       shows,
+      priorityShow,
       tourType,
       city,
       images,
@@ -47,6 +49,7 @@ export default class Tour implements TourImpl {
       content,
       day,
       shows,
+      priorityShow,
       tourType,
       city,
       images,
@@ -87,6 +90,7 @@ interface TourImpl {
   content: string;
   day: number;
   shows: boolean;
+  priorityShow: boolean;
   tourType: string;
   city: string;
   images: Array<ImageImpl>;

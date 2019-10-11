@@ -3,18 +3,23 @@
     <img :src="'/downloadImg/' + tourObj.images[0].uuid" class="tour-image" />
     <div style="padding: 14px;">
       <p class="card-body-title">{{ tourObj.title }}</p>
-      <p class="card-body-desc" v-html="tourObj.subTitle"></p>
-      <p class="price">${{tourObj.minPrice}}</p>
+      <p class="card-body-desc" :title="tourObj.subTitle" v-html="tourObj.subTitle"></p>
+      <price-item :price="tourObj.minPrice"></price-item>
     </div>
   </el-card>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import PriceItem from '@/components/priceItem.vue';
 import Tour from '@/model/tour.model';
 const E = require('wangeditor');
 
-@Component
+@Component({
+  components: {
+    PriceItem
+  }
+})
 export default class SpotCard extends Vue {
   @Prop() private tourObj!: Tour;
 
@@ -42,9 +47,10 @@ p {
   letter-spacing: 2px;
   color: #333;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  /* white-space: nowrap; */
   width: 100%;
   overflow: hidden;
+  font-family: sans-serif;
 }
 
 .card-hover:hover {

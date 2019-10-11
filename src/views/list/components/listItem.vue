@@ -8,7 +8,7 @@
     <el-col :md="12" :sm="12" :xs="24" class="list-item-content">
       <h4 v-text="tourObj.title"></h4>
       <p class="card-body-desc" :title="tourObj.subTitle" v-html="tourObj.subTitle"></p>
-      <p class="price">${{tourObj.minPrice}}</p>
+      <price-item :price="tourObj.minPrice"></price-item>
     </el-col>
     <el-col :md="6" :sm="6" :xs="24" class="list-item-price">
       <el-button type="danger" @click="handleBook">Book Now</el-button>
@@ -19,9 +19,15 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
+import PriceItem from '@/components/priceItem.vue';
+
 import Tour from '@/model/tour.model';
 
-@Component({})
+@Component({
+  components: {
+    PriceItem
+  }
+})
 export default class ListItem extends Vue {
   @Prop() tourObj!: Tour;
 

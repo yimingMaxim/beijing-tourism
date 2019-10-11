@@ -4,7 +4,7 @@ export default class Comment implements CommentImpl {
   public uuid: string = Wang.randomString(32);
   public tourId: string = '';
   public authorName: string = '';
-  public imageId: string = '';
+  public imageId: string = Wang.randomString(32);
   public imageUrl: string = '';
   public star: number = 5;
   public content: string = '';

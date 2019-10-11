@@ -5,13 +5,6 @@ input[type='file'] {
   display: none;
 }
 
-.price {
-  color: crimson;
-  font-weight: bolder;
-  font-size: 18px;
-  margin-bottom: 0;
-}
-
 .card-body-desc {
   white-space: nowrap;
   overflow: hidden;

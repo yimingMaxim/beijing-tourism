@@ -64,7 +64,7 @@ export default class FilterBar extends Vue {
       startPrice,
       endPrice,
       tourType: '',
-      isShow: true
+      shows: true
     };
   }
 

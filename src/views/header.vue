@@ -1,18 +1,18 @@
 <template>
   <el-row class="header">
-    <el-col class="header-logo" :sm="12" :xs="12">
+    <el-col :sm="12" :xs="12" class="header-logo">
       <img src="@/assets/logo.png" style="height: 100%;" />
     </el-col>
-    <el-col class="header-login" :sm="12" :xs="12">
+    <el-col :sm="12" :xs="12" class="header-login">
       <login-form></login-form>
     </el-col>
   </el-row>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue } from 'vue-property-decorator';
 
-import LoginForm from "./login/index.vue";
+import LoginForm from './login/index.vue';
 
 @Component({
   components: {
@@ -24,17 +24,24 @@ export default class Header extends Vue {}
 
 <style scoped>
 .header {
-  height: 100%;
+  background: #fff;
+  /* height: 100%; */
 }
 
 .header-logo {
   text-align: left;
-  height: 100%;
+  padding-left: 20px;
+  padding-top: 10px;
+}
+
+.header-logo img {
+  width: 160px;
 }
 
 .header-login {
   text-align: right;
-  padding-top: 40px;
+  margin-bottom: 20px;
+  padding-top: 20px;
 }
 
 .header-login u {
