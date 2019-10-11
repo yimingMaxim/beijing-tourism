@@ -54,7 +54,7 @@
             ></el-date-picker>
           </el-form-item>
           <el-form-item label="Number of Adults:">
-            <el-select :placeholder="false" style="width: 20%;" v-model="formData.person">
+            <el-select placeholder style="width: 20%;" v-model="formData.person">
               <el-option
                 :key="price.person"
                 :label="price.person"
@@ -64,10 +64,10 @@
             </el-select>
           </el-form-item>
           <el-form-item label="Number of Children:">
-            <el-input :placeholder="false" style="width: 20%;" v-model="formData.childNumber"></el-input>
+            <el-input style="width: 20%;" v-model="formData.childNumber"></el-input>
           </el-form-item>
           <el-form-item label="Age of Children:">
-            <el-input :placeholder="false" style="width: 20%;" v-model="formData.childAge"></el-input>
+            <el-input style="width: 20%;" v-model="formData.childAge"></el-input>
           </el-form-item>
           <el-form-item label="Hotel you stay:">
             <el-input placeholder="Hotel Address" style="width: 50%;" v-model="formData.hotel"></el-input>
