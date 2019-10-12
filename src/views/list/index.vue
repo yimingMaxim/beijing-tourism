@@ -13,9 +13,9 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import AboutUs from "@/components/aboutAs.vue";
-import Breadcrumb from "@/components/breadcrumb.vue";
+import { Component, Prop, Vue } from 'vue-property-decorator';
+import AboutUs from '@/components/aboutAs.vue';
+import Breadcrumb from '@/components/breadcrumb.vue';
 
 @Component({
   components: {
@@ -33,4 +33,4 @@ export default class List extends Vue {
 }
 </script>
 
-<style src="../../views/main/main.css">
+<style src="../../views/home/main.css">

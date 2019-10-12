@@ -1,12 +1,12 @@
 <template>
   <el-breadcrumb separator-class="el-icon-arrow-right">
-    <el-breadcrumb-item to="/main">home</el-breadcrumb-item>
+    <el-breadcrumb-item to="/home">home</el-breadcrumb-item>
     <el-breadcrumb-item>{{current}}</el-breadcrumb-item>
   </el-breadcrumb>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component({})
 export default class Breadcrumb extends Vue {

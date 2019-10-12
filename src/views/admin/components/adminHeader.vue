@@ -4,8 +4,8 @@
       <h4>{{title}}</h4>
     </el-col>
     <el-col :span="12" class="admin-header-right">
-      <el-button type="warning" icon="el-icon-back" @click="$router.push('/main')">返回主页</el-button>
-      <el-button type="primary" @click="handleAdd">
+      <el-button @click="$router.push('/home')" icon="el-icon-back" type="warning">返回主页</el-button>
+      <el-button @click="handleAdd" type="primary">
         新增
         <i class="el-icon-plus"></i>
       </el-button>

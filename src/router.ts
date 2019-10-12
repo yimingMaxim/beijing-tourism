@@ -3,11 +3,11 @@ import Router from 'vue-router';
 import Cookies from 'js-cookie';
 import { Message } from 'element-ui';
 
-import Main from './views/main/index.vue';
-import List from './views/list/index.vue';
+import Home from './views/home/home.vue';
 import Admin from './views/admin/index.vue';
-import TourDetail from './views/detail/index.vue'
-import TourOrder from './views/order/tourOrder/tourOrder.vue'
+import List from './views/list/index.vue';
+import TourDetail from './views/detail/index.vue';
+import TourOrder from './views/order/tourOrder/tourOrder.vue';
 
 import listRouter from './views/list/list-router';
 import adminRouter from './views/admin/admin-router';
@@ -18,11 +18,11 @@ const baseRouter = new Router({
   routes: [
     {
       path: '',
-      redirect: '/main'
+      redirect: '/home'
     },
     {
-      path: '/main',
-      component: Main
+      path: '/home',
+      component: Home
     },
     {
       path: '/list',

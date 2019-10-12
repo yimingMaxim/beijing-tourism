@@ -4,13 +4,13 @@
     <el-container class="main-body">
       <el-aside class="hidden-sm-and-down" width="15%"></el-aside>
       <el-main>
-        <el-tabs v-model="activeName" @tab-click="handleClick">
-          <el-tab-pane :label="tab.label" :name="tab.name" v-for="tab in tabs" :key="tab.name"></el-tab-pane>
+        <el-tabs @tab-click="handleClick" v-model="activeName">
+          <el-tab-pane :key="tab.name" :label="tab.label" :name="tab.name" v-for="tab in tabs"></el-tab-pane>
         </el-tabs>
-        <Tours title="Group tours" id="group" :tour-type="'group'" :more="true"></Tours>
-        <Tours title="Private tours" id="private" tour-type="private" :more="true"></Tours>
-        <Tours title="Night show" id="nightShow" tour-type="nightShow"></Tours>
-        <chauffeur-service title="Chauffeur service" id="chauffeur"></chauffeur-service>
+        <Tours :more="true" :tour-type="'group'" id="group" title="Group tours"></Tours>
+        <Tours :more="true" id="private" title="Private tours" tour-type="private"></Tours>
+        <Tours id="nightShow" title="Night show" tour-type="nightShow"></Tours>
+        <chauffeur-service id="chauffeur" title="Chauffeur service"></chauffeur-service>
       </el-main>
       <el-aside class="hidden-sm-and-down" width="25%">
         <about-us></about-us>
@@ -71,4 +71,4 @@ export default class Main extends Vue {
 }
 </script>
 
-<style scoped src="../../views/main/main.css">
+<style scoped src="../../views/home/main.css">
