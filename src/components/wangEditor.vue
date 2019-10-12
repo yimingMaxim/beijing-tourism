@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Model, Watch, Vue } from 'vue-property-decorator';
+import { Component, Model, Vue } from 'vue-property-decorator';
 const E = require('wangeditor');
 
 /**

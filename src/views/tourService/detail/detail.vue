@@ -43,7 +43,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import Breadcrumb from '@/components/breadcrumb.vue';
-import PriceTable from './priceTable.vue';
+import PriceTable from './components/priceTable.vue';
 
 import TourApi from '@/api/tour';
 

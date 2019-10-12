@@ -1,9 +1,9 @@
 .main-body {
-  margin-top: 10px;
+  /* margin-top: 10px; */
 }
 
 .list-body {
-  border: 1px solid #EBEEF5;
+  border: 1px solid #ebeef5;
 }
 
 .card-list-row .el-col {

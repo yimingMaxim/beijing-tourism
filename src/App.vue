@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <el-container class="main-container">
-      <el-header id="main-header" style="height: 100%;">
+      <el-header style="height: 100%;">
         <Header></Header>
       </el-header>
       <router-view />
@@ -34,14 +34,5 @@ export default class App extends Vue {}
   text-align: center;
   color: #2c3e50;
   background: #f2f3f5;
-}
-
-/* .main-container {
-  padding-left: 10%;
-  padding-right: 10%;
-} */
-
-#main-header {
-  padding: 0;
 }
 </style>

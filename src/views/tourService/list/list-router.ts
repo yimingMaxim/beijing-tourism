@@ -7,7 +7,7 @@ const listRouter = [
   },
   {
     path: 'private',
-    name: 'tourList',
+    name: 'privateTour',
     meta: {
       type: 'private',
       title: 'private tour'
@@ -16,7 +16,7 @@ const listRouter = [
   },
   {
     path: 'group',
-    name: 'tourList',
+    name: 'groupTour',
     meta: {
       type: 'group',
       title: 'group tour'

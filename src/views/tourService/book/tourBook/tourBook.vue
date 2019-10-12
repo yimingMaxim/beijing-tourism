@@ -100,7 +100,7 @@ import { countries } from './country';
 @Component({
   components: {}
 })
-export default class TourOrder extends Vue {
+export default class TourBook extends Vue {
   private tourObj: Tour = new Tour();
 
   private countries: Array<any> = countries;

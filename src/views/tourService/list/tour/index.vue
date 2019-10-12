@@ -1,7 +1,7 @@
 <template>
   <div>
-    <filter-bar ref="filter" @change="getTours"></filter-bar>
-    <list-item v-for="tourObj in tourList" :key="tourObj.uuid" :tour-obj="tourObj"></list-item>
+    <filter-bar @change="getTours" ref="filter"></filter-bar>
+    <list-item :key="tourObj.uuid" :tour-obj="tourObj" v-for="tourObj in tourList"></list-item>
   </div>
 </template>
 

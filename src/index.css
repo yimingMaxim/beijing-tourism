@@ -28,3 +28,8 @@ input[type='file'] {
   width: 100%;
   height: 155px;
 }
+/* 移动端分离后删除 */
+.el-header {
+  padding: 0;
+  height: 40px;
+}

@@ -5,19 +5,19 @@
         <h4>锋范</h4>
         <small>1.5L自动</small>
       </el-col>
-      <el-col class="vehicle-card-price" :sm="12" :xs="12">
+      <el-col :sm="12" :xs="12" class="vehicle-card-price">
         <p>
           <strong>$55</strong>
           <em>/日均</em>
         </p>
       </el-col>
     </el-row>
-    <img src="@/assets/car/nisang.jpg" class="image img-responsive" />
+    <img class="image img-responsive" src="@/assets/car/nisang.jpg" />
   </el-card>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component
 export default class VehicleCard extends Vue {

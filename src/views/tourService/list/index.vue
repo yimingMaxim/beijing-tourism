@@ -1,6 +1,7 @@
 <template>
   <div id="main-root">
     <el-container class="main-body list-body">
+      <el-aside class="hidden-sm-and-down" width="15%"></el-aside>
       <el-main>
         <Breadcrumb :current="title"></Breadcrumb>
         <router-view />
@@ -33,4 +34,4 @@ export default class List extends Vue {
 }
 </script>
 
-<style src="../../views/home/main.css">
+<style src="../../../views/home/main.css">

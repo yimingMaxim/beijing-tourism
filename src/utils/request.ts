@@ -1,6 +1,8 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { Message } from 'element-ui';
+import TourApi from '@/api/auth';
+
 const service = axios.create({
   timeout: 10000,
   headers: {
@@ -78,9 +80,11 @@ service.interceptors.response.use(
         });
         break;
       case 401:
-        Message({
-          message: res.message,
-          type: 'error'
+        TourApi.logout(() => {
+          Message({
+            message: res.message,
+            type: 'error'
+          });
         });
         break;
       case 403:
