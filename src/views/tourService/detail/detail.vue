@@ -12,7 +12,8 @@
           <!-- </el-card> -->
         </el-col>
         <el-col :md="14" :xs="24" class="detail-content">
-          <h4>{{tourObj.title}}</h4>
+          <h3>{{tourObj.title}}</h3>
+          <h4>{{tourObj.subTitle}}</h4>
           <div class="detail-content-text" v-html="tourObj.content"></div>
         </el-col>
       </el-row>
@@ -92,9 +93,13 @@ export default class Detail extends Vue {
 .detail-content {
   padding-left: 10px;
 }
+.detail-content h3 {
+  font-weight: bold;
+  margin-bottom: 15px;
+}
 .detail-content h4 {
-  font-weight: bolder;
   color: #ff8300;
+  margin-bottom: 20px;
 }
 .detail-content-text {
   padding-top: 10px;

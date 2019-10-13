@@ -1,9 +1,9 @@
 <template>
-  <el-card :body-style="{ padding: '0' }" class="card-hover" @click.native="toDetail()">
+  <el-card :body-style="{ padding: '0' }" @click.native="toDetail()" class="card-hover">
     <img :src="'/downloadImg/' + tourObj.images[0].uuid" class="tour-image" />
     <div style="padding: 14px;">
       <p class="card-body-title">{{ tourObj.title }}</p>
-      <p class="card-body-desc" :title="tourObj.subTitle" v-html="tourObj.subTitle"></p>
+      <p :title="tourObj.subTitle" class="card-body-desc" v-html="tourObj.subTitle"></p>
       <price-item :price="tourObj.minPrice"></price-item>
     </div>
   </el-card>
@@ -40,17 +40,14 @@ p {
   text-align: left;
 }
 .card-body-title {
-  font-size: 14px;
   font-weight: 600;
   margin-bottom: 12px;
   line-height: 16px;
-  letter-spacing: 2px;
-  color: #333;
-  text-overflow: ellipsis;
-  /* white-space: nowrap; */
-  width: 100%;
-  overflow: hidden;
   font-family: sans-serif;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-break: break-all;
 }
 
 .card-hover:hover {

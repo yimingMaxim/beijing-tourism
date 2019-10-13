@@ -1,28 +1,28 @@
 <template>
-  <admin-templete ref="adminTemplete" :title="title" @addBtn="handleAddBtn">
+  <admin-templete :title="title" @addBtn="handleAddBtn" ref="adminTemplete">
     <template v-slot:dialogTable>
-      <el-tabs v-model="activeTab" type="border-card" @tab-click="getTbData()">
+      <el-tabs @tab-click="getTbData()" type="border-card" v-model="activeTab">
         <el-tab-pane label="Private" name="private"></el-tab-pane>
         <el-tab-pane label="Group" name="group"></el-tab-pane>
         <el-tab-pane label="Night Show" name="nightShow"></el-tab-pane>
         <ui-table
           :columns="columns"
           :table-data="tableData"
-          @onSwitch="handleSwitch"
-          @onEdit="handleEdit"
           @onDelete="handleDelete"
+          @onEdit="handleEdit"
+          @onSwitch="handleSwitch"
         ></ui-table>
       </el-tabs>
     </template>
     <template v-slot:dialog>
       <el-dialog
+        :close-on-click-modal="false"
         :title="dialogTitle"
         :visible.sync="dialogDisplay"
-        style="text-align: left;"
-        :close-on-click-modal="false"
         @close="onDialogClose"
+        style="text-align: left;"
       >
-        <el-form ref="dialog_form" :model="dialogData" :rules="validate" label-width="80px">
+        <el-form :model="dialogData" :rules="validate" label-width="80px" ref="dialog_form">
           <el-form-item label="类型">
             <el-radio-group v-model="dialogData.tourType">
               <el-radio-button label="group">Group Tour</el-radio-button>
@@ -39,40 +39,40 @@
           <el-form-item label="首页展示">
             <el-switch v-model="dialogData.priorityShow"></el-switch>
           </el-form-item>
+          <el-form-item label="几日游" prop="day">
+            <el-select v-model="dialogData.day">
+              <el-option :key="day" :label="day" :value="day" v-for="day in days"></el-option>
+            </el-select>
+          </el-form-item>
           <el-form-item label="内容" prop="content">
             <wang-editor v-if="dialogDisplay" v-model="dialogData.content"></wang-editor>
           </el-form-item>
-          <el-form-item label="几日游" prop="day">
-            <el-select v-model="dialogData.day">
-              <el-option v-for="day in days" :key="day" :label="day" :value="day"></el-option>
-            </el-select>
-          </el-form-item>
           <el-form-item label="图片" prop="images">
             <file-upload
-              ref="upload"
               :image-id="dialogData.images[0].uuid"
               :image-url="dialogData.images[0].url"
               @change="onImgChange"
+              ref="upload"
             ></file-upload>
           </el-form-item>
-          <el-form-item v-if="dialogData.prices.length === 0" label="价格" prop="prices">
-            <el-button type="primary" icon="el-icon-plus" @click.prevent="addPrice()"></el-button>
+          <el-form-item label="价格" prop="prices" v-if="dialogData.prices.length === 0">
+            <el-button @click.prevent="addPrice()" icon="el-icon-plus" type="primary"></el-button>
           </el-form-item>
           <el-form-item
+            :key="index"
+            label="人数"
+            prop="prices"
             v-else
             v-for="(price, index) in dialogData.prices"
-            label="人数"
-            :key="index"
-            prop="prices"
           >
             <el-row>
               <el-col :span="4">
                 <el-select v-model="price.person">
                   <el-option
-                    v-for="(person, index) in people"
                     :key="index"
                     :label="person"
                     :value="person"
+                    v-for="(person, index) in people"
                   ></el-option>
                 </el-select>
               </el-col>
@@ -81,28 +81,28 @@
                   <template slot="prepend">$</template>
                 </el-input>
               </el-col>
-              <el-col :span="10" :push="1">
+              <el-col :push="1" :span="10">
                 <el-row>
                   <el-button
-                    v-if="index !== 0"
-                    type="danger"
-                    icon="el-icon-delete"
                     @click.prevent="removePrice(price.uuid)"
+                    icon="el-icon-delete"
+                    type="danger"
+                    v-if="index !== 0"
                   ></el-button>
                   <el-button
-                    v-if="index === 0"
-                    type="primary"
-                    icon="el-icon-plus"
                     @click.prevent="addPrice()"
+                    icon="el-icon-plus"
+                    type="primary"
+                    v-if="index === 0"
                   ></el-button>
                 </el-row>
               </el-col>
             </el-row>
           </el-form-item>
         </el-form>
-        <div slot="footer" class="dialog-footer">
+        <div class="dialog-footer" slot="footer">
           <el-button @click="dialogDisplay = false">取消</el-button>
-          <el-button type="primary" @click="handleFormSave">确定</el-button>
+          <el-button @click="handleFormSave" type="primary">确定</el-button>
         </div>
       </el-dialog>
     </template>
