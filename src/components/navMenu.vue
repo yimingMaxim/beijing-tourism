@@ -1,6 +1,6 @@
 <template>
   <div class="nav_box">
-    <div class="response_wrap3" id="nav" style="width: 1300px;">
+    <div class="response_wrap3" id="nav">
       <ul class="link" id="channelMenu">
         <li :key="nav.id" v-bind:class="{'on': $route.name === nav.name}" v-for="nav in navs">
           <a :title="nav.title" @click="$router.push(nav.path)" v-text="nav.label"></a>
@@ -58,7 +58,7 @@ export default class NavMenu extends Vue {
 }
 #nav {
   /* width: 1200px; */
-  width: 70%;
+  /* width: 70%; */
   height: 40px;
   margin: 0px auto;
   position: relative;

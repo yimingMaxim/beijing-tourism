@@ -1,6 +1,6 @@
 <template>
   <el-card>
-    <el-col :md="12" :xs="24" class="order-body">
+    <el-col :md="12" :sm="24" :xs="24" class="order-body">
       <h4>Beijing Tours Online Reservation Form</h4>
       <div class="order-form">
         <el-form :model="formData" :rules="validate" ref="order_form" size="mini">
@@ -21,20 +21,24 @@
             </el-select>
           </el-form-item>
           <el-form-item label="E-Mail Address:">
-            <el-input placeholder="email address" style="width: 60%;" v-model="formData.email"></el-input>
+            <el-input
+              placeholder="email address"
+              style="width: 60%;"
+              v-model="formData.mailAddress"
+            ></el-input>
           </el-form-item>
           <el-form-item label="Alternate E-mail:">
             <el-input
               placeholder="email address"
               style="width: 60%;"
-              v-model="formData.alternateEmail"
+              v-model="formData.alternatMailAddress"
             ></el-input>
           </el-form-item>
           <el-form-item label="Phone Number:">
             <el-input
               placeholder="including extension"
               style="width: 50%;"
-              v-model="formData.phone"
+              v-model="formData.phoneNumber"
             ></el-input>
           </el-form-item>
           <el-form-item :label="tourObj.day === 1 ? 'Tour Date:' : 'Start Date'">
@@ -42,7 +46,8 @@
               :editable="false"
               :placeholder="tourObj.day === 1 ? 'Date:' : 'Start Date'"
               type="date"
-              v-model="formData.startDate"
+              v-model="formData.tourDate"
+              value-format="yyyy-MM-dd"
             ></el-date-picker>
           </el-form-item>
           <el-form-item label="End Date:" v-if="tourObj.day > 1">
@@ -51,6 +56,7 @@
               placeholder="End Date"
               type="date"
               v-model="formData.endDate"
+              value-format="yyyy-MM-dd"
             ></el-date-picker>
           </el-form-item>
           <el-form-item label="Number of Adults:">
@@ -95,6 +101,7 @@ import { Message } from 'element-ui';
 import TourApi from '@/api/tour';
 
 import Tour from '@/model/tour.model';
+import TourOrder from '@/model/tourOrder.model';
 import { countries } from './country';
 
 @Component({
@@ -105,9 +112,7 @@ export default class TourBook extends Vue {
 
   private countries: Array<any> = countries;
 
-  private formData: any = {
-    country: ''
-  };
+  private tourOrder: TourOrder = new TourOrder();
 
   private validate = {
     title: [
@@ -122,7 +127,9 @@ export default class TourBook extends Vue {
   private created() {
     const tourId: string = this.$route.params.tourId;
     TourApi.queryTourById(tourId).then((res: any) => {
-      this.tourObj = new Tour(res.data.object);
+      const tour = res.data.object;
+      this.tourObj = new Tour(tour);
+      this.tourOrder.tourId = tour.uuid;
     });
   }
 }

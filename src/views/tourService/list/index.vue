@@ -1,7 +1,6 @@
 <template>
   <div id="main-root">
     <el-container class="main-body list-body">
-      <el-aside class="hidden-sm-and-down" width="15%"></el-aside>
       <el-main>
         <Breadcrumb :current="title"></Breadcrumb>
         <router-view />
