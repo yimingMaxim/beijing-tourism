@@ -10,9 +10,6 @@
       <tr :key="price.person" v-for="price in tourObj.prices">
         <td v-text="price.person + ' person'"></td>
         <td v-text="'$' + price.price"></td>
-        <!-- <td>
-          <el-button @click="handleBook" size="mini" type="danger">book</el-button>
-        </td>-->
       </tr>
       <tr>
         <td colspan="2">

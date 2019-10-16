@@ -3,17 +3,17 @@
     <el-header>
       <el-menu
         :default-active="activeIndex"
+        :router="true"
+        active-text-color="#ffd04b"
+        background-color="#545c64"
         class="el-menu-demo"
         mode="horizontal"
-        background-color="#545c64"
         text-color="#fff"
-        active-text-color="#ffd04b"
-        :router="true"
       >
         <el-submenu index="1">
           <template slot="title">后台管理</template>
           <el-menu-item index="tour">旅游</el-menu-item>
-          <!-- <el-menu-item index="chauffeur">用车</el-menu-item> -->
+          <el-menu-item index="chauffeur">用车</el-menu-item>
         </el-submenu>
         <el-menu-item index="order">订单管理</el-menu-item>
       </el-menu>

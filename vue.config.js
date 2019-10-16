@@ -13,6 +13,9 @@ module.exports = {
       '/tour': {
         target: BASE_PATH
       },
+      '/car': {
+        target: BASE_PATH
+      },
       '/business': {
         target: BASE_PATH
       },

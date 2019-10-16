@@ -1,16 +1,16 @@
 <template>
   <div>
     <el-upload
+      :before-upload="validate"
+      :on-remove="handleRemove"
+      :on-success="handleSuccess"
+      :show-file-list="false"
       action="/business/uploadImg"
       list-type="picture-card"
-      :show-file-list="false"
-      :before-upload="validate"
-      :on-success="handleSuccess"
-      :on-remove="handleRemove"
     >
-      <img v-if="previewUrl" :src="previewUrl" class="avatar" />
-      <img v-else-if="imageUrl" :src="'/downloadImg/' + imageId" class="avatar" />
-      <i v-else class="el-icon-plus"></i>
+      <img :src="previewUrl" class="avatar" v-if="previewUrl" />
+      <img :src="'/downloadImg/' + imageId" class="avatar" v-else-if="imageUrl" />
+      <i class="el-icon-plus" v-else></i>
     </el-upload>
   </div>
 </template>
@@ -67,8 +67,8 @@ export default class extends Vue {
 
 <style>
 .avatar {
-  width: 249px;
-  height: 147px;
+  max-width: 249px;
+  max-height: 147px;
   display: block;
 }
 </style>

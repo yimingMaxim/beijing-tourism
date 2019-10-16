@@ -1,63 +1,75 @@
 <template>
-  <admin-templete ref="adminTemplete" :title="title" @addBtn="handleAddBtn">
+  <admin-templete :title="title" @addBtn="handleAddBtn" ref="adminTemplete">
     <template v-slot:dialogTable>
       <ui-table
         :columns="columns"
+        :show-switch="false"
         :table-data="tableData"
-        @onEdit="handleEdit"
         @onDelete="handleDelete"
+        @onEdit="handleEdit"
       ></ui-table>
     </template>
     <template v-slot:dialog>
       <el-dialog
+        :close-on-click-modal="false"
         :title="dialogTitle"
         :visible.sync="dialogDisplay"
-        style="text-align: left;"
-        :close-on-click-modal="false"
         @close="onDialogClose"
+        style="text-align: left;"
       >
-        <el-form ref="dialog_form" :model="dialogData" :rules="validate" label-width="80px">
-          <el-form-item label="车名" prop="title" class="min-width">
-            <el-input v-model="dialogData.title" :clearable="true"></el-input>
+        <el-form :model="dialogData" :rules="validate" label-width="80px" ref="dialog_form">
+          <el-form-item class="min-width" label="车名" prop="carName">
+            <el-input :clearable="true" v-model="dialogData.carName"></el-input>
           </el-form-item>
-          <el-form-item label="图片" prop="imgUrl">
-            <file-upload ref="upload" @change="onImgChange"></file-upload>
+          <el-form-item label="图片" prop="carUrl">
+            <file-upload
+              :image-id="dialogData.carUrlId"
+              :image-url="dialogData.carUrl"
+              @change="onImgChange"
+              ref="upload"
+            ></file-upload>
           </el-form-item>
-          <el-form-item v-if="dialogData.prices.length === 0" label="价格">
-            <el-button type="primary" icon="el-icon-plus" @click.prevent="addPrice()"></el-button>
+          <el-form-item label="价格" prop="carprice" v-if="dialogData.carprice.length === 0">
+            <el-button @click.prevent="addPrice()" icon="el-icon-plus" type="primary"></el-button>
           </el-form-item>
-          <el-form-item v-else v-for="(price, index) in dialogData.prices" label="路线" :key="index">
+          <el-form-item
+            :key="index"
+            label="路线"
+            prop="carprice"
+            v-else
+            v-for="(price, index) in dialogData.carprice"
+          >
             <el-row>
-              <el-col :span="6">
-                <el-input placeholder="请输入路线/目的地" v-model="price.route"></el-input>
+              <el-col :span="10">
+                <el-input placeholder="请输入路线/目的地" v-model="price.placeName"></el-input>
               </el-col>
               <el-col :span="5">
                 <el-input placeholder="价格" v-model="price.price">
                   <template slot="prepend">$</template>
                 </el-input>
               </el-col>
-              <el-col :span="8" :push="1">
+              <el-col :push="1" :span="8">
                 <el-row>
                   <el-button
-                    v-if="index !== 0"
-                    type="danger"
-                    icon="el-icon-delete"
                     @click.prevent="removePrice(price.uuid)"
+                    icon="el-icon-delete"
+                    type="danger"
+                    v-if="index !== 0"
                   ></el-button>
                   <el-button
-                    v-if="index === 0"
-                    type="primary"
-                    icon="el-icon-plus"
                     @click.prevent="addPrice()"
+                    icon="el-icon-plus"
+                    type="primary"
+                    v-if="index === 0"
                   ></el-button>
                 </el-row>
               </el-col>
             </el-row>
           </el-form-item>
         </el-form>
-        <div slot="footer" class="dialog-footer">
+        <div class="dialog-footer" slot="footer">
           <el-button @click="dialogDisplay = false">取消</el-button>
-          <el-button type="primary" @click="handleFormSave">确定</el-button>
+          <el-button @click="handleFormSave" type="primary">确定</el-button>
         </div>
       </el-dialog>
     </template>
@@ -66,11 +78,12 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { Message } from 'element-ui';
 import AdminTemplete from '../components/adminTemplete.vue';
 import UiTable from '@/components/table.vue';
 import FileUpload from '@/components/fileUpload.vue';
-import TourApi from '@/api/tour';
 
+import ChauffeurApi from '@/api/chauffeur';
 import Chauffeur from '@/model/chauffeur.model';
 
 @Component({
@@ -91,7 +104,7 @@ export default class ChauffeurAdmin extends Vue {
     },
     {
       label: '车名',
-      value: 'name'
+      value: 'carName'
     }
   ];
 
@@ -99,18 +112,39 @@ export default class ChauffeurAdmin extends Vue {
   private tableData: Array<Chauffeur> = []; // table列表数据
 
   private validate = {
-    title: [
+    carName: [
       {
         required: true,
         message: '车名不能为空!',
         trigger: 'blur'
       }
     ],
-    imgUrl: [
+    carUrl: [
       {
-        required: true,
-        message: '必须上传图片!',
-        trigger: 'blur'
+        validator: (rule: any, value: any, callback: any) => {
+          if (!value) {
+            callback(new Error('必须上传图片'));
+          } else {
+            callback();
+          }
+        },
+        trigger: 'change'
+      }
+    ],
+    carprice: [
+      {
+        validator: (rule: any, value: any, callback: any) => {
+          const noLength = !value.length;
+          const inputError = value.some((price: any) => {
+            return !price.placeName || !price.price;
+          });
+          if (noLength || inputError) {
+            callback(new Error('至少添加一条价格,且人数和价格不能为空！'));
+          } else {
+            callback();
+          }
+        },
+        trigger: 'change'
       }
     ]
   };
@@ -128,7 +162,7 @@ export default class ChauffeurAdmin extends Vue {
    * @description 查询表格数据
    */
   private getTbData() {
-    TourApi.queryTourList().then((res: any) => {
+    ChauffeurApi.queryCarList().then((res: any) => {
       const list: Array<any> = res.data.object;
       this.tableData = list.map((item: any) => {
         return new Chauffeur(item);
@@ -137,37 +171,37 @@ export default class ChauffeurAdmin extends Vue {
   }
 
   /**
-   * @private addTour
+   * @private addCar
    * @param {object} param - 表单结构体
    * @description 新增一条旅游数据
    */
-  private addTour(param: any) {
-    TourApi.addTour(param).then(res => {
+  private addCar(param: any) {
+    ChauffeurApi.addCar(param).then(res => {
       this.hideDialog();
-      this.getTbData();
+      this.success();
     });
   }
 
   /**
-   * @private updateTour
+   * @private updateCar
    * @param {object} param - 表单结构体
    * @description 修改一条旅游数据
    */
-  private updateTour(param: any) {
-    TourApi.updateTour(param).then(res => {
+  private updateCar(param: any) {
+    ChauffeurApi.updateCar(param).then(res => {
       this.hideDialog();
-      this.getTbData();
+      this.success();
     });
   }
 
   /**
-   * @private deleteTour
+   * @private deleteCar
    * @param {string} uuid - 删除行uuid
    * @description 删除一条旅游数据
    */
-  private deleteTour(uuid: string) {
-    TourApi.deleteTour(uuid).then(res => {
-      this.getTbData();
+  private deleteCar(uuid: string) {
+    ChauffeurApi.deleteCar(uuid).then(res => {
+      this.success();
     });
   }
 
@@ -177,7 +211,7 @@ export default class ChauffeurAdmin extends Vue {
    * @description 上传图片成功后回调
    */
   private onImgChange(url: string) {
-    this.dialogData.images[0].url = url;
+    this.dialogData.carUrl = url;
   }
 
   /**
@@ -232,9 +266,9 @@ export default class ChauffeurAdmin extends Vue {
         const param = this.dialogData.getSubmit();
         const title = this.dialogTitle;
         if (title === '新增') {
-          this.addTour(param);
+          this.addCar(param);
         } else {
-          this.updateTour(param);
+          this.updateCar(param);
         }
       } else {
         return false;
@@ -243,7 +277,15 @@ export default class ChauffeurAdmin extends Vue {
   }
 
   private handleDelete(row: any) {
-    this.deleteTour(row.uuid);
+    this.deleteCar(row.uuid);
+  }
+
+  private success() {
+    Message({
+      message: '操作成功！',
+      type: 'success'
+    });
+    this.getTbData();
   }
 
   /**

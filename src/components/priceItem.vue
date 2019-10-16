@@ -1,5 +1,8 @@
 <template>
-  <p class="price">US${{price}}/person</p>
+  <p class="price">
+    US${{price}}
+    <span v-if="perPerson !== false">/person</span>
+  </p>
 </template>
 
 <script lang="ts">
@@ -8,6 +11,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 @Component({})
 export default class PriceItem extends Vue {
   @Prop() price!: string | number;
+  @Prop() perPerson!: boolean;
 }
 </script>
 

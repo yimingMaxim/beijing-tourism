@@ -5,6 +5,7 @@
     </el-col>
     <el-col :span="12" class="admin-header-right">
       <el-button @click="$router.push('/home')" icon="el-icon-back" type="warning">返回主页</el-button>
+      <el-button @click="$router.go(-1)" icon="el-icon-back" type="danger">返回上级</el-button>
       <el-button @click="handleAdd" type="primary">
         新增
         <i class="el-icon-plus"></i>

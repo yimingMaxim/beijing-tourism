@@ -1,52 +1,9 @@
 <template>
   <div>
     <card-list-title :title="title" url></card-list-title>
-    <!-- <el-collapse>
-      <el-col class="car-collapse" :md="12" :xs="24">
-        <el-collapse-item>
-          <template slot="title">
-            <div class="car-img">
-              <img src="@/assets/car/nisang.jpg" />
-            </div>
-          </template>
-          <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
-          <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
-        </el-collapse-item>
-      </el-col>
-      <el-col class="car-collapse" :md="12" :xs="24">
-        <el-collapse-item>
-          <template slot="title">
-            <div class="car-img">
-              <img src="@/assets/car/nisang.jpg" />
-            </div>
-          </template>
-          <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
-          <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
-        </el-collapse-item>
-      </el-col>
-      <el-col class="car-collapse" :md="12" :xs="24">
-        <el-collapse-item>
-          <template slot="title">
-            <div class="car-img">
-              <img src="@/assets/car/nisang.jpg" />
-            </div>
-          </template>
-          <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
-          <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
-        </el-collapse-item>
-      </el-col>
-      <el-col class="car-collapse" :md="12" :xs="24">
-        <el-collapse-item>
-          <template slot="title">
-            <div class="car-img">
-              <img src="@/assets/car/nisang.jpg" />
-            </div>
-          </template>
-          <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
-          <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
-        </el-collapse-item>
-      </el-col>
-    </el-collapse>-->
+    <el-collapse>
+      <vehicle-card :car="car" :key="car.uuid" v-for="car in carList"></vehicle-card>
+    </el-collapse>
   </div>
 </template>
 
@@ -54,6 +11,9 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import vehicleCard from './components/vehicleCard.vue';
 import cardListTitle from '@/components/cardListTitle.vue';
+
+import ChauffeurApi from '@/api/chauffeur';
+import Chauffeur from '@/model/chauffeur.model';
 
 @Component({
   components: {
@@ -63,15 +23,28 @@ import cardListTitle from '@/components/cardListTitle.vue';
 })
 export default class ChauffeurService extends Vue {
   @Prop() title!: string;
+
+  private carList: Array<Chauffeur> = []; // table列表数据
+
+  /**
+   * @private created
+   * @description 立即实行函数 - click
+   */
+  private created() {
+    this.getTbData();
+  }
+
+  /**
+   * @private getTbData
+   * @description 查询表格数据
+   */
+  private getTbData() {
+    ChauffeurApi.queryCarList().then((res: any) => {
+      const list: Array<any> = res.data.object;
+      this.carList = list.map((item: any) => {
+        return new Chauffeur(item);
+      });
+    });
+  }
 }
 </script>
-
-<style scoped>
-.car-img img {
-  max-height: 140px;
-  max-width: 210px;
-}
-.car-collapse {
-  padding: 10px;
-}
-</style>

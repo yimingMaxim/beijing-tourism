@@ -1,48 +1,57 @@
 <template>
-  <el-card :body-style="{ padding: '0' }">
-    <el-row class="vehicle-card-header">
-      <el-col :sm="12" :xs="12">
-        <h4>锋范</h4>
-        <small>1.5L自动</small>
-      </el-col>
-      <el-col :sm="12" :xs="12" class="vehicle-card-price">
-        <p>
-          <strong>$55</strong>
-          <em>/日均</em>
-        </p>
-      </el-col>
-    </el-row>
-    <img class="image img-responsive" src="@/assets/car/nisang.jpg" />
-  </el-card>
+  <el-col :md="12" :xs="24" class="car-collapse">
+    <el-collapse-item>
+      <template slot="title">
+        <el-col :span="12" class="car-img">
+          <img :src="'/downloadImg/' + car.carUrlId" />
+        </el-col>
+        <el-col :span="12">
+          <div class="car-name">
+            <span v-text="car.carName"></span>
+          </div>
+          <div class="car-price">
+            <price-item :per-person="false" :price="car.minPrice"></price-item>
+          </div>
+        </el-col>
+      </template>
+      <div>
+        <price-table :prices="car.carprice" @onBook="handelBook"></price-table>
+      </div>
+    </el-collapse-item>
+  </el-col>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import priceTable from './priceTable.vue';
+import priceItem from '@/components/priceItem.vue';
+import Chauffeur from '@/model/chauffeur.model';
 
-@Component
+@Component({
+  components: {
+    priceTable,
+    priceItem
+  }
+})
 export default class VehicleCard extends Vue {
-  @Prop() private msg!: string;
+  @Prop() private car!: Chauffeur;
+
+  private handelBook(price: any) {}
 }
 </script>
 
-<style>
-.vehicle-card-header {
-  padding-left: 30px;
-  padding-top: 10px;
+<style scoped>
+.car-img img {
+  max-height: 100px;
+  max-width: 150px;
+}
+.car-collapse {
+  padding: 10px;
+}
+/* .car-name {
   text-align: left;
-}
-
-.vehicle-card-price {
-  padding-top: 20px;
-}
-
-.vehicle-card-price strong {
-  font-size: 18px;
-  color: #ef3939;
-}
-
-.image {
-  width: 100%;
-  display: block;
+} */
+.car-price p {
+  text-align: center;
 }
 </style>

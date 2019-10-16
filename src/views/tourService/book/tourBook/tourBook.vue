@@ -88,6 +88,36 @@
               v-model="formData.hotelPhone"
             ></el-input>
           </el-form-item>
+          <el-form-item label="Arrive Time:">
+            <el-date-picker
+              :editable="false"
+              placeholder="Airplane Arrive Time"
+              type="datetime"
+              v-model="formData.arriveTime"
+            ></el-date-picker>
+          </el-form-item>
+          <el-form-item label="Arrive Line Number:">
+            <el-input
+              placeholder="Airplane Line Number"
+              style="width: 50%;"
+              v-model="formData.arriveLineNumber"
+            ></el-input>
+          </el-form-item>
+          <el-form-item label="Leave Time:">
+            <el-date-picker
+              :editable="false"
+              placeholder="Airplane Leave Time"
+              type="datetime"
+              v-model="formData.leaveTime"
+            ></el-date-picker>
+          </el-form-item>
+          <el-form-item label="Leave Line Number:">
+            <el-input
+              placeholder="Airplane Line Number"
+              style="width: 50%;"
+              v-model="formData.leaveLineNumber"
+            ></el-input>
+          </el-form-item>
         </el-form>
       </div>
     </el-col>

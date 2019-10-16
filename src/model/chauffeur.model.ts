@@ -3,16 +3,11 @@ import Wang from '@/utils/wang';
 export default class Chauffeur implements ChauffeurImpl {
   public uuid: string = Wang.randomString(32);
   public carNo: string = '';
-  public carName: string = '';
+  public carName?: string;
+  public carUrlId: string = Wang.randomString(32);
+  public carUrl: string = '';
   public shows: boolean = true;
-  public images: Array<ImageImpl> = [
-    {
-      uuid: Wang.randomString(32),
-      tourId: this.uuid,
-      url: ''
-    }
-  ];
-  public prices: Array<PriceImpl> = [];
+  public carprice: Array<PriceImpl> = [];
 
   constructor(options = undefined) {
     if (options) {
@@ -21,28 +16,24 @@ export default class Chauffeur implements ChauffeurImpl {
   }
 
   public getSubmit() {
-    const { uuid, carNo, carName, shows, images, prices } = this;
+    const { uuid, carNo, carName, carUrlId, carUrl, shows, carprice } = this;
     return {
-      uuid,
-      carNo,
-      carName,
-      shows,
-      images,
-      prices
+      uuid, carNo, carName, carUrlId, carUrl, shows, carprice
     };
   }
 
   public addPrice() {
-    this.prices.push({
+    this.carprice.push({
       uuid: Wang.randomString(32),
-      chauffeurId: this.uuid,
-      route: '',
-      price: null
+      price: null,
+      carId: this.uuid,
+      placeId: Wang.randomString(32),
+      placeName: ''
     });
   }
 
   public removePrice(uuid: string) {
-    this.prices = this.prices.filter((price: PriceImpl) => {
+    this.carprice = this.carprice.filter((price: PriceImpl) => {
       return price.uuid !== uuid;
     });
   }
@@ -50,7 +41,7 @@ export default class Chauffeur implements ChauffeurImpl {
   get minPrice() {
     return Math.min.apply(
       Math,
-      this.prices.map(price => {
+      this.carprice.map((price: PriceImpl) => {
         return price.price as number;
       })
     );
@@ -60,21 +51,17 @@ export default class Chauffeur implements ChauffeurImpl {
 interface ChauffeurImpl {
   uuid: string;
   carNo: string;
-  carName: string;
+  carName?: string;
+  carUrlId: string;
+  carUrl: string;
   shows: boolean;
-  images: Array<ImageImpl>;
-  prices: Array<PriceImpl>;
-}
-
-interface ImageImpl {
-  uuid?: string;
-  tourId?: string;
-  url: string;
+  carprice: Array<PriceImpl>;
 }
 
 interface PriceImpl {
-  uuid?: string;
-  chauffeurId?: string;
-  route: string;
+  uuid: string;
   price: number | null;
+  carId: string;
+  placeId: string,
+  placeName: string
 }
