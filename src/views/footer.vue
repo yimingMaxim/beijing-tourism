@@ -23,11 +23,11 @@
         <span>For any questions or suggestions about website tech, please contact: webmaster@beijinglocaltour.com</span>
       </p>
       <p>
-        <a href="http://www.beian.gov.cn" target="_blank" rel="nofollow">京公安网备110105008521号</a>
+        <a href="http://www.beian.gov.cn" rel="nofollow" target="_blank">京公安网备110105008521号</a>
         <a
           href="http://www.beian.miit.gov.cn/publish/query/indexFirst.action"
-          target="_blank"
           rel="nofollow"
+          target="_blank"
         >京ICP备05034922号</a>
       </p>
     </div>
@@ -78,7 +78,7 @@ export default class Footer extends Vue {}
 }
 
 .qn_footer p .s24 {
-  background: url(//source.qunarzz.com/common/hf/24h.png) no-repeat left center;
-  padding-left: 20px;
+  /* background: url('../assets/24h.jpg') no-repeat left center; */
+  /* padding-left: 20px; */
 }
 </style>

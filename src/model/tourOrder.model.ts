@@ -3,6 +3,7 @@ import Wang from '@/utils/wang';
 export default class TourOrder implements TourOrderImpl {
   public uuid: string = Wang.randomString(32);
   public tourId: string = '';
+  public tourName: string = '';
   // 个人信息
   public name: string = '';
   public country: string = '';
@@ -35,14 +36,14 @@ export default class TourOrder implements TourOrderImpl {
 
   public getSubmit() {
     const { 
-        uuid, tourId, name, country, mailAddress, alternatMailAddress, 
+        uuid, tourId, tourName, name, country, mailAddress, alternatMailAddress, 
         phoneNumber, startDate, endDate, numberOfAdults, numberOfChildren,
         ageOfChildren, hotelName, roomNumber, hotelNumber, arriveTime, arriveLineNumber,
         leaveTime, leaveLineNumber, remarks
     } = this;
     const tourDate = endDate ? `${startDate}至${endDate}` : startDate;
     return {
-        uuid, tourId, name, country, mailAddress, alternatMailAddress, 
+        uuid, tourId, tourName, name, country, mailAddress, alternatMailAddress, 
         phoneNumber, tourDate, numberOfAdults, numberOfChildren,
         ageOfChildren, hotelName, roomNumber, hotelNumber, arriveTime, arriveLineNumber,
         leaveTime, leaveLineNumber, remarks
@@ -53,6 +54,7 @@ export default class TourOrder implements TourOrderImpl {
 interface TourOrderImpl {
   uuid: string;
   tourId: string;
+  tourName: string;
   name: string;
   country: string;
   mailAddress: string;

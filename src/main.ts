@@ -11,8 +11,11 @@ import router from './router';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import 'element-ui/lib/theme-chalk/display.css';
-Vue.use(ElementUI);
+import locale from 'element-ui/lib/locale/lang/en';
 
+Vue.use(ElementUI, { locale })
+
+// bootstrap
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 

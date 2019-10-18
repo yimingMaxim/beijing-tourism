@@ -50,4 +50,24 @@ export default class Wang {
   public static flatten(arr: Array<any>): Array<any> {
     return [].concat(...arr.map(x => (Array.isArray(x) ? this.flatten(x) : x)));
   }
+
+  /**
+  * 通过时间戳返回yyyy-MM-dd HH:mm:ss
+  * @param timestamp
+  * @returns {string}
+  */
+  public static formartDate(timestamp: Date) {
+    var time = new Date(timestamp);
+    var y = time.getFullYear();
+    var m = time.getMonth()+1;
+    var d = time.getDate();
+    var h = time.getHours();
+    var mm = time.getMinutes();
+    var s = time.getSeconds();
+    return y+'-'+add0(m)+'-'+add0(d)+' '+add0(h)+':'+add0(mm)+':'+add0(s);
+  }
+}
+
+function add0(m: number){
+  return m<10?'0'+m:m;
 }

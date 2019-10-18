@@ -16,6 +16,9 @@ module.exports = {
       '/car': {
         target: BASE_PATH
       },
+      '/order': {
+        target: BASE_PATH
+      },
       '/business': {
         target: BASE_PATH
       },

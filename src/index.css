@@ -29,6 +29,10 @@ input[type='file'] {
   width: 100%;
   height: 155px;
 }
+.el-loading-text {
+  font-size: 20px;
+  text-align: center;
+}
 /* 移动端分离后删除 */
 .el-header {
   padding: 0;
