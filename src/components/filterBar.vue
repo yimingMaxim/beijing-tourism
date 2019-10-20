@@ -75,7 +75,7 @@ export default class FilterBar extends Vue {
 }
 </script>
 
-<style>
+<style scoped>
 .el-form-item--mini.el-form-item {
   margin-bottom: 0;
 }

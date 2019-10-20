@@ -79,7 +79,7 @@ export default class Detail extends Vue {
 }
 </script>
 
-<style>
+<style scoped>
 .detail-body {
   text-align: left;
 }

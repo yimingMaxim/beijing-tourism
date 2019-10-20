@@ -49,7 +49,7 @@ export default class NavMenu extends Vue {
 }
 </script>
 
-<style>
+<style scoped>
 .nav_box {
   /* width: 100%; */
   /* margin-top: 13px; */

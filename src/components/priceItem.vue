@@ -15,7 +15,7 @@ export default class PriceItem extends Vue {
 }
 </script>
 
-<style>
+<style scoped>
 .price {
   color: #ff0000;
   font-weight: bold;

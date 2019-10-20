@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-card class="box-card">
-      <div slot="header" class="clearfix">
+      <div class="clearfix" slot="header">
         <strong>About Us</strong>
       </div>
       <div class="card-content">
@@ -26,7 +26,7 @@ import WeatherWidget from './weatherWidget.vue';
 export default class AboutUs extends Vue {}
 </script>
 
-<style>
+<style scoped>
 .card-content {
   text-align: left;
   font-size: 16px;

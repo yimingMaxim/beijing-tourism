@@ -65,7 +65,7 @@ export default class extends Vue {
 }
 </script>
 
-<style>
+<style scoped>
 .avatar {
   max-width: 249px;
   max-height: 147px;

@@ -34,7 +34,7 @@ export default class SpotCard extends Vue {
 }
 </script>
 
-<style>
+<style scoped>
 p {
   margin-top: 0;
   text-align: left;

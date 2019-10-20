@@ -14,7 +14,7 @@ export default class Breadcrumb extends Vue {
 }
 </script>
 
-<style>
+<style scoped>
 .el-breadcrumb {
   margin-bottom: 20px;
   font-size: 16px;

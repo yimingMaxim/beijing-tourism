@@ -22,7 +22,7 @@ export default class CardListTitle extends Vue {
 }
 </script>
 
-<style>
+<style scoped>
 .card-list-title {
   text-align: left;
   border-bottom: 2px solid #00afc7;

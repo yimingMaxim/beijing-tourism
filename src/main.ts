@@ -11,9 +11,9 @@ import router from './router';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import 'element-ui/lib/theme-chalk/display.css';
-import locale from 'element-ui/lib/locale/lang/en';
+import { locale } from './lang/en';
 
-Vue.use(ElementUI, { locale })
+Vue.use(ElementUI, { locale });
 
 // bootstrap
 import 'bootstrap/dist/css/bootstrap.css';

@@ -1,17 +1,17 @@
 <template>
-  <el-row class="list-item-body" @click.native="toDetail()">
+  <el-row @click.native="toDetail()" class="list-item-body">
     <el-col :md="6" :sm="6" :xs="24">
       <div class="list-item-img">
-        <img class="tour-image" :src="'/downloadImg/' + tourObj.images[0].uuid" />
+        <img :src="'/downloadImg/' + tourObj.images[0].uuid" class="tour-image" />
       </div>
     </el-col>
     <el-col :md="12" :sm="12" :xs="24" class="list-item-content">
       <h4 v-text="tourObj.title"></h4>
-      <p class="card-body-desc" :title="tourObj.subTitle" v-html="tourObj.subTitle"></p>
+      <p :title="tourObj.subTitle" class="card-body-desc" v-html="tourObj.subTitle"></p>
       <price-item :price="tourObj.minPrice"></price-item>
     </el-col>
     <el-col :md="6" :sm="6" :xs="24" class="list-item-price">
-      <el-button type="danger" @click="handleBook">Book Now</el-button>
+      <el-button @click="handleBook" type="danger">Book Now</el-button>
     </el-col>
   </el-row>
 </template>
@@ -45,7 +45,7 @@ export default class ListItem extends Vue {
 }
 </script>
 
-<style>
+<style scoped>
 .list-item-body {
   background: #ffffff;
   margin-bottom: 20px;
