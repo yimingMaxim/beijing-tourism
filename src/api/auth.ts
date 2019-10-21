@@ -24,8 +24,4 @@ export default class AuthApi {
     Cookies.remove('authToken');
     callback();
   }
-
-  public static getUsRate() {
-    return request.get('https://www.mycurrency.net/US.json');
-  }
 }

@@ -114,6 +114,10 @@ export default class TourApi {
     });
     return Promise.all([imagePromise, pricePromise]);
   }
+
+  public static getUsRate() {
+    return request.get('/tour/api/getRatesForward');
+  }
 }
 
 const sortPrice = (tour: any) => {
