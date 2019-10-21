@@ -78,7 +78,7 @@ export default class Footer extends Vue {}
 }
 
 .qn_footer p .s24 {
-  background: url('@/assets/24h.jpg') no-repeat left center;
+  background: url('../assets/24h.png') no-repeat left center;
   padding-left: 20px;
 }
 </style>

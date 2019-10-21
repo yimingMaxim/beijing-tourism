@@ -15,6 +15,14 @@
           <h3>{{tourObj.title}}</h3>
           <h4>{{tourObj.subTitle}}</h4>
           <div class="detail-content-text" v-html="tourObj.content"></div>
+          <el-col :span="24" style="margin-top: 20px;">
+            <el-button @click="handleBook" size="small" type="danger">Book Now</el-button>
+            <el-button
+              @click="$router.push('/home')"
+              style="float: right;font-size: 16px;"
+              type="text"
+            >more options</el-button>
+          </el-col>
         </el-col>
       </el-row>
     </el-main>
@@ -34,7 +42,7 @@
             ></el-rate>
           </el-col>
         </div>
-        <img :src="'/downloadImg/' + comment.imageId" />
+        <!-- <img :src="'/downloadImg/' + comment.imageId" /> -->
         <div class="card-content" v-html="comment.content"></div>
       </el-card>
     </el-aside>
@@ -74,6 +82,16 @@ export default class Detail extends Vue {
       this.commentList = res.data.object.map((item: any) => {
         return new Comment(item);
       });
+    });
+  }
+
+  private handleBook() {
+    const tourId = this.tourObj.uuid;
+    this.$router.push({
+      name: 'tourBook',
+      params: {
+        tourId
+      }
     });
   }
 }

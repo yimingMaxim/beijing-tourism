@@ -14,6 +14,16 @@
           </template>
         </el-table-column>
       </el-table>
+      <div class="table-pagination">
+        <el-pagination
+          :current-page.sync="page.startPage"
+          :page-size="page.pageSize"
+          :total="page.total"
+          @current-change="handlePageChange"
+          background
+          layout="prev, pager, next"
+        ></el-pagination>
+      </div>
     </template>
   </order-table>
 </template>
@@ -31,6 +41,11 @@ import orderTable from './components/order.vue';
 })
 export default class TourOrder extends Vue {
   private orderList: Array<any> = [];
+  private page: any = {
+    startPage: 1,
+    pageSize: 10,
+    total: 0
+  };
   private columns: any = [
     {
       label: '订单号',
@@ -54,18 +69,26 @@ export default class TourOrder extends Vue {
     this.getOrderList();
   }
 
+  private handlePageChange(startPage: number) {
+    this.page.startPage = startPage;
+    this.getOrderList();
+  }
+
   private getOrderList() {
     const tableRef = this.$refs.orderTable as any;
     const startTime = tableRef.dateFilter[0];
     const endTime = tableRef.dateFilter[1];
+    const { startPage, pageSize } = this.page;
     OrderApi.queryTourOrder({
       startTime: moment(startTime).format('YYYY-MM-DD'),
       endTime: moment(endTime).format('YYYY-MM-DD'),
-      startPage: 1,
-      pageSize: 10
+      startPage,
+      pageSize
     }).then(res => {
       const result = res.data.object;
       this.orderList = result.list;
+      this.page.startPage = result.pageNum;
+      this.page.total = result.total;
     });
   }
 }
@@ -83,5 +106,11 @@ export default class TourOrder extends Vue {
 }
 .admin-header-right {
   text-align: right;
+}
+.table-pagination {
+  text-align: right;
+  background: #fff;
+  padding: 10px;
+  margin-top: 10px;
 }
 </style>

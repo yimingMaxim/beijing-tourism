@@ -1,17 +1,20 @@
 <template>
   <el-card>
     <el-col :md="12" :sm="24" :xs="24" class="order-body">
-      <h4>Beijing Tours Online Reservation Form</h4>
+      <h4>Online Chauffeur Service Form</h4>
       <div class="order-form">
-        <el-form :model="tourOrder" :rules="validate" ref="order_form" size="mini">
-          <el-form-item label="Tour Name:">
-            <span v-text="tourObj.title"></span>
+        <el-form :model="carOrder" :rules="validate" ref="order_form" size="mini">
+          <el-form-item label="Vehicle Type:">
+            <span class="form-text" v-text="carOrder.vehicleType"></span>
+          </el-form-item>
+          <el-form-item label="Chauffeur Service:">
+            <span class="form-text" v-text="carOrder.chauffeurService"></span>
           </el-form-item>
           <el-form-item label="Name:" prop="name">
-            <el-input placeholder="Your Name" style="width: 50%;" v-model="tourOrder.name"></el-input>
+            <el-input placeholder="Your Name" style="width: 50%;" v-model="carOrder.name"></el-input>
           </el-form-item>
           <el-form-item label="Country:" prop="country">
-            <el-select filterable placeholder="input keyword" v-model="tourOrder.country">
+            <el-select filterable placeholder="input keyword" v-model="carOrder.country">
               <el-option
                 :key="country.value"
                 :label="country.label"
@@ -24,84 +27,52 @@
             <el-input
               placeholder="email address"
               style="width: 60%;"
-              v-model="tourOrder.mailAddress"
+              v-model="carOrder.mailAddress"
             ></el-input>
           </el-form-item>
           <el-form-item label="Alternate E-mail:">
             <el-input
               placeholder="email address"
               style="width: 60%;"
-              v-model="tourOrder.alternatMailAddress"
+              v-model="carOrder.alternatMailAddress"
             ></el-input>
           </el-form-item>
-          <el-form-item label="Phone Number:">
-            <el-input
-              placeholder="including extension"
-              style="width: 50%;"
-              v-model="tourOrder.phoneNumber"
-            ></el-input>
-          </el-form-item>
-          <el-form-item :label="tourObj.day === 1 ? 'Tour Date' : 'Start Date'" prop="startDate">
+          <el-form-item label="Chauffeur Service Date:" prop="chauffeurServiceDate">
             <el-date-picker
               :editable="false"
-              :placeholder="tourObj.day === 1 ? 'Tour Date' : 'Start Date'"
+              placeholder="Chauffeur Service Date"
               type="date"
-              v-model="tourOrder.startDate"
+              v-model="carOrder.chauffeurServiceDate"
               value-format="yyyy-MM-dd"
             ></el-date-picker>
           </el-form-item>
-          <el-form-item label="End Date:" prop="endDate" v-if="tourObj.day > 1">
-            <el-date-picker
-              :editable="false"
-              placeholder="End Date"
-              type="date"
-              v-model="tourOrder.endDate"
-              value-format="yyyy-MM-dd"
-            ></el-date-picker>
-          </el-form-item>
-          <el-form-item label="Number of Adults:" prop="numberOfAdults">
-            <el-select placeholder style="width: 20%;" v-model="tourOrder.numberOfAdults">
-              <el-option
-                :key="price.person"
-                :label="price.person"
-                :value="price.person"
-                v-for="price in tourObj.prices"
-              ></el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="Number of Children:">
-            <el-input style="width: 20%;" v-model="tourOrder.numberOfChildren"></el-input>
-          </el-form-item>
-          <el-form-item label="Age of Children:">
-            <el-input style="width: 20%;" v-model="tourOrder.ageOfChildren"></el-input>
-          </el-form-item>
-          <el-form-item label="Hotel you stay:">
-            <el-input placeholder="Hotel Address" style="width: 50%;" v-model="tourOrder.hotelName"></el-input>
-          </el-form-item>
-          <el-form-item label="Room Number:">
-            <el-input placeholder="Room Number" style="width: 40%;" v-model="tourOrder.roomNumber"></el-input>
-          </el-form-item>
-          <el-form-item label="Hotel Telephone Number:">
-            <el-input
-              placeholder="Hotel Telephone Number"
-              style="width: 50%;"
-              v-model="tourOrder.hotelNumber"
-            ></el-input>
+          <el-form-item label="Number of Person:" prop="numberOfPerson">
+            <el-input placeholder="number" style="width: 40%;" v-model="carOrder.numberOfPerson"></el-input>
           </el-form-item>
           <el-form-item label="Arrive Time:">
             <el-date-picker
               :editable="false"
               placeholder="Airplane Arrive Time"
               type="datetime"
-              v-model="tourOrder.arriveTime"
+              v-model="carOrder.arriveTime"
               value-format="yyyy-MM-dd HH-mm-ss"
             ></el-date-picker>
+          </el-form-item>
+          <el-form-item label="Beijing Tour Guide Service:">
+            <el-select v-model="carOrder.guideLanguage">
+              <el-option
+                :key="lang.value"
+                :label="lang.label"
+                :value="lang.label"
+                v-for="lang in langs"
+              ></el-option>
+            </el-select>
           </el-form-item>
           <el-form-item label="Arrive Line Number:">
             <el-input
               placeholder="Airplane Line Number"
               style="width: 50%;"
-              v-model="tourOrder.arriveLineNumber"
+              v-model="carOrder.arriveLineNumber"
             ></el-input>
           </el-form-item>
           <el-form-item label="Leave Time:">
@@ -109,7 +80,7 @@
               :editable="false"
               placeholder="Airplane Leave Time"
               type="datetime"
-              v-model="tourOrder.leaveTime"
+              v-model="carOrder.leaveTime"
               value-format="yyyy-MM-dd HH-mm-ss"
             ></el-date-picker>
           </el-form-item>
@@ -117,7 +88,7 @@
             <el-input
               placeholder="Airplane Line Number"
               style="width: 50%;"
-              v-model="tourOrder.leaveLineNumber"
+              v-model="carOrder.leaveLineNumber"
             ></el-input>
           </el-form-item>
           <el-form-item>
@@ -133,23 +104,43 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { Message } from 'element-ui';
-
-import TourApi from '@/api/tour';
+import Wang from '@/utils/wang';
 import OrderApi from '@/api/order';
+import Chauffeur from '@/model/chauffeur.model';
 
-import Tour from '@/model/tour.model';
-import TourOrder from '@/model/tourOrder.model';
 import { countries } from '../country';
+import { langs } from '../lang';
 
 @Component({
   components: {}
 })
 export default class TourBook extends Vue {
-  private tourObj: Tour = new Tour();
+  private carObj: Chauffeur = new Chauffeur();
 
   private countries: Array<any> = countries;
+  private langs: Array<any> = langs;
 
-  private tourOrder: TourOrder = new TourOrder();
+  private carOrder: any = {
+    uuid: Wang.randomString(32),
+    // orderNo: 'C1571037637',
+    // tourId: '',
+    // carName: '',
+    // createTime: '2022-10-10',
+    name: '',
+    numberOfPerson: '',
+    country: '',
+    mailAddress: '',
+    alternatMailAddress: '',
+    chauffeurServiceDate: '',
+    chauffeurService: '',
+    vehicleType: '',
+    guideLanguage: '',
+    arriveTime: '',
+    leaveTime: '',
+    arriveLineNumber: '',
+    leaveLineNumber: '',
+    remarks: ''
+  };
 
   private validate = {
     name: [
@@ -173,45 +164,36 @@ export default class TourBook extends Vue {
         trigger: 'blur'
       }
     ],
-    startDate: [
+    chauffeurServiceDate: [
       {
         required: true,
         message: 'date is required!',
         trigger: 'change'
       }
     ],
-    endDate: [
+    numberOfPerson: [
       {
         required: true,
-        message: 'end date is required!',
-        trigger: 'change'
-      }
-    ],
-    numberOfAdults: [
-      {
-        required: true,
-        message: 'adult number is required!',
+        message: 'number is required!',
         trigger: 'change'
       }
     ]
   };
 
   private created() {
-    const tourId: string = this.$route.params.tourId;
-    TourApi.queryTourById(tourId).then((res: any) => {
-      const tour = res.data.object;
-      this.tourObj = new Tour(tour);
-      this.tourOrder.tourId = tour.uuid;
-      this.tourOrder.tourName = tour.title;
-    });
+    const params = JSON.parse(this.$route.params.car_params);
+    const carObj: any = params.car;
+    const price: any = params.price;
+    this.carOrder.vehicleType = carObj.carName;
+    this.carOrder.chauffeurService = price.placeName;
   }
 
   private onSubmit() {
     (this.$refs.order_form as any).validate((valid: boolean) => {
       if (valid) {
-        const param = this.tourOrder.getSubmit();
+        const param = this.carOrder;
         const waiting = this.waiting();
-        OrderApi.addTourOrder(param).then(res => {
+        OrderApi.addCarOrder(param).then(res => {
           waiting.close();
           const status = res.data.code;
           if (status === 200) {
@@ -278,5 +260,10 @@ export default class TourBook extends Vue {
   border-radius: 4px 4px 0 0;
   padding: 10px 5px 0 20px;
   margin-bottom: 20px;
+}
+.form-text {
+  font-size: 16px;
+  color: #fc0d1b;
+  font-weight: 500;
 }
 </style>

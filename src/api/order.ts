@@ -3,8 +3,8 @@ import request from '@/utils/request';
 const QUERY_TOUR_ORDER_URL = '/order/api/showHotelOrders';
 const ADD_TOUR_URL = '/order/api/addHotelOrder';
 
-const QUERY_CAR_ORDER_URL = '/order/api/addCarOrder';
-const ADD_CAR_URL = '/order/api/showCarOrders';
+const QUERY_CAR_ORDER_URL = '/order/api/showCarOrders';
+const ADD_CAR_URL = '/order/api/addCarOrder';
 
 export default class OrderApi {
   /**

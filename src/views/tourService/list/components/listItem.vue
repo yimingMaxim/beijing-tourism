@@ -41,6 +41,13 @@ export default class ListItem extends Vue {
   }
   private handleBook(e: any) {
     e.stopPropagation(); //非IE浏览器
+    const tourId = this.tourObj.uuid;
+    this.$router.push({
+      name: 'tourBook',
+      params: {
+        tourId
+      }
+    });
   }
 }
 </script>

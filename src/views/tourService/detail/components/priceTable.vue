@@ -31,7 +31,7 @@ export default class PriceTable extends Vue {
   private handleBook() {
     const tourId = this.tourObj.uuid;
     this.$router.push({
-      name: 'TourBook',
+      name: 'tourBook',
       params: {
         tourId
       }

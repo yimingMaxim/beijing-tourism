@@ -36,7 +36,18 @@ import Chauffeur from '@/model/chauffeur.model';
 export default class VehicleCard extends Vue {
   @Prop() private car!: Chauffeur;
 
-  private handelBook(price: any) {}
+  private handelBook(price: any) {
+    const params = {
+      car: this.car,
+      price
+    };
+    this.$router.push({
+      name: 'carBook',
+      params: {
+        car_params: JSON.stringify(params)
+      }
+    });
+  }
 }
 </script>
 
@@ -47,11 +58,5 @@ export default class VehicleCard extends Vue {
 }
 .car-collapse {
   padding: 10px;
-}
-/* .car-name {
-  text-align: left;
-} */
-.car-price p {
-  text-align: center;
 }
 </style>
