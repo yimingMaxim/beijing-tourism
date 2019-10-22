@@ -40,10 +40,10 @@ export default class NavMenu extends Vue {
     },
     {
       id: 4,
-      label: 'Chauffeur Service',
+      label: 'Chauffeur',
       name: 'chauffeurService',
       title: 'Chauffeur Service',
-      path: '/tour_service/list/chauffeur_service'
+      path: '/home'
     }
   ];
 }

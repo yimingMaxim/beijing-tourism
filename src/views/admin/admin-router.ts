@@ -2,6 +2,7 @@ import Tour from './tour/tour.vue';
 import Comment from './comment/comment.vue';
 import Chauffeur from './chauffeur/chauffeur.vue';
 import TourOrder from './order/tourOrder.vue'
+import CarOrder from './order/carOrder.vue'
 
 const adminRouter = [
   {
@@ -24,9 +25,14 @@ const adminRouter = [
     component: Chauffeur
   },
   {
-    path: 'order',
-    name: 'order',
+    path: 'tour_order',
+    name: 'tourOrder',
     component: TourOrder
+  },
+  {
+    path: 'chauffeur_order',
+    name: 'chauffeurOrder',
+    component: CarOrder
   }
 ];
 

@@ -257,7 +257,7 @@ export default class TourBook extends Vue {
       duration: 0,
       message: h(
         'i',
-        { style: 'color: teal' },
+        { style: 'color: tomato' },
         'Sorry, Your order submission failed, please try again later'
       )
     });

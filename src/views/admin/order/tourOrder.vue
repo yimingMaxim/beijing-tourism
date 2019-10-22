@@ -1,5 +1,5 @@
 <template>
-  <order-table @onDateChange="getOrderList" ref="orderTable">
+  <order-table @onDateChange="getOrderList" ref="orderTable" title="旅游订单管理">
     <template v-slot:table>
       <el-table :data="orderList" style="width: 100%">
         <el-table-column

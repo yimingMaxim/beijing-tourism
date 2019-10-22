@@ -15,7 +15,11 @@
           <el-menu-item index="tour">旅游</el-menu-item>
           <el-menu-item index="chauffeur">用车</el-menu-item>
         </el-submenu>
-        <el-menu-item index="order">订单管理</el-menu-item>
+        <el-submenu index="2">
+          <template slot="title">订单管理</template>
+          <el-menu-item index="tour_order">旅游订单</el-menu-item>
+          <el-menu-item index="chauffeur_order">用车订单</el-menu-item>
+        </el-submenu>
       </el-menu>
     </el-header>
     <el-main>

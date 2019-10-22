@@ -1,9 +1,9 @@
 <template>
-  <el-form ref="filter_form" :model="searchKey" label-width="80px" size="mini">
+  <el-form :model="searchKey" label-width="80px" ref="filter_form" size="mini">
     <el-row>
       <el-col :md="12" :sm="12" :xs="24">
         <el-form-item label="keywords">
-          <el-input v-model="searchKey.keywords" placeholder="keywords"></el-input>
+          <el-input placeholder="keywords" v-model="searchKey.keywords"></el-input>
         </el-form-item>
       </el-col>
     </el-row>
@@ -31,8 +31,8 @@
           </el-select>
         </el-form-item>
       </el-col>
-      <el-col :md="4" :sm="8" :xs="24" style="margin-bottom: 10px;">
-        <el-button type="primary" size="mini" icon="el-icon-search" @click="handleSearch">Search</el-button>
+      <el-col :md="4" :push="2" :sm="8" :xs="24" style="margin-bottom: 10px;">
+        <el-button @click="handleSearch" icon="el-icon-search" size="mini" type="primary">Search</el-button>
       </el-col>
     </el-row>
   </el-form>

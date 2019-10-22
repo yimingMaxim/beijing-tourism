@@ -2,7 +2,7 @@
   <div>
     <el-row class="admin-header">
       <el-col :span="12" class="admin-header-left">
-        <h4>订单管理</h4>
+        <h4 v-text="title"></h4>
       </el-col>
       <el-col :span="12" class="admin-header-right">
         <el-button @click="$router.push('/home')" icon="el-icon-back" type="warning">返回主页</el-button>
@@ -33,6 +33,7 @@ import { Component, Vue, Prop } from 'vue-property-decorator';
   components: {}
 })
 export default class OrderAdmin extends Vue {
+  @Prop() title!: string;
   private dateFilter: Array<Date> = [];
 
   private pickerOptions = {
