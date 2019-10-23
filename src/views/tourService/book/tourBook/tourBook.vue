@@ -88,38 +88,43 @@
               v-model="tourOrder.hotelNumber"
             ></el-input>
           </el-form-item>
-          <el-form-item label="Arrive Time:">
-            <el-date-picker
-              :editable="false"
-              placeholder="Airplane Arrive Time"
-              type="datetime"
-              v-model="tourOrder.arriveTime"
-              value-format="yyyy-MM-dd HH-mm-ss"
-            ></el-date-picker>
-          </el-form-item>
-          <el-form-item label="Arrive Line Number:">
-            <el-input
-              placeholder="Airplane Line Number"
-              style="width: 50%;"
-              v-model="tourOrder.arriveLineNumber"
-            ></el-input>
-          </el-form-item>
-          <el-form-item label="Leave Time:">
-            <el-date-picker
-              :editable="false"
-              placeholder="Airplane Leave Time"
-              type="datetime"
-              v-model="tourOrder.leaveTime"
-              value-format="yyyy-MM-dd HH-mm-ss"
-            ></el-date-picker>
-          </el-form-item>
-          <el-form-item label="Leave Line Number:">
-            <el-input
-              placeholder="Airplane Line Number"
-              style="width: 50%;"
-              v-model="tourOrder.leaveLineNumber"
-            ></el-input>
-          </el-form-item>
+          <div v-if="tourObj.day >= 4">
+            <el-form-item label="Arrive Time:">
+              <el-date-picker
+                :editable="false"
+                placeholder="Airplane Arrive Time"
+                type="datetime"
+                v-model="tourOrder.arriveTime"
+                value-format="yyyy-MM-dd HH-mm-ss"
+              ></el-date-picker>
+            </el-form-item>
+            <el-form-item label="Arrive Line Number:">
+              <el-input
+                placeholder="Airplane Line Number"
+                style="width: 50%;"
+                v-model="tourOrder.arriveLineNumber"
+              ></el-input>
+            </el-form-item>
+            <el-form-item label="Leave Time:">
+              <el-date-picker
+                :editable="false"
+                placeholder="Airplane Leave Time"
+                type="datetime"
+                v-model="tourOrder.leaveTime"
+                value-format="yyyy-MM-dd HH-mm-ss"
+              ></el-date-picker>
+            </el-form-item>
+            <el-form-item label="Leave Line Number:">
+              <el-input
+                placeholder="Airplane Line Number"
+                style="width: 50%;"
+                v-model="tourOrder.leaveLineNumber"
+              ></el-input>
+            </el-form-item>
+            <el-form-item label="Special Request:">
+              <el-input type="textarea" v-model="tourOrder.remarks"></el-input>
+            </el-form-item>
+          </div>
           <el-form-item>
             <el-button @click="onSubmit" type="primary">submit</el-button>
             <el-button @click="$router.go(-1)">cancel</el-button>

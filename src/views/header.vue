@@ -1,7 +1,7 @@
 <template>
   <el-row class="header">
     <el-col :sm="12" :xs="12" class="header-logo">
-      <img src="@/assets/logo.png" style="height: 100%;" />
+      <img src="@/assets/logo.jpg" style="height: 100%;" />
     </el-col>
     <el-col :sm="12" :xs="12" class="header-login">
       <login-form></login-form>

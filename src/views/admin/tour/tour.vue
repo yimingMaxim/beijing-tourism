@@ -149,6 +149,10 @@ export default class TourAdmin extends Vue {
     {
       label: '类型',
       value: 'tourType'
+    },
+    {
+      label: '天数',
+      value: 'day'
     }
   ];
 

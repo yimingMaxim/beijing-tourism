@@ -2,6 +2,11 @@
   <order-table @onDateChange="getOrderList" ref="orderTable" title="旅游订单管理">
     <template v-slot:table>
       <el-table :data="orderList" style="width: 100%">
+        <el-table-column type="expand">
+          <template slot-scope="props">
+            <tour-form :data="props.row"></tour-form>
+          </template>
+        </el-table-column>
         <el-table-column
           :key="column.value"
           :label="column.label"
@@ -33,10 +38,12 @@ import { Component, Vue, Prop } from 'vue-property-decorator';
 import moment from 'moment';
 import OrderApi from '@/api/order';
 import orderTable from './components/order.vue';
+import tourForm from './components/tourForm.vue';
 
 @Component({
   components: {
-    orderTable
+    orderTable,
+    tourForm
   }
 })
 export default class TourOrder extends Vue {

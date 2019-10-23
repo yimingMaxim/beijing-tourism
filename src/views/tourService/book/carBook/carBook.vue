@@ -91,6 +91,9 @@
               v-model="carOrder.leaveLineNumber"
             ></el-input>
           </el-form-item>
+          <el-form-item label="Special Request:">
+            <el-input type="textarea" v-model="carOrder.remarks"></el-input>
+          </el-form-item>
           <el-form-item>
             <el-button @click="onSubmit" type="primary">submit</el-button>
             <el-button @click="$router.go(-1)">cancel</el-button>
