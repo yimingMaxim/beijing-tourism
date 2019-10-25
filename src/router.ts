@@ -34,7 +34,14 @@ const baseRouter = new Router({
       component: Admin,
       children: adminRouter
     }
-  ]
+  ],
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    } else {
+      return { x: 0, y: 0 };
+    }
+  }
 });
 
 baseRouter.beforeEach((to: any, from: any, next: any) => {
