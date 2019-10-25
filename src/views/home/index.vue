@@ -52,11 +52,11 @@ export default class Main extends Vue {
     {
       label: 'Beijing Night Show',
       name: '#nightShow'
-    },
-    {
-      label: 'Hotel Booking',
-      name: 'hotel'
     }
+    // {
+    //   label: 'Hotel Booking',
+    //   name: 'hotel'
+    // }
   ];
 
   /**

@@ -1,7 +1,7 @@
 <template>
   <el-row class="header">
     <el-col :sm="12" :xs="12" class="header-logo">
-      <img src="@/assets/logo.jpg" style="height: 100%;" />
+      <img src="@/assets/logo.jpg" />
     </el-col>
     <el-col :sm="12" :xs="12" class="header-login">
       <login-form></login-form>
@@ -36,6 +36,7 @@ export default class Header extends Vue {}
 
 .header-logo img {
   width: 160px;
+  height: 100px;
 }
 
 .header-login {

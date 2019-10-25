@@ -7,11 +7,11 @@
       <p>
         <span>
           Booking Hotline:
-          <span class="s24">13801051196</span>
+          <span class="s24">18515250136</span>
         </span>
       </p>
       <p>
-        <span>Wechat ID: 13801051196</span>
+        <span>Wechat ID: harrison_37</span>
       </p>
       <p>
         <span>Address: No.1206, Building 5, Tuofangying Xili, Chaoyang District, Beijing, China 100016</span>

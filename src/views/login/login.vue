@@ -14,7 +14,8 @@
       size="small"
       type="primary"
       v-else
-    >登录</el-button>
+    >login</el-button>
+    <el-col class="hotline">24hours hotline 18515250136</el-col>
     <el-dialog
       :close-on-click-modal="false"
       :visible.sync="dialogDisplay"
@@ -28,6 +29,7 @@
         <el-form-item label="password" prop="password">
           <el-input auto-complete="off" type="password" v-model="loginData.password"></el-input>
         </el-form-item>
+        <span>( Visitor login is not supported temporarily )</span>
       </el-form>
       <div class="dialog-footer" slot="footer">
         <el-button @click="dialogDisplay = false">cancel</el-button>
@@ -108,5 +110,12 @@ export default class LoginForm extends Vue {
 
 .login-item u {
   cursor: pointer;
+}
+.hotline {
+  font-weight: 800;
+  font-family: monospace;
+  font-size: 16px;
+  padding-top: 20px;
+  color: #e05a34;
 }
 </style>

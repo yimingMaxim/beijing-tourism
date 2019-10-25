@@ -5,7 +5,7 @@
       <div class="order-form">
         <el-form :model="tourOrder" :rules="validate" ref="order_form" size="mini">
           <el-form-item label="Tour Name:">
-            <span v-text="tourObj.title"></span>
+            <span class="form-text" v-text="tourObj.title"></span>
           </el-form-item>
           <el-form-item label="Name:" prop="name">
             <el-input placeholder="Your Name" style="width: 50%;" v-model="tourOrder.name"></el-input>
@@ -19,6 +19,31 @@
                 v-for="country in countries"
               ></el-option>
             </el-select>
+          </el-form-item>
+          <el-form-item label="Tour Date" prop="startDate">
+            <el-date-picker
+              :editable="false"
+              placeholder="Tour Date"
+              type="date"
+              v-model="tourOrder.startDate"
+              value-format="yyyy-MM-dd"
+            ></el-date-picker>
+          </el-form-item>
+          <el-form-item label="Number of Adults:" prop="numberOfAdults">
+            <el-select placeholder style="width: 20%;" v-model="tourOrder.numberOfAdults">
+              <el-option
+                :key="price.person"
+                :label="price.person"
+                :value="price.person"
+                v-for="price in tourObj.prices"
+              ></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="Number of Children:">
+            <el-input style="width: 20%;" v-model="tourOrder.numberOfChildren"></el-input>
+          </el-form-item>
+          <el-form-item label="Age of Children:">
+            <el-input style="width: 20%;" v-model="tourOrder.ageOfChildren"></el-input>
           </el-form-item>
           <el-form-item label="E-Mail Address:" prop="mailAddress">
             <el-input
@@ -41,16 +66,7 @@
               v-model="tourOrder.phoneNumber"
             ></el-input>
           </el-form-item>
-          <el-form-item :label="tourObj.day === 1 ? 'Tour Date' : 'Start Date'" prop="startDate">
-            <el-date-picker
-              :editable="false"
-              :placeholder="tourObj.day === 1 ? 'Tour Date' : 'Start Date'"
-              type="date"
-              v-model="tourOrder.startDate"
-              value-format="yyyy-MM-dd"
-            ></el-date-picker>
-          </el-form-item>
-          <el-form-item label="End Date:" prop="endDate" v-if="tourObj.day > 1">
+          <!-- <el-form-item label="End Date:" prop="endDate" v-if="tourObj.day > 1">
             <el-date-picker
               :editable="false"
               placeholder="End Date"
@@ -58,23 +74,7 @@
               v-model="tourOrder.endDate"
               value-format="yyyy-MM-dd"
             ></el-date-picker>
-          </el-form-item>
-          <el-form-item label="Number of Adults:" prop="numberOfAdults">
-            <el-select placeholder style="width: 20%;" v-model="tourOrder.numberOfAdults">
-              <el-option
-                :key="price.person"
-                :label="price.person"
-                :value="price.person"
-                v-for="price in tourObj.prices"
-              ></el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="Number of Children:">
-            <el-input style="width: 20%;" v-model="tourOrder.numberOfChildren"></el-input>
-          </el-form-item>
-          <el-form-item label="Age of Children:">
-            <el-input style="width: 20%;" v-model="tourOrder.ageOfChildren"></el-input>
-          </el-form-item>
+          </el-form-item>-->
           <el-form-item label="Hotel you stay:">
             <el-input placeholder="Hotel Address" style="width: 50%;" v-model="tourOrder.hotelName"></el-input>
           </el-form-item>
@@ -121,10 +121,10 @@
                 v-model="tourOrder.leaveLineNumber"
               ></el-input>
             </el-form-item>
-            <el-form-item label="Special Request:">
-              <el-input type="textarea" v-model="tourOrder.remarks"></el-input>
-            </el-form-item>
           </div>
+          <el-form-item label="Special Request:">
+            <el-input type="textarea" v-model="tourOrder.remarks"></el-input>
+          </el-form-item>
           <el-form-item>
             <el-button @click="onSubmit" type="primary">submit</el-button>
             <el-button @click="$router.go(-1)">cancel</el-button>
@@ -270,18 +270,5 @@ export default class TourBook extends Vue {
 }
 </script>
 
-<style scoped>
-.order-body h4 {
-  text-align: left;
-  margin-bottom: 20px;
-  color: #00afc7;
-}
-.order-form {
-  border-style: solid;
-  border-color: #ddd;
-  border-width: 1px;
-  border-radius: 4px 4px 0 0;
-  padding: 10px 5px 0 20px;
-  margin-bottom: 20px;
-}
+<style scoped src="../book_form.css">
 </style>

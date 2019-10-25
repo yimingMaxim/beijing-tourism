@@ -1,0 +1,18 @@
+.order-body h4 {
+text-align: left;
+margin-bottom: 20px;
+color: #00afc7;
+}
+.order-form {
+border-style: solid;
+border-color: #ddd;
+border-width: 1px;
+border-radius: 4px 4px 0 0;
+padding: 10px 5px 0 20px;
+margin-bottom: 20px;
+}
+.form-text {
+font-size: 16px;
+color: #fc0d1b;
+font-weight: 500;
+}

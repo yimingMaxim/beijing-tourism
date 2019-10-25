@@ -23,6 +23,18 @@
               ></el-option>
             </el-select>
           </el-form-item>
+          <el-form-item label="Chauffeur Service Date:" prop="chauffeurServiceDate">
+            <el-date-picker
+              :editable="false"
+              placeholder="Chauffeur Service Date"
+              type="date"
+              v-model="carOrder.chauffeurServiceDate"
+              value-format="yyyy-MM-dd"
+            ></el-date-picker>
+          </el-form-item>
+          <el-form-item label="Number of Person:" prop="numberOfPerson">
+            <el-input placeholder="number" style="width: 40%;" v-model="carOrder.numberOfPerson"></el-input>
+          </el-form-item>
           <el-form-item label="E-Mail Address:" prop="mailAddress">
             <el-input
               placeholder="email address"
@@ -37,28 +49,7 @@
               v-model="carOrder.alternatMailAddress"
             ></el-input>
           </el-form-item>
-          <el-form-item label="Chauffeur Service Date:" prop="chauffeurServiceDate">
-            <el-date-picker
-              :editable="false"
-              placeholder="Chauffeur Service Date"
-              type="date"
-              v-model="carOrder.chauffeurServiceDate"
-              value-format="yyyy-MM-dd"
-            ></el-date-picker>
-          </el-form-item>
-          <el-form-item label="Number of Person:" prop="numberOfPerson">
-            <el-input placeholder="number" style="width: 40%;" v-model="carOrder.numberOfPerson"></el-input>
-          </el-form-item>
-          <el-form-item label="Arrive Time:">
-            <el-date-picker
-              :editable="false"
-              placeholder="Airplane Arrive Time"
-              type="datetime"
-              v-model="carOrder.arriveTime"
-              value-format="yyyy-MM-dd HH-mm-ss"
-            ></el-date-picker>
-          </el-form-item>
-          <el-form-item label="Beijing Tour Guide Service:">
+          <!-- <el-form-item label="Beijing Tour Guide Service:">
             <el-select v-model="carOrder.guideLanguage">
               <el-option
                 :key="lang.value"
@@ -67,30 +58,61 @@
                 v-for="lang in langs"
               ></el-option>
             </el-select>
+          </el-form-item>-->
+          <!-- 接机信息 -->
+          <el-form-item label="Airport pick up:">
+            <el-radio-group size="mini" v-model="pickUp">
+              <el-radio-button :label="true">yes</el-radio-button>
+              <el-radio-button :label="false">no</el-radio-button>
+            </el-radio-group>
           </el-form-item>
-          <el-form-item label="Arrive Line Number:">
-            <el-input
-              placeholder="Airplane Line Number"
-              style="width: 50%;"
-              v-model="carOrder.arriveLineNumber"
-            ></el-input>
+          <div v-show="pickUp">
+            <el-form-item label="Arrive Time:">
+              <el-date-picker
+                :editable="false"
+                format="yyyy-MM-dd HH:mm"
+                placeholder="Airplane Arrive Time"
+                type="datetime"
+                v-model="carOrder.arriveTime"
+                value-format="yyyy-MM-dd HH:mm"
+              ></el-date-picker>
+            </el-form-item>
+            <el-form-item label="Arrive Line Number:">
+              <el-input
+                placeholder="Airplane Line Number"
+                style="width: 50%;"
+                v-model="carOrder.arriveLineNumber"
+              ></el-input>
+            </el-form-item>
+          </div>
+          <!-- /接机信息 -->
+          <!-- 送机信息 -->
+          <el-form-item label="Airport drop off:">
+            <el-radio-group size="mini" v-model="dropOff">
+              <el-radio-button :label="true">yes</el-radio-button>
+              <el-radio-button :label="false">no</el-radio-button>
+            </el-radio-group>
           </el-form-item>
-          <el-form-item label="Leave Time:">
-            <el-date-picker
-              :editable="false"
-              placeholder="Airplane Leave Time"
-              type="datetime"
-              v-model="carOrder.leaveTime"
-              value-format="yyyy-MM-dd HH-mm-ss"
-            ></el-date-picker>
-          </el-form-item>
-          <el-form-item label="Leave Line Number:">
-            <el-input
-              placeholder="Airplane Line Number"
-              style="width: 50%;"
-              v-model="carOrder.leaveLineNumber"
-            ></el-input>
-          </el-form-item>
+          <div v-show="dropOff">
+            <el-form-item label="Leave Time:">
+              <el-date-picker
+                :editable="false"
+                format="yyyy-MM-dd HH:mm"
+                placeholder="Airplane Leave Time"
+                type="datetime"
+                v-model="carOrder.leaveTime"
+                value-format="yyyy-MM-dd HH:mm"
+              ></el-date-picker>
+            </el-form-item>
+            <el-form-item label="Leave Line Number:">
+              <el-input
+                placeholder="Airplane Line Number"
+                style="width: 50%;"
+                v-model="carOrder.leaveLineNumber"
+              ></el-input>
+            </el-form-item>
+          </div>
+          <!-- /送机信息 -->
           <el-form-item label="Special Request:">
             <el-input type="textarea" v-model="carOrder.remarks"></el-input>
           </el-form-item>
@@ -112,7 +134,7 @@ import OrderApi from '@/api/order';
 import Chauffeur from '@/model/chauffeur.model';
 
 import { countries } from '../country';
-import { langs } from '../lang';
+// import { langs } from '../lang';
 
 @Component({
   components: {}
@@ -121,7 +143,9 @@ export default class TourBook extends Vue {
   private carObj: Chauffeur = new Chauffeur();
 
   private countries: Array<any> = countries;
-  private langs: Array<any> = langs;
+  private pickUp: boolean = false; // 是否接机
+  private dropOff: boolean = false; // 是否送机
+  // private langs: Array<any> = langs;
 
   private carOrder: any = {
     uuid: Wang.randomString(32),
@@ -250,23 +274,5 @@ export default class TourBook extends Vue {
 }
 </script>
 
-<style scoped>
-.order-body h4 {
-  text-align: left;
-  margin-bottom: 20px;
-  color: #00afc7;
-}
-.order-form {
-  border-style: solid;
-  border-color: #ddd;
-  border-width: 1px;
-  border-radius: 4px 4px 0 0;
-  padding: 10px 5px 0 20px;
-  margin-bottom: 20px;
-}
-.form-text {
-  font-size: 16px;
-  color: #fc0d1b;
-  font-weight: 500;
-}
+<style scoped src="../book_form.css">
 </style>
