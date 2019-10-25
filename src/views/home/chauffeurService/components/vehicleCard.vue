@@ -1,5 +1,5 @@
 <template>
-  <el-col :md="12" :xs="24" class="car-collapse">
+  <el-col :md="14" :xs="24" class="car-collapse">
     <el-collapse-item>
       <template slot="title">
         <el-col :span="12" class="car-img">
