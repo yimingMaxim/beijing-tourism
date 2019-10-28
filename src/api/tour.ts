@@ -101,6 +101,30 @@ export default class TourApi {
     return request.delete(`${DELETE_COMMENT_URL}${uuid}`);
   }
 
+  /**
+   * @public queryBanners
+   * @description 查询轮播图列表
+   */
+  public static queryBanners() {
+    return request.get('/tour/api/getCarouselPicture');
+  }
+
+  /**
+   * @public addBanner
+   * @description 增加一张轮播图
+   */
+  public static addBanner(param: any) {
+    return request.post('/tour/api/addCarouselPicture', param);
+  }
+
+  /**
+   * @public deleteBanner
+   * @description 删除一张轮播图
+   */
+  public static deleteBanner(imageid: string) {
+    return request.delete(`/tour/api/deleteCarouselPicture/${imageid}`);
+  }
+
   public static deletePriceAndImg(tourId: string) {
     const imagePromise = new Promise(resolve => {
       ImageApi.deleteImage(tourId).then(res => {

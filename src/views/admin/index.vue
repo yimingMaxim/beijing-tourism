@@ -14,6 +14,7 @@
           <template slot="title">后台管理</template>
           <el-menu-item index="tour">旅游</el-menu-item>
           <el-menu-item index="chauffeur">用车</el-menu-item>
+          <el-menu-item index="banner">轮播图</el-menu-item>
         </el-submenu>
         <el-submenu index="2">
           <template slot="title">订单管理</template>

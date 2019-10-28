@@ -1,5 +1,6 @@
 import Tour from './tour/tour.vue';
 import Comment from './comment/comment.vue';
+import Banner from './banner/banner.vue';
 import Chauffeur from './chauffeur/chauffeur.vue';
 import TourOrder from './order/tourOrder.vue'
 import CarOrder from './order/carOrder.vue'
@@ -18,6 +19,11 @@ const adminRouter = [
     path: 'comment/:tourId',
     name: 'commentAdmin',
     component: Comment
+  },
+  {
+    path: 'banner',
+    name: 'bannerAdmin',
+    component: Banner
   },
   {
     path: 'chauffeur',

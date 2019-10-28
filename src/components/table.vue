@@ -3,21 +3,27 @@
     <!-- 表格 -->
     <el-table :data="tableData" style="width: 100%">
       <el-table-column
-        v-for="column in columns"
         :key="column.value"
-        :prop="column.value"
         :label="column.label"
+        :prop="column.value"
         :width="column.width"
+        v-for="column in columns"
       >
         <template slot-scope="scope">
           <!-- if(超链接)) -->
           <u
-            v-if="column.type === 'link'"
             @click="toComment(scope.row)"
+            v-if="column.type === 'link'"
             v-text="scope.row[column.value]"
           ></u>
           <!-- else if(富文本) -->
           <span v-else-if="column.type === 'html'" v-html="scope.row[column.value]"></span>
+          <!-- else if(图片) -->
+          <img
+            :src="'/downloadImg/' + scope.row[column.value]"
+            style="max-width: 1000px;"
+            v-else-if="column.type === 'image'"
+          />
           <!-- else(文本) -->
           <span v-else v-text="scope.row[column.value]"></span>
           <!-- end if -->
@@ -25,15 +31,15 @@
       </el-table-column>
       <el-table-column label="是否展示" v-if="showSwitch !== false">
         <template slot-scope="scope">
-          <el-switch v-model="scope.row.shows" @change="handleSwitch(scope.row)"></el-switch>
+          <el-switch @change="handleSwitch(scope.row)" v-model="scope.row.shows"></el-switch>
         </template>
       </el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
           <delete-confirm
             :show-edit="showEdit !== false"
-            @onEdit="handleEdit(scope.row)"
             @onDelete="handleDelete(scope.row)"
+            @onEdit="handleEdit(scope.row)"
           ></delete-confirm>
         </template>
       </el-table-column>

@@ -1,9 +1,8 @@
 <template>
   <div>
     <el-carousel :interval="5000" arrow="always">
-      <el-carousel-item :key="item" v-for="item in 4">
-        <!-- <h3>{{ item }}</h3> -->
-        <img src="../../../assets/banner/lunbo1.jpeg" />
+      <el-carousel-item :key="banner.uuid" v-for="banner in banners">
+        <img :src="'/downloadImg/' + banner.imageid" />
       </el-carousel-item>
     </el-carousel>
   </div>
@@ -11,26 +10,27 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import TourApi from '@/api/tour';
+import Banner from '@/model/banner.model';
 
 @Component
-export default class Carousel extends Vue {}
+export default class Carousel extends Vue {
+  private banners: Array<Banner> = []; // table列表数据
+
+  private mounted() {
+    TourApi.queryBanners().then((res: any) => {
+      const list: Array<any> = res.data.object;
+      this.banners = list.map((item: any) => {
+        return new Banner(item);
+      });
+    });
+  }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.el-carousel__item h3 {
-  color: #475669;
-  font-size: 18px;
-  opacity: 0.75;
-  line-height: 300px;
-  margin: 0;
-}
-
-.el-carousel__item:nth-child(2n) {
-  background-color: #99a9bf;
-}
-
-.el-carousel__item:nth-child(2n + 1) {
-  background-color: #d3dce6;
+img {
+  width: 100%;
 }
 </style>

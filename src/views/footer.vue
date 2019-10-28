@@ -23,12 +23,8 @@
         <span>For any questions or suggestions about website tech, please contact: webmaster@beijinglocaltour.com</span>
       </p>
       <p>
-        <a href="http://www.beian.gov.cn" rel="nofollow" target="_blank">京公安网备110105008521号</a>
-        <a
-          href="http://www.beian.miit.gov.cn/publish/query/indexFirst.action"
-          rel="nofollow"
-          target="_blank"
-        >京ICP备05034922号</a>
+        <a @click="goGov()" href="#" rel="nofollow" target="_blank">京公安网备110105008521号</a>
+        <a @click="goIcp()" href="#" rel="nofollow" target="_blank">京ICP备05034922号</a>
       </p>
     </div>
   </div>
@@ -38,7 +34,14 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component
-export default class Footer extends Vue {}
+export default class Footer extends Vue {
+  private goGov() {
+    window.open('http://www.beian.gov.cn');
+  }
+  private goIcp() {
+    window.open('http://www.beian.miit.gov.cn/publish/query/indexFirst.action');
+  }
+}
 </script>
 
 <style scoped>
