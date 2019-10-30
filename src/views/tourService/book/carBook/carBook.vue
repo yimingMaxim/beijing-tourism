@@ -49,6 +49,16 @@
               v-model="carOrder.alternatMailAddress"
             ></el-input>
           </el-form-item>
+          <el-form-item label="Hotel you stay:">
+            <el-input placeholder="Hotel Address" style="width: 50%;" v-model="carOrder.hotelName"></el-input>
+          </el-form-item>
+          <el-form-item label="Hotel Telephone Number:">
+            <el-input
+              placeholder="Hotel Telephone Number"
+              style="width: 50%;"
+              v-model="carOrder.telNumber"
+            ></el-input>
+          </el-form-item>
           <!-- <el-form-item label="Beijing Tour Guide Service:">
             <el-select v-model="carOrder.guideLanguage">
               <el-option
@@ -161,7 +171,8 @@ export default class TourBook extends Vue {
     chauffeurServiceDate: '',
     chauffeurService: '',
     vehicleType: '',
-    guideLanguage: '',
+    hotelName: '',
+    telNumber: '',
     arriveTime: '',
     leaveTime: '',
     arriveLineNumber: '',
