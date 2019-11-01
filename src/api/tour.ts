@@ -125,6 +125,20 @@ export default class TourApi {
     return request.delete(`/tour/api/deleteCarouselPicture/${imageid}`);
   }
 
+  /**
+   * @public queryYiLongHotel
+   * @param { string } ArrivalDate - 入住时间
+   * @param { string } DepartureDate - 离开时间
+   * @param { string | number } startPage - 当前页
+   * @param { string | number } pageSize - 每页条数
+   * @description 查询艺龙酒店列表
+   */
+  public static queryYiLongHotel(params: any) {
+    return request.get('/tour/api/getHotelList', {
+      params
+    });
+  }
+
   public static deletePriceAndImg(tourId: string) {
     const imagePromise = new Promise(resolve => {
       ImageApi.deleteImage(tourId).then(res => {
