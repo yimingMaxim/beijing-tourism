@@ -11,14 +11,15 @@
             <el-input placeholder="Your Name" style="width: 50%;" v-model="tourOrder.name"></el-input>
           </el-form-item>
           <el-form-item label="Country:" prop="country">
-            <el-select filterable placeholder="input keyword" v-model="tourOrder.country">
+            <el-input placeholder="Your Country" style="width: 50%;" v-model="tourOrder.country"></el-input>
+            <!-- <el-select filterable placeholder="input keyword" v-model="tourOrder.country">
               <el-option
                 :key="country.value"
                 :label="country.label"
                 :value="country.label"
                 v-for="country in countries"
               ></el-option>
-            </el-select>
+            </el-select> -->
           </el-form-item>
           <el-form-item label="Tour Date" prop="startDate">
             <el-date-picker

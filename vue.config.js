@@ -1,5 +1,5 @@
 // const BASE_PATH = 'http://192.168.0.113:7891';
-const BASE_PATH = 'http://192.168.54.12:7891';
+const BASE_PATH = 'https://www.beijinglocaltour.com';
 // const BASE_PATH = '192.168.202.198:7891';
 
 module.exports = {
