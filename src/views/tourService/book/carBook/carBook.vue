@@ -13,7 +13,7 @@
           <el-form-item label="Name:" prop="name">
             <el-input placeholder="Your Name" style="width: 50%;" v-model="carOrder.name"></el-input>
           </el-form-item>
-          <el-form-item label="Country:" prop="country">
+          <el-form-item label="Country:">
             <el-input placeholder="Your Country" style="width: 50%;" v-model="carOrder.country"></el-input>
             <!-- <el-select filterable placeholder="input keyword" v-model="carOrder.country">
               <el-option
@@ -33,25 +33,25 @@
               value-format="yyyy-MM-dd"
             ></el-date-picker>
           </el-form-item>
-          <el-form-item label="Number of Person:" prop="numberOfPerson">
-            <el-input placeholder="number" style="width: 40%;" v-model="carOrder.numberOfPerson"></el-input>
+          <el-form-item label="Number of Guests:" prop="numberOfPerson">
+            <el-input style="width: 40%;" v-model="carOrder.numberOfPerson"></el-input>
           </el-form-item>
           <el-form-item label="E-Mail Address:" prop="mailAddress">
             <el-input
-              placeholder="email address"
+              placeholder="Email Address"
               style="width: 60%;"
               v-model="carOrder.mailAddress"
             ></el-input>
           </el-form-item>
           <el-form-item label="Alternate E-mail:">
             <el-input
-              placeholder="email address"
+              placeholder="Email Address"
               style="width: 60%;"
               v-model="carOrder.alternatMailAddress"
             ></el-input>
           </el-form-item>
-          <el-form-item label="Hotel you stay:">
-            <el-input placeholder="Hotel Address" style="width: 50%;" v-model="carOrder.hotelName"></el-input>
+          <el-form-item label="Hotel In Beijing:">
+            <el-input placeholder="Hotel Name" style="width: 50%;" v-model="carOrder.hotelName"></el-input>
           </el-form-item>
           <el-form-item label="Hotel Telephone Number:">
             <el-input
@@ -78,17 +78,16 @@
             </el-radio-group>
           </el-form-item>
           <div v-show="pickUp">
-            <el-form-item label="Arrive Time:">
+            <el-form-item label="Arrival Time:">
               <el-date-picker
                 :editable="false"
                 format="yyyy-MM-dd HH:mm"
-                placeholder="Airplane Arrive Time"
                 type="datetime"
                 v-model="carOrder.arriveTime"
                 value-format="yyyy-MM-dd HH:mm"
               ></el-date-picker>
             </el-form-item>
-            <el-form-item label="Arrive Line Number:">
+            <el-form-item label="Arrival Flight Number:">
               <el-input
                 placeholder="Airplane Line Number"
                 style="width: 50%;"
@@ -105,17 +104,16 @@
             </el-radio-group>
           </el-form-item>
           <div v-show="dropOff">
-            <el-form-item label="Leave Time:">
+            <el-form-item label="Departure Time:">
               <el-date-picker
                 :editable="false"
                 format="yyyy-MM-dd HH:mm"
-                placeholder="Airplane Leave Time"
                 type="datetime"
                 v-model="carOrder.leaveTime"
                 value-format="yyyy-MM-dd HH:mm"
               ></el-date-picker>
             </el-form-item>
-            <el-form-item label="Leave Line Number:">
+            <el-form-item label="Departure Flight Number:">
               <el-input
                 placeholder="Airplane Line Number"
                 style="width: 50%;"
@@ -189,13 +187,13 @@ export default class TourBook extends Vue {
         trigger: 'blur'
       }
     ],
-    country: [
-      {
-        required: true,
-        message: 'country is required!',
-        trigger: 'change'
-      }
-    ],
+    // country: [
+    //   {
+    //     required: true,
+    //     message: 'country is required!',
+    //     trigger: 'change'
+    //   }
+    // ],
     mailAddress: [
       {
         required: true,
@@ -214,7 +212,7 @@ export default class TourBook extends Vue {
       {
         required: true,
         message: 'number is required!',
-        trigger: 'change'
+        trigger: 'blur'
       }
     ]
   };
