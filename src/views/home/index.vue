@@ -1,9 +1,34 @@
+<style scoped>
+.why-title {
+  color: #e05a34;
+  font-size: 14px;
+  font-family: sans-serif;
+}
+.why {
+  padding: 10px;
+}
+</style>
+
 <template>
   <div id="main-root">
     <Carousel class="hidden-sm-and-down"></Carousel>
     <el-container class="main-body">
       <el-aside class="hidden-sm-and-down" width="15%"></el-aside>
       <el-main>
+        <el-collapse>
+          <el-collapse-item class="why" name="1">
+            <template slot="title">
+              <div class="why-title">Why beijinglocaltour</div>
+            </template>
+            <div class="why">
+              Beijing local tour agency
+              More than 20 years working for tour in Beijing
+              Multiple tourist routes choises
+              Reasonable travel advice
+              English private driver
+            </div>
+          </el-collapse-item>
+        </el-collapse>
         <el-tabs @tab-click="handleClick" v-model="activeName">
           <el-tab-pane :key="tab.name" :label="tab.label" :name="tab.name" v-for="tab in tabs"></el-tab-pane>
         </el-tabs>
