@@ -1,4 +1,5 @@
 import Tour from './tour/index.vue';
+import Hotel from './hotel/hotel.vue'
 
 const listRouter = [
   {
@@ -22,6 +23,15 @@ const listRouter = [
       title: 'group tour'
     },
     component: Tour
+  },
+  {
+    path: 'hotel',
+    name: 'hotel',
+    meta: {
+      type: 'hotel',
+      title: 'hotels'
+    },
+    component: Hotel
   }
 ];
 

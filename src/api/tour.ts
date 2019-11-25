@@ -129,6 +129,9 @@ export default class TourApi {
    * @public queryYiLongHotel
    * @param { string } ArrivalDate - 入住时间
    * @param { string } DepartureDate - 离开时间
+   * @param { string } CityId - 城市id
+   * @param { string } Sort - 排序
+   * @param { string } ResultType - 返回值类型
    * @param { string | number } startPage - 当前页
    * @param { string | number } pageSize - 每页条数
    * @description 查询艺龙酒店列表
