@@ -15,7 +15,7 @@
       type="primary"
       v-else
     >login</el-button>
-    <el-col class="hotline">24hours hotline 18515250136</el-col>
+    <el-col class="hotline">24hours hotline +8618515250136</el-col>
     <el-dialog
       :close-on-click-modal="false"
       :visible.sync="dialogDisplay"

@@ -5,12 +5,12 @@
         <strong>About Us</strong>
       </div>
       <div class="card-content">
-        <span>BeijingLocalTour.com is a service to help with tour service and hotel reservation in Beijing & specially catered for your travel needs in Beijing. Whether you are the business traveler or just a backpacker, we have every tour package and accommodation that suits your needs. To sweeten your stay, all the prices are discounted. So, enjoy your stay in Beijing!</span>
+        <span>BeijingLocalTour.com is a Beijing local tour company. We have been working in Beijing for more than 20 years, and we know what kind of tour arrangement suit you the best. Whether you come to Beijing for tour or business, even a pass through, we have different tour packages will suit you. Tour package includes group tours (bus tours or seat-in coach tour), private tours and car rental (private driver) as options. On the other hand, you can also tell us where do you want to visit in Beijing and we can offer you a plan of sightseeing in Beijing. We would love to give you some advice on reasonable travel arrangements to make your money well spent and have a satisfied trip!</span>
       </div>
     </el-card>
     <!-- <p class="weather-widget">
       <weather-widget></weather-widget>
-    </p> -->
+    </p>-->
   </div>
 </template>
 
